@@ -18,6 +18,7 @@ import java.util.GregorianCalendar;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmRecyclerViewAdapter;
+import ru.kulikovman.tasklist.Helper;
 import ru.kulikovman.tasklist.R;
 
 public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.TaskHolder> {
@@ -114,9 +115,9 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
 
                 // Сравниваем года и записываем дату в нужном формате
                 if (targetYear == currentYear) {
-                    mTaskDate.setText(convertLongToShortTextDate(targetDate));
+                    mTaskDate.setText(Helper.convertLongToShortTextDate(targetDate));
                 } else {
-                    mTaskDate.setText(convertLongToLongTextDate(targetDate));
+                    mTaskDate.setText(Helper.convertLongToLongTextDate(targetDate));
                 }
 
                 // Считаем количество дней до задачи
@@ -223,7 +224,7 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
         holder.bindTask(task);
 
         // Если установленная позиция равна текущей, то выделяем элемент
-        holder.itemView.setSelected(mPosition == position);
+        //holder.itemView.setSelected(mPosition == position);
     }
 
     @Override
