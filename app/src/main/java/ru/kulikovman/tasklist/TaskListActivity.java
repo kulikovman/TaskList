@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.ImageButton;
 
 import io.realm.Realm;
 
@@ -19,6 +21,11 @@ public class TaskListActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Realm mRealm;
+
+    private EditText mTaskField;
+    private ImageButton mAddTask;
+    private ImageButton mSetDateBtn, mSetPriorityBtn, mSetGroupBtn, mSetRepeatBtn, mSetReminderBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +47,9 @@ public class TaskListActivity extends AppCompatActivity
         Realm.init(this);
         mRealm = Realm.getDefaultInstance();
 
-
-
+        // Инициализируем необходимые вью элементы
+        mTaskField = (EditText) findViewById(R.id.task_field);
+        mAddTask = (ImageButton) findViewById(R.id.add_task_button);
 
     }
 
