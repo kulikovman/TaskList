@@ -29,5 +29,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile 'io.realm:android-adapters:2.1.1' // Подключение RealmRecyclerViewAdapter
-    compile "com.daimajia.swipelayout:library:1.2.0@aar" // Библиотека для создания свайп-меню
+    compile 'com.tubb.smrv:swipemenu-recyclerview:5.4.4' // Библиотека для создания свайп-меню
 }
