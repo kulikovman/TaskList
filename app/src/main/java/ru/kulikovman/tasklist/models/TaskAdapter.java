@@ -53,7 +53,7 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
             super(view);
 
             // Слушатель нажатий по элементу
-            view.setOnClickListener(this);
+            //view.setOnClickListener(this);
 
             // Инициализируем вью элемента списка
             mTaskTitle = (TextView) view.findViewById(R.id.item_task_title);
@@ -66,7 +66,7 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
 
         @Override
         public void onClick(View v) {
-            // Обновляем айтем нажатый ранее
+            /*// Обновляем айтем нажатый ранее
             notifyItemChanged(mPosition);
 
             // Сохраняем старую и получаем новую позицию
@@ -79,7 +79,7 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
             }
 
             // Обновляем айтем нажатый сейчас
-            notifyItemChanged(mPosition);
+            notifyItemChanged(mPosition);*/
 
             // Код для проброса слушателя
             if (TaskAdapter.mListener != null) {

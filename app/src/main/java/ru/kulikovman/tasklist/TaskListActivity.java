@@ -63,6 +63,9 @@ public class TaskListActivity extends AppCompatActivity
         mTaskField = (EditText) findViewById(R.id.task_field);
         mAddTask = (ImageButton) findViewById(R.id.add_task_button);
 
+        // Создаем и запускаем список
+        setUpRecyclerView();
+
     }
 
     private class TouchHelperCallback extends ItemTouchHelper.SimpleCallback {
@@ -88,7 +91,6 @@ public class TaskListActivity extends AppCompatActivity
             return true;
         }
     }
-
 
     @Override
     protected void onDestroy() {
