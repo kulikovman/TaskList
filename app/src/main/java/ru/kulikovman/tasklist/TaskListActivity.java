@@ -60,6 +60,7 @@ public class TaskListActivity extends AppCompatActivity
         mRealm = Realm.getDefaultInstance();
 
         // Инициализируем необходимые вью элементы
+        mRecyclerView = (RecyclerView) findViewById(R.id.task_recycler_view);
         mTaskField = (EditText) findViewById(R.id.task_field);
         mAddTask = (ImageButton) findViewById(R.id.add_task_button);
 
@@ -88,7 +89,7 @@ public class TaskListActivity extends AppCompatActivity
 
         @Override
         public boolean isLongPressDragEnabled() {
-            return true;
+            return false;
         }
     }
 
