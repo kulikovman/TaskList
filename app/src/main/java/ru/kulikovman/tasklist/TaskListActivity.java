@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,6 +19,7 @@ import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
@@ -63,6 +65,31 @@ public class TaskListActivity extends AppCompatActivity
 
     }
 
+    private class TouchHelperCallback extends ItemTouchHelper.SimpleCallback {
+
+        TouchHelperCallback() {
+            super(ItemTouchHelper.UP | ItemTouchHelper.DOWN, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
+        }
+
+        @Override
+        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            return true;
+        }
+
+        @Override
+        public void onSwiped(final RecyclerView.ViewHolder viewHolder, int direction) {
+            //DataHelper.deleteItemAsync(realm, viewHolder.getItemId());
+            String taskId = String.valueOf(viewHolder.getItemId());
+            Toast.makeText(getApplicationContext(), taskId, Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public boolean isLongPressDragEnabled() {
+            return true;
+        }
+    }
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -77,7 +104,12 @@ public class TaskListActivity extends AppCompatActivity
         mRecyclerView.setHasFixedSize(true);
 
         // Слушатель для адаптера списка
-        mAdapter.setOnItemClickListener(this);
+        //mAdapter.setOnItemClickListener(this);
+
+        // Пробуем другой подход...
+        TouchHelperCallback touchHelperCallback = new TouchHelperCallback();
+        ItemTouchHelper touchHelper = new ItemTouchHelper(touchHelperCallback);
+        touchHelper.attachToRecyclerView(mRecyclerView);
     }
 
     private OrderedRealmCollection<Task> loadUnfinishedTasks() {
