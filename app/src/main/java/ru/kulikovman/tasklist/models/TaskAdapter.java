@@ -20,14 +20,14 @@ import io.realm.OrderedRealmCollection;
 import io.realm.RealmRecyclerViewAdapter;
 import ru.kulikovman.tasklist.R;
 
-public class TaskRealmAdapter extends RealmRecyclerViewAdapter<Task, TaskRealmAdapter.TaskHolder> {
+public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.TaskHolder> {
     private static OnItemClickListener mListener;
     private Context mContext;
     private OrderedRealmCollection<Task> mTasks;
 
     private int mPosition = RecyclerView.NO_POSITION;
 
-    public TaskRealmAdapter(Context context, OrderedRealmCollection<Task> results) {
+    public TaskAdapter(Context context, OrderedRealmCollection<Task> results) {
         super(results, true);
         // Only set this if the model class has a primary key that is also a integer or long.
         // In that case, {@code getItemId(int)} must also be overridden to return the key.
@@ -82,8 +82,8 @@ public class TaskRealmAdapter extends RealmRecyclerViewAdapter<Task, TaskRealmAd
             notifyItemChanged(mPosition);
 
             // Код для проброса слушателя
-            if (TaskRealmAdapter.mListener != null) {
-                TaskRealmAdapter.mListener.onItemClick(v, getLayoutPosition(), mTask, mPosition);
+            if (TaskAdapter.mListener != null) {
+                TaskAdapter.mListener.onItemClick(v, getLayoutPosition(), mTask, mPosition);
             }
         }
 

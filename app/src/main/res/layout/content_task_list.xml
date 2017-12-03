@@ -10,7 +10,7 @@
     tools:showIn="@layout/app_bar_task_list">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/test_rw_two"
+        android:id="@+id/task_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginEnd="70dp"
@@ -31,18 +31,17 @@
 
         <!-- Кнопки управления задачами -->
         <ImageButton
-            android:id="@+id/imageButton1"
+            android:id="@+id/task_date_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:background="@drawable/button_options"
-            android:contentDescription="Выбрать дату"
             android:padding="10dp"
             android:tint="@color/gray_6"
             app:srcCompat="@drawable/ic_event_black_24dp"/>
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/task_priority_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -52,7 +51,7 @@
             app:srcCompat="@drawable/ic_low_priority_black_24dp"/>
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/task_group_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -62,7 +61,7 @@
             app:srcCompat="@drawable/ic_dns_black_24dp"/>
 
         <ImageButton
-            android:id="@+id/imageButton4"
+            android:id="@+id/task_repeat_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -72,7 +71,7 @@
             app:srcCompat="@drawable/ic_replay_black_24dp"/>
 
         <ImageButton
-            android:id="@+id/imageButton5"
+            android:id="@+id/task_reminder_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -82,7 +81,7 @@
             app:srcCompat="@drawable/ic_alarm_black_24dp"/>
 
         <ImageButton
-            android:id="@+id/imageButton6"
+            android:id="@+id/task_delete_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -93,7 +92,7 @@
     </LinearLayout>
 
     <ImageButton
-        android:id="@+id/imageBut"
+        android:id="@+id/add_task_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginBottom="15dp"
@@ -106,7 +105,7 @@
         app:srcCompat="@drawable/ic_add_black_24dp"/>
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/task_field"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
@@ -124,7 +123,7 @@
         android:textColorHint="@color/gray_4"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageBut"
+        app:layout_constraintEnd_toStartOf="@+id/add_task_button"
         app:layout_constraintStart_toStartOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>
