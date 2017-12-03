@@ -1,0 +1,129 @@
+<resources>
+    <string name="app_name">Список задач</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Ниже находятся старые строки -->
+    <!-- (все нужное перенести наверх) -->
+
+    <!-- Заголовки и названия -->
+    <string name="title_activity_edit_task">Задача</string>
+    <string name="title_activity_edit_group">Группа</string>
+    <string name="title_activity_main">Список задач</string>
+    <string name="title_activity_group_list">Группы</string>
+
+    <!-- Выбор даты задачи -->
+    <string name="date_title">Дата выполнения</string>
+    <string name="date_without">Не установлена</string>
+    <string name="date_today">Сегодня</string>
+    <string name="date_tomorrow">Завтра</string>
+    <string name="date_pick_date">Выбрать дату</string>
+    <string name="date_not">Без даты</string>
+
+    <!-- Выбор приоритета задачи -->
+    <string name="priority_title">Приоритет</string>
+    <string name="priority_emergency">Чрезвычайный</string>
+    <string name="priority_high">Высокий</string>
+    <string name="priority_common">Обычный</string>
+    <string name="priority_low">Низкий</string>
+    <string name="priority_lowest">Самый низкий</string>
+
+    <!-- Выбор группы задачи -->
+    <string name="group_title">Группа</string>
+    <string name="group_without">Не выбрана</string>
+    <string name="group_not">Без группы</string>
+    <string name="group_button_ok">Создать</string>
+    <string name="group_button_cancel">Отмена</string>
+    <string name="group_message">Вы пока не создали ни одной группы</string>
+
+    <!-- Диалог - создание группы -->
+    <string name="create_group_title">Название группы</string>
+
+    <!-- Цвет группы -->
+    <string name="color_title">Цвет</string>
+    <string name="color_without">Не выбран</string>
+    <string name="color_1_red">Красный</string>
+    <string name="color_2_orange">Оранжевый</string>
+    <string name="color_3_yellow">Желтый</string>
+    <string name="color_4_green">Зеленый</string>
+    <string name="color_5_blue">Синий</string>
+    <string name="color_6_violet">Фиолетовый</string>
+    <string name="color_7_pink">Розовый</string>
+    <string name="color_not">Без цвета</string>
+
+    <!-- Создание описание группы -->
+    <string name="description_title">Описание</string>
+    <string name="without_description">Без описания</string>
+    <string name="save_button">Сохранить</string>
+    <string name="cancel_button">Отмена</string>
+
+    <!-- Выбор повтора задачи -->
+    <string name="repeat_title">Повторение</string>
+    <string name="repeat_without">Без повтора</string>
+    <string name="repeat_day">Ежедневно</string>
+    <string name="repeat_week">Каждую неделю</string>
+    <string name="repeat_month">Раз в месяц</string>
+    <string name="repeat_year">Через год</string>
+    <string name="repeat_not">Не повторять</string>
+
+    <!-- Напоминание о задаче -->
+    <string name="reminder_title">Напоминание</string>
+    <string name="reminder_without">Без напоминания</string>
+    <string name="reminder_on_the_day">В день выполнения</string>
+    <string name="reminder_day_before">За один день</string>
+    <string name="reminder_two_day_before">За два дня</string>
+    <string name="reminder_week_before">За неделю</string>
+    <string name="reminder_month_before">За месяц</string>
+    <string name="reminder_not">Не напоминать</string>
+    <string name="reminder_enabled">Включено</string>
+    <string name="reminder_disabled">Без напоминания</string>
+
+    <!-- Имена пунктов главного бокового меню -->
+    <string name="menu_unsorted_tasks">Не отсортированные</string>
+    <string name="menu_today_tasks">Сегодня</string>
+    <string name="menu_month_tasks">На месяц</string>
+    <string name="menu_tasks_without_date">Без даты</string>
+    <string name="menu_all_tasks">Все задачи</string>
+    <string name="menu_finished_tasks">Завершенные</string>
+    <string name="menu_edit_groups">Редактировать группы</string>
+
+    <!-- Другие разные строки -->
+    <string name="task_title_hint">Описание задачи…</string>
+    <string name="group_name_hint">Название группы…</string>
+    <string name="group_description_hint">Описание группы…</string>
+
+    <!-- Информационные сообщения -->
+    <string name="message_group_is_exist">Группа с таким названием уже существует.</string>
+    <string name="message_set_task_date">Сначала установите дату выполнения задачи.</string>
+    <string name="message_can_not_set_reminder">Нельзя установить напоминание для задачи назначенной на сегодня.</string>
+
+    <!-- Кнопки диалогов -->
+    <string name="dialog_button_ok">OK</string>
+    <string name="dialog_button_cancel">Отмена</string>
+    <string name="dialog_button_create_group">Создать</string>
+
+
+
+
+
+
+
+
+
+
+
+</resources>

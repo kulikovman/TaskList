@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="ru.kulikovman.tasklist.TaskListActivity"
+    tools:showIn="@layout/app_bar_task_list">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/test_rw_two"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="70dp"
+        android:clipToPadding="false"
+        android:paddingTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Кнопки управления задачами -->
+        <ImageButton
+            android:id="@+id/imageButton1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/button_options"
+            android:contentDescription="Выбрать дату"
+            android:padding="10dp"
+            android:tint="@color/gray_6"
+            app:srcCompat="@drawable/ic_event_black_24dp"/>
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/button_options"
+            android:padding="10dp"
+            android:tint="@color/gray_6"
+            app:srcCompat="@drawable/ic_low_priority_black_24dp"/>
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/button_options"
+            android:padding="10dp"
+            android:tint="@color/gray_6"
+            app:srcCompat="@drawable/ic_dns_black_24dp"/>
+
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/button_options"
+            android:padding="10dp"
+            android:tint="@color/gray_6"
+            app:srcCompat="@drawable/ic_replay_black_24dp"/>
+
+        <ImageButton
+            android:id="@+id/imageButton5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/button_options"
+            android:padding="10dp"
+            android:tint="@color/gray_6"
+            app:srcCompat="@drawable/ic_alarm_black_24dp"/>
+
+        <ImageButton
+            android:id="@+id/imageButton6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/button_options"
+            android:padding="10dp"
+            android:tint="@color/gray_6"
+            app:srcCompat="@drawable/ic_delete_black_24dp"/>
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/imageBut"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/button_add_task"
+        android:elevation="1dp"
+        android:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_add_black_24dp"/>
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:background="@drawable/task_field_style"
+        android:elevation="1dp"
+        android:hint="@string/task_title_hint"
+        android:inputType="textMultiLine|textCapSentences"
+        android:minHeight="50dp"
+        android:paddingBottom="6dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
+        android:paddingTop="4dp"
+        android:textColorHint="@color/gray_4"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageBut"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>
