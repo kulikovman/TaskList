@@ -1,12 +1,14 @@
 package ru.kulikovman.tasklist;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -26,9 +28,12 @@ import io.realm.Realm;
 import io.realm.Sort;
 import ru.kulikovman.tasklist.models.Task;
 import ru.kulikovman.tasklist.models.TaskAdapter;
+import ru.kulikovman.tasklist.models.TouchHelperCallback;
+
+import static android.support.v7.widget.helper.ItemTouchHelper.ACTION_STATE_SWIPE;
 
 public class TaskListActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, TaskAdapter.OnItemClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     private Realm mRealm;
     private RecyclerView mRecyclerView;
@@ -37,7 +42,6 @@ public class TaskListActivity extends AppCompatActivity
     private EditText mTaskField;
     private ImageButton mAddTask;
     private ImageButton mSetDateBtn, mSetPriorityBtn, mSetGroupBtn, mSetRepeatBtn, mSetReminderBtn;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,30 +73,6 @@ public class TaskListActivity extends AppCompatActivity
 
     }
 
-    private class TouchHelperCallback extends ItemTouchHelper.SimpleCallback {
-
-        TouchHelperCallback() {
-            super(ItemTouchHelper.UP | ItemTouchHelper.DOWN, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
-        }
-
-        @Override
-        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-            return true;
-        }
-
-        @Override
-        public void onSwiped(final RecyclerView.ViewHolder viewHolder, int direction) {
-            //DataHelper.deleteItemAsync(realm, viewHolder.getItemId());
-            String taskId = String.valueOf(viewHolder.getItemId());
-            Toast.makeText(getApplicationContext(), taskId, Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public boolean isLongPressDragEnabled() {
-            return false;
-        }
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -109,7 +89,7 @@ public class TaskListActivity extends AppCompatActivity
         // Слушатель для адаптера списка
         //mAdapter.setOnItemClickListener(this);
 
-        // Пробуем другой подход...
+        // Обработчик свайпов
         TouchHelperCallback touchHelperCallback = new TouchHelperCallback();
         ItemTouchHelper touchHelper = new ItemTouchHelper(touchHelperCallback);
         touchHelper.attachToRecyclerView(mRecyclerView);
@@ -178,11 +158,6 @@ public class TaskListActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    @Override
-    public void onItemClick(View itemView, int itemPosition, Task task, int selectedPosition) {
-
     }
 
     public void addTask(View view) {
