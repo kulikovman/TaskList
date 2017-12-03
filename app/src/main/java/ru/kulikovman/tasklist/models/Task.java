@@ -1,4 +1,4 @@
-package ru.kulikovman.tasklist.Models;
+package ru.kulikovman.tasklist.models;
 
 
 import io.realm.RealmObject;
