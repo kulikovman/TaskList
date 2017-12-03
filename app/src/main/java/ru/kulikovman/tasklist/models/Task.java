@@ -19,17 +19,18 @@ public class Task extends RealmObject {
     private long mId;
 
     private String mTitle;
-    private int mPriority;
-    private boolean mDone;
     private long mTargetDate;
-    private long mCompletionDate;
+    private int mPriority;
+    private Group mGroup;
     private String mRepeat;
     private boolean mReminder;
-    private Group mGroup;
+    private boolean mDone;
+    private long mCompletionDate;
 
     public Task(String title) {
         mId = System.currentTimeMillis();
         mTitle = title;
+        mTargetDate = Long.MAX_VALUE;
         mDone = false;
     }
 

@@ -100,6 +100,7 @@
         android:background="@drawable/button_add_task"
         android:elevation="1dp"
         android:tint="@color/white"
+        android:onClick="addTask"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_add_black_24dp"/>

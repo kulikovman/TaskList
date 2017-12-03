@@ -1,8 +1,11 @@
 package ru.kulikovman.tasklist;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,15 +15,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
+import io.realm.Sort;
+import ru.kulikovman.tasklist.models.Task;
+import ru.kulikovman.tasklist.models.TaskAdapter;
 
 public class TaskListActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, TaskAdapter.OnItemClickListener {
 
     private Realm mRealm;
+    private RecyclerView mRecyclerView;
+    private TaskAdapter mAdapter;
 
     private EditText mTaskField;
     private ImageButton mAddTask;
@@ -51,6 +61,31 @@ public class TaskListActivity extends AppCompatActivity
         mTaskField = (EditText) findViewById(R.id.task_field);
         mAddTask = (ImageButton) findViewById(R.id.add_task_button);
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mRecyclerView.setAdapter(null);
+        mRealm.close();
+    }
+
+    private void setUpRecyclerView() {
+        mAdapter = new TaskAdapter(this, loadUnfinishedTasks());
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setHasFixedSize(true);
+
+        // Слушатель для адаптера списка
+        mAdapter.setOnItemClickListener(this);
+    }
+
+    private OrderedRealmCollection<Task> loadUnfinishedTasks() {
+        return mRealm.where(Task.class)
+                .equalTo(Task.DONE, false)
+                .findAll()
+                .sort(new String[]{Task.TARGET_DATE, Task.PRIORITY, Task.TITLE},
+                        new Sort[] {Sort.ASCENDING, Sort.ASCENDING, Sort.ASCENDING});
     }
 
     @Override
@@ -108,5 +143,38 @@ public class TaskListActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onItemClick(View itemView, int itemPosition, Task task, int selectedPosition) {
+
+    }
+
+    public void addTask(View view) {
+        String taskTitle = mTaskField.getText().toString().trim();
+
+        if (taskTitle.length() > 0) {
+            // Создаем задачу и добавляем в базу
+            Task task = new Task(taskTitle);
+
+            mRealm.beginTransaction();
+            mRealm.insert(task);
+            mRealm.commitTransaction();
+
+            // Очищаем поле
+            mTaskField.setText(null);
+
+            // Прячем клавиатуру
+            View v = this.getCurrentFocus();
+            if (v != null) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+
+            // Выделяем созданную задачу и перемещаемся к ней
+            // ...
+        }
     }
 }
