@@ -1,0 +1,29 @@
+<com.chauthai.swipereveallayout.SwipeRevealLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/swipe_layout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:mode="same_level"
+    app:dragEdge="right"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Your secondary layout here -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical">
+
+        <include layout="@layout/swipe_menu_buttons"/>
+
+    </LinearLayout>
+
+    <!-- Your main layout here -->
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/item_task"/>
+
+    </FrameLayout>
+
+</com.chauthai.swipereveallayout.SwipeRevealLayout>

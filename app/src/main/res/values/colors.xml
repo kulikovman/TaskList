@@ -32,6 +32,8 @@
     <color name="gray_ripple_selector">#dfdfdf</color>
     <color name="option_button_pressed">#dcdcdc</color>
     <color name="add_task_button_pressed">#58b443</color>
+    <color name="delete_task_button">#ff8080</color>
+    <color name="done_task_button">#6fe455</color>
     <color name="red_date">#ff8080</color>
 
     <color name="colorOptionsIcons">#5ebcff</color>

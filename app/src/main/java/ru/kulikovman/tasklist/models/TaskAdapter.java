@@ -13,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chauthai.swipereveallayout.SwipeRevealLayout;
+import com.chauthai.swipereveallayout.ViewBinderHelper;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -28,6 +31,9 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
 
     private int mPosition = RecyclerView.NO_POSITION;
 
+    // This object helps you save/restore the open/close state of each view
+    private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
+
     public TaskAdapter(Context context, OrderedRealmCollection<Task> results) {
         super(results, true);
         // Only set this if the model class has a primary key that is also a integer or long.
@@ -36,6 +42,9 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
 
         mTasks = results;
         mContext = context;
+
+        // uncomment the line below if you want to open only one row at a time
+        viewBinderHelper.setOpenOnlyOne(true);
     }
 
     @Override
@@ -50,6 +59,8 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
         private ImageView mTaskWarning;
         private Task mTask;
 
+        private SwipeRevealLayout swipeLayout;
+
         public TaskHolder(View view) {
             super(view);
 
@@ -63,6 +74,8 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
             mTaskRepeat = (TextView) view.findViewById(R.id.item_task_repeat);
             mTaskColor = (ImageButton) view.findViewById(R.id.item_task_color);
             mTaskWarning = (ImageView) view.findViewById(R.id.item_task_warning);
+
+            swipeLayout = (SwipeRevealLayout) itemView.findViewById(R.id.swipe_layout);
         }
 
         @Override
@@ -214,13 +227,21 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
 
     @Override
     public TaskHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_task, parent, false);
+        //View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_task, parent, false);
+        View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.swipe_reveal_layout, parent, false);
         return new TaskHolder(item);
     }
 
     @Override
     public void onBindViewHolder(TaskHolder holder, int position) {
         Task task = mTasks.get(position);
+
+        // Save/restore the open/close state.
+        // You need to provide a String id which uniquely defines the data object.
+        String tempId = String.valueOf(task.getId());
+        viewBinderHelper.bind(holder.swipeLayout, tempId);
+
+        // Мои бинды
         holder.bindTask(task);
 
         // Если установленная позиция равна текущей, то выделяем элемент
