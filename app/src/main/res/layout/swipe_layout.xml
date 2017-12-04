@@ -1,29 +1,26 @@
 <com.chauthai.swipereveallayout.SwipeRevealLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/swipe_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:mode="same_level"
+    android:id="@+id/swipe_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     app:dragEdge="right"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    app:mode="same_level">
 
     <!-- Your secondary layout here -->
-    <LinearLayout
+    <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical">
+        android:layout_height="match_parent">
 
-        <include layout="@layout/swipe_menu_buttons"/>
-
-    </LinearLayout>
+        <include layout="@layout/task_swipe_buttons"/>
+    </FrameLayout>
 
     <!-- Your main layout here -->
     <FrameLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <include layout="@layout/item_task"/>
-
     </FrameLayout>
 
 </com.chauthai.swipereveallayout.SwipeRevealLayout>

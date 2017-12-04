@@ -228,7 +228,7 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
     @Override
     public TaskHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_task, parent, false);
-        View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.swipe_reveal_layout, parent, false);
+        View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.swipe_layout, parent, false);
         return new TaskHolder(item);
     }
 
