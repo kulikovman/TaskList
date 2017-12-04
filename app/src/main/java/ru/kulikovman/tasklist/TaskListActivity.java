@@ -3,6 +3,7 @@ package ru.kulikovman.tasklist;
 import android.content.Context;
 import android.os.Bundle;
 
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -62,7 +63,6 @@ public class TaskListActivity extends AppCompatActivity
 
         // Создаем и запускаем список
         setUpRecyclerView();
-
     }
 
     @Override
@@ -77,6 +77,7 @@ public class TaskListActivity extends AppCompatActivity
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         // Слушатель для адаптера списка
         //mAdapter.setOnItemClickListener(this);

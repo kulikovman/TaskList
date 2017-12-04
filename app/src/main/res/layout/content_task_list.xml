@@ -13,10 +13,10 @@
         android:id="@+id/task_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginEnd="70dp"
+        android:layout_marginEnd="65dp"
         android:clipToPadding="false"
         android:paddingTop="10dp"
-        android:paddingBottom="62dp"
+        android:paddingBottom="79dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
