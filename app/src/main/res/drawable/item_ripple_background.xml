@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/gray_4">
+    android:color="@color/gray_3"> <!-- цвет вспышки при нажатии -->
 
-    <!-- mask will be here... -->
+    <!-- маска для прозрачного фона -->
     <item android:id="@android:id/mask">
-        <color android:color="@color/black"/> <!-- any color will do -->
+        <color android:color="@color/black"/> <!-- любой цвет -->
     </item>
 
+    <!-- Цвета состояний должны отличаться от цвета вспышки -->
     <item>
         <selector>
             <item android:state_selected="true">
-                <color android:color="@color/gray_ripple_selector"/>
-            </item>
-
-            <item android:state_activated="true">
                 <color android:color="@color/gray_ripple_selector"/>
             </item>
 

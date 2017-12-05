@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
@@ -27,7 +28,7 @@ import ru.kulikovman.tasklist.models.Task;
 import ru.kulikovman.tasklist.models.TaskAdapter;
 
 public class TaskListActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, TaskAdapter.OnItemClickListener {
 
     private Realm mRealm;
     private RecyclerView mRecyclerView;
@@ -81,12 +82,12 @@ public class TaskListActivity extends AppCompatActivity
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         // Слушатель для адаптера списка
-        //mAdapter.setOnItemClickListener(this);
+        mAdapter.setOnItemClickListener(this);
 
         // Обработчик свайпов
-        SwipeController swipeController = new SwipeController();
+        /*SwipeController swipeController = new SwipeController();
         ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
-        itemTouchhelper.attachToRecyclerView(mRecyclerView);
+        itemTouchhelper.attachToRecyclerView(mRecyclerView);*/
     }
 
     private OrderedRealmCollection<Task> loadUnfinishedTasks() {
@@ -180,5 +181,14 @@ public class TaskListActivity extends AppCompatActivity
             // Выделяем созданную задачу и перемещаемся к ней
             // ...
         }
+    }
+
+    @Override
+    public void onItemClick(View itemView, int itemPosition, boolean isSelected) {
+        if (isSelected) {
+            Toast.makeText(this, "Выбрана строка: " + itemPosition, Toast.LENGTH_SHORT).show();
+        }
+
+        long dgrdg = itemView.getId();
     }
 }

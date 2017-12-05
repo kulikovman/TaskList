@@ -29,7 +29,7 @@
     // Дополнительные цвета
     <color name="lightGrey">#d2d2d2</color>
     <color name="redButton">#f55d55</color>
-    <color name="gray_ripple_selector">#dfdfdf</color>
+    <color name="gray_ripple_selector">#e1e1e1</color>
     <color name="option_button_pressed">#dcdcdc</color>
     <color name="add_task_button_pressed">#58b443</color>
     <color name="delete_task_button">#ff8080</color>

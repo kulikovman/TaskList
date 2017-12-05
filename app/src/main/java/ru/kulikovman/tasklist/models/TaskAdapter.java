@@ -22,11 +22,12 @@ import ru.kulikovman.tasklist.Helper;
 import ru.kulikovman.tasklist.R;
 
 public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.TaskHolder> {
-    private static OnItemClickListener mListener;
+    private OnItemClickListener mOnItemClickListener;
+    private OrderedRealmCollection<Task> mResults;
     private Context mContext;
-    private OrderedRealmCollection<Task> mTasks;
 
-    private int mPosition = RecyclerView.NO_POSITION;
+    private int mRowIndex = -1;
+    private boolean mIsSelected = false;
 
     public TaskAdapter(Context context, OrderedRealmCollection<Task> results) {
         super(results, true);
@@ -34,8 +35,12 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
         // In that case, {@code getItemId(int)} must also be overridden to return the key.
         setHasStableIds(true);
 
-        mTasks = results;
+        mResults = results;
         mContext = context;
+    }
+
+    public void setResults(OrderedRealmCollection<Task> results) {
+        mResults = results;
     }
 
     @Override
@@ -44,17 +49,30 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
         return getItem(index).getId();
     }
 
+    @Override
+    public TaskHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View item = inflater.inflate(R.layout.item_task, parent, false);
+        return new TaskHolder(item);
+    }
+
+    @Override
+    public void onBindViewHolder(TaskHolder holder, int position) {
+        Task task = mResults.get(position);
+        holder.bindTask(task);
+
+        // Если установленная позиция равна текущей, то выделяем элемент
+        holder.itemView.setSelected(mRowIndex == position);
+        mIsSelected = holder.itemView.isSelected();
+    }
+
     public class TaskHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView mTaskTitle, mTaskDate, mTaskPriority, mTaskRepeat;
         private ImageButton mTaskColor;
         private ImageView mTaskWarning;
-        private Task mTask;
 
         public TaskHolder(View view) {
             super(view);
-
-            // Слушатель нажатий по элементу
-            view.setOnClickListener(this);
 
             // Инициализируем вью элемента списка
             mTaskTitle = (TextView) view.findViewById(R.id.item_task_title);
@@ -63,34 +81,37 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
             mTaskRepeat = (TextView) view.findViewById(R.id.item_task_repeat);
             mTaskColor = (ImageButton) view.findViewById(R.id.item_task_color);
             mTaskWarning = (ImageView) view.findViewById(R.id.item_task_warning);
+
+            // Слушатель нажатий по элементу
+            view.setOnClickListener(this);
         }
 
         @Override
-        public void onClick(View v) {
+        public void onClick(View view) {
             // Обновляем айтем нажатый ранее
-            notifyItemChanged(mPosition);
+            notifyItemChanged(mRowIndex);
 
             // Сохраняем старую и получаем новую позицию
-            int oldPosition = mPosition;
-            mPosition = getLayoutPosition();
+            int oldPosition = mRowIndex;
+            mRowIndex = getLayoutPosition();
 
             // Если старая и новая позиции совпадают, то удаляем позицию
-            if (mPosition == oldPosition) {
+            if (mRowIndex == oldPosition) {
                 resetSelection();
             }
 
             // Обновляем айтем нажатый сейчас
-            notifyItemChanged(mPosition);
+            notifyItemChanged(mRowIndex);
 
             // Код для проброса слушателя
-            if (TaskAdapter.mListener != null) {
-                TaskAdapter.mListener.onItemClick(v, getLayoutPosition(), mTask, mPosition);
+            if (mOnItemClickListener != null) {
+                mOnItemClickListener.onItemClick(view, getLayoutPosition(), mIsSelected);
             }
         }
 
         // Назначаем содержимое для текущего элемента списка
         public void bindTask(Task task) {
-            mTask = task;
+            //mTask = task;
 
             // Устанавливаем состояние айтема по умолчанию
             defaultStateItem();
@@ -204,48 +225,25 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
             // Цвет даты по умолчанию
             mTaskDate.setTextColor(mContext.getResources().getColor(R.color.gray_4));
         }
-    }
 
-    private void setMarginStartForView(View view, int value) {
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
-        params.setMarginStart(Helper.convertDpToPx(mContext, value));
-        view.setLayoutParams(params);
-    }
-
-    @Override
-    public TaskHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_task, parent, false);
-        return new TaskHolder(item);
-    }
-
-    @Override
-    public void onBindViewHolder(TaskHolder holder, int position) {
-        Task task = mTasks.get(position);
-        holder.bindTask(task);
-
-        // Если установленная позиция равна текущей, то выделяем элемент
-        holder.itemView.setSelected(mPosition == position);
-    }
-
-    @Override
-    public int getItemCount() {
-        return mTasks.size();
-    }
-
-    public void setTasks(OrderedRealmCollection<Task> results) {
-        mTasks = results;
+        private void setMarginStartForView(View view, int value) {
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
+            params.setMarginStart(Helper.convertDpToPx(mContext, value));
+            view.setLayoutParams(params);
+        }
     }
 
     // Интерфейс для проброса слушателя наружу
     public interface OnItemClickListener {
-        void onItemClick(View itemView, int itemPosition, Task task, int selectedPosition);
+        void onItemClick(View itemView, int itemPosition, boolean isSelected);
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        mListener = listener;
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        mOnItemClickListener = onItemClickListener;
     }
 
     public void resetSelection() {
-        mPosition = RecyclerView.NO_POSITION;   //NO_POSITION == -1
+        mRowIndex = RecyclerView.NO_POSITION;
+        mIsSelected = false;
     }
 }
