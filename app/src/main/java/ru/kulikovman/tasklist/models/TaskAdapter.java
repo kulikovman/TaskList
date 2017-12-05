@@ -18,6 +18,7 @@ import java.util.GregorianCalendar;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmRecyclerViewAdapter;
+import ru.kulikovman.tasklist.Common;
 import ru.kulikovman.tasklist.Helper;
 import ru.kulikovman.tasklist.R;
 
@@ -27,7 +28,7 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
     private Context mContext;
 
     private int mRowIndex = -1;
-    private boolean mIsSelected = false;
+    //private boolean mIsSelected = false;
 
     public TaskAdapter(Context context, OrderedRealmCollection<Task> results) {
         super(results, true);
@@ -63,7 +64,9 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
 
         // Если установленная позиция равна текущей, то выделяем элемент
         holder.itemView.setSelected(mRowIndex == position);
-        mIsSelected = holder.itemView.isSelected();
+
+        Common.sCurrentTask = mResults.get(position);
+        Common.isSelected = holder.itemView.isSelected();
     }
 
     public class TaskHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -105,7 +108,7 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
 
             // Код для проброса слушателя
             if (mOnItemClickListener != null) {
-                mOnItemClickListener.onItemClick(view, getLayoutPosition(), mIsSelected);
+                mOnItemClickListener.onItemClick(view, getLayoutPosition());
             }
         }
 
@@ -235,7 +238,7 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
 
     // Интерфейс для проброса слушателя наружу
     public interface OnItemClickListener {
-        void onItemClick(View itemView, int itemPosition, boolean isSelected);
+        void onItemClick(View itemView, int itemPosition);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -243,7 +246,11 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
     }
 
     public void resetSelection() {
+        // Сохраняем позицию выделения и сбрасываем ее
+        int oldPosition = mRowIndex;
         mRowIndex = RecyclerView.NO_POSITION;
-        mIsSelected = false;
+
+        // Обновляем ранее выделенный элемент
+        notifyItemChanged(oldPosition);
     }
 }

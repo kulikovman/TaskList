@@ -184,11 +184,11 @@ public class TaskListActivity extends AppCompatActivity
     }
 
     @Override
-    public void onItemClick(View itemView, int itemPosition, boolean isSelected) {
-        if (isSelected) {
-            Toast.makeText(this, "Выбрана строка: " + itemPosition, Toast.LENGTH_SHORT).show();
+    public void onItemClick(View itemView, int itemPosition) {
+        if (Common.isSelected) {
+            Toast.makeText(this, "Позиция: " + itemPosition, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Выделение снято", Toast.LENGTH_SHORT).show();
         }
-
-        long dgrdg = itemView.getId();
     }
 }
