@@ -20,15 +20,14 @@ import io.realm.OrderedRealmCollection;
 import io.realm.RealmRecyclerViewAdapter;
 import ru.kulikovman.tasklist.Common;
 import ru.kulikovman.tasklist.Helper;
+import ru.kulikovman.tasklist.ItemClickListener;
 import ru.kulikovman.tasklist.R;
 
 public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.TaskHolder> {
-    private OnItemClickListener mOnItemClickListener;
     private OrderedRealmCollection<Task> mResults;
     private Context mContext;
 
     private int mRowIndex = -1;
-    //private boolean mIsSelected = false;
 
     public TaskAdapter(Context context, OrderedRealmCollection<Task> results) {
         super(results, true);
@@ -62,17 +61,51 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
         Task task = mResults.get(position);
         holder.bindTask(task);
 
-        // Если установленная позиция равна текущей, то выделяем элемент
-        holder.itemView.setSelected(mRowIndex == position);
+        // Обработка нажатия по элементу
+        holder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(View view, int position, boolean isLongClick) {
+                if (!isLongClick) {
+                    // Обновляем нажатый ранее элемент
+                    notifyItemChanged(mRowIndex);
 
-        Common.sCurrentTask = mResults.get(position);
-        Common.isSelected = holder.itemView.isSelected();
+                    // Если старая и текущая позиции совпадают
+                    if (position == mRowIndex) {
+                        // То это повторное нажатие - снимаем выделение
+                        resetSelection();
+                    } else {
+                        // Сохраняем выбранный элемент
+                        mRowIndex = position;
+                        Common.sCurrentTask = mResults.get(position);
+                        notifyDataSetChanged();
+                    }
+                } else {
+                    // Обработка длинного нажатия
+                    // ...
+                }
+            }
+        });
+
+        // Выделение элемента
+        holder.itemView.setSelected(mRowIndex == position);
     }
 
-    public class TaskHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public void resetSelection() {
+        // Обнуляем элемент
+        Common.sCurrentTask = null;
+
+        // Снимаем выделение
+        int oldPosition = mRowIndex;
+        mRowIndex = RecyclerView.NO_POSITION;
+        notifyItemChanged(oldPosition);
+    }
+
+    public class TaskHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         private TextView mTaskTitle, mTaskDate, mTaskPriority, mTaskRepeat;
         private ImageButton mTaskColor;
         private ImageView mTaskWarning;
+
+        private ItemClickListener mItemClickListener;
 
         public TaskHolder(View view) {
             super(view);
@@ -85,38 +118,29 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
             mTaskColor = (ImageButton) view.findViewById(R.id.item_task_color);
             mTaskWarning = (ImageView) view.findViewById(R.id.item_task_warning);
 
-            // Слушатель нажатий по элементу
+            // Слушатели нажатий по элементу
             view.setOnClickListener(this);
+            view.setOnLongClickListener(this);
+        }
+
+        public void setItemClickListener(ItemClickListener itemClickListener) {
+            mItemClickListener = itemClickListener;
         }
 
         @Override
         public void onClick(View view) {
-            // Обновляем айтем нажатый ранее
-            notifyItemChanged(mRowIndex);
+            mItemClickListener.onClick(view, getAdapterPosition(), false);
+        }
 
-            // Сохраняем старую и получаем новую позицию
-            int oldPosition = mRowIndex;
-            mRowIndex = getLayoutPosition();
-
-            // Если старая и новая позиции совпадают, то удаляем позицию
-            if (mRowIndex == oldPosition) {
-                resetSelection();
-            }
-
-            // Обновляем айтем нажатый сейчас
-            notifyItemChanged(mRowIndex);
-
-            // Код для проброса слушателя
-            if (mOnItemClickListener != null) {
-                mOnItemClickListener.onItemClick(view, getLayoutPosition());
-            }
+        @Override
+        public boolean onLongClick(View view) {
+            mItemClickListener.onClick(view, getAdapterPosition(), true);
+            return true;
         }
 
         // Назначаем содержимое для текущего элемента списка
         public void bindTask(Task task) {
-            //mTask = task;
-
-            // Устанавливаем состояние айтема по умолчанию
+            // Делаем состояние айтема по умолчанию
             defaultStateItem();
 
             // Устанавливаем название задачи
@@ -234,23 +258,5 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
             params.setMarginStart(Helper.convertDpToPx(mContext, value));
             view.setLayoutParams(params);
         }
-    }
-
-    // Интерфейс для проброса слушателя наружу
-    public interface OnItemClickListener {
-        void onItemClick(View itemView, int itemPosition);
-    }
-
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        mOnItemClickListener = onItemClickListener;
-    }
-
-    public void resetSelection() {
-        // Сохраняем позицию выделения и сбрасываем ее
-        int oldPosition = mRowIndex;
-        mRowIndex = RecyclerView.NO_POSITION;
-
-        // Обновляем ранее выделенный элемент
-        notifyItemChanged(oldPosition);
     }
 }

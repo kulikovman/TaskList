@@ -27,8 +27,7 @@ import io.realm.Sort;
 import ru.kulikovman.tasklist.models.Task;
 import ru.kulikovman.tasklist.models.TaskAdapter;
 
-public class TaskListActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, TaskAdapter.OnItemClickListener {
+public class TaskListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Realm mRealm;
     private RecyclerView mRecyclerView;
@@ -82,7 +81,7 @@ public class TaskListActivity extends AppCompatActivity
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         // Слушатель для адаптера списка
-        mAdapter.setOnItemClickListener(this);
+        //mAdapter.setOnItemClickListener(this);
 
         // Обработчик свайпов
         /*SwipeController swipeController = new SwipeController();
@@ -180,15 +179,6 @@ public class TaskListActivity extends AppCompatActivity
 
             // Выделяем созданную задачу и перемещаемся к ней
             // ...
-        }
-    }
-
-    @Override
-    public void onItemClick(View itemView, int itemPosition) {
-        if (Common.isSelected) {
-            Toast.makeText(this, "Позиция: " + itemPosition, Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Выделение снято", Toast.LENGTH_SHORT).show();
         }
     }
 }
