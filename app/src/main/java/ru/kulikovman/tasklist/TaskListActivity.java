@@ -36,7 +36,7 @@ public class TaskListActivity extends AppCompatActivity
 
     private EditText mTaskField;
     private ImageButton mAddTask;
-    private ImageButton mSetDateButton, mSetPriorityButton, mSetGroupButton, mSetRepeatButton, mSetReminderButton;
+    private ImageButton mSetDateButton, mSetPriorityButton, mSetGroupButton, mSetRepeatButton, mSetReminderButton, mDeleteButton;
     private LinearLayout mTaskOptionsPanel;
 
     @Override
@@ -71,6 +71,7 @@ public class TaskListActivity extends AppCompatActivity
         mSetGroupButton = (ImageButton) findViewById(R.id.task_set_group_button);
         mSetRepeatButton = (ImageButton) findViewById(R.id.task_set_repeat_button);
         mSetReminderButton = (ImageButton) findViewById(R.id.task_set_reminder_button);
+        mDeleteButton = (ImageButton) findViewById(R.id.task_delete_button);
 
         // Создаем и запускаем список
         setUpRecyclerView();
@@ -187,7 +188,7 @@ public class TaskListActivity extends AppCompatActivity
                 }
             }
 
-            // Нажимаем на созданный элемент
+            // Переходим к созданной задаче
             moveToItem(task);
         }
     }
@@ -224,5 +225,14 @@ public class TaskListActivity extends AppCompatActivity
     public void onItemClick(View itemView, int itemPosition, Task task) {
         mTask = task;
         showingOptionsPanel(mTask);
+    }
+
+    public void deleteTask(View view) {
+        mRealm.beginTransaction();
+        mTask.deleteFromRealm();
+        mRealm.commitTransaction();
+
+        mAdapter.resetSelection();
+        mTaskOptionsPanel.setVisibility(View.INVISIBLE);
     }
 }
