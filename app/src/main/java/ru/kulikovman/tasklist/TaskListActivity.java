@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,6 +18,7 @@ import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import io.realm.OrderedRealmCollection;
@@ -27,7 +27,8 @@ import io.realm.Sort;
 import ru.kulikovman.tasklist.models.Task;
 import ru.kulikovman.tasklist.models.TaskAdapter;
 
-public class TaskListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class TaskListActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener, TaskAdapter.OnItemClickListener {
 
     private Realm mRealm;
     private RecyclerView mRecyclerView;
@@ -36,6 +37,7 @@ public class TaskListActivity extends AppCompatActivity implements NavigationVie
     private EditText mTaskField;
     private ImageButton mAddTask;
     private ImageButton mSetDateBtn, mSetPriorityBtn, mSetGroupBtn, mSetRepeatBtn, mSetReminderBtn;
+    private LinearLayout mTaskOptionsPanel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,7 @@ public class TaskListActivity extends AppCompatActivity implements NavigationVie
         mRecyclerView = (RecyclerView) findViewById(R.id.task_recycler_view);
         mTaskField = (EditText) findViewById(R.id.task_field);
         mAddTask = (ImageButton) findViewById(R.id.add_task_button);
+        mTaskOptionsPanel = (LinearLayout) findViewById(R.id.task_options_panel);
 
         // Создаем и запускаем список
         setUpRecyclerView();
@@ -81,7 +84,7 @@ public class TaskListActivity extends AppCompatActivity implements NavigationVie
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         // Слушатель для адаптера списка
-        //mAdapter.setOnItemClickListener(this);
+        mAdapter.setOnItemClickListener(this);
 
         // Обработчик свайпов
         /*SwipeController swipeController = new SwipeController();
@@ -179,6 +182,15 @@ public class TaskListActivity extends AppCompatActivity implements NavigationVie
 
             // Выделяем созданную задачу и перемещаемся к ней
             // ...
+        }
+    }
+
+    @Override
+    public void onItemClick(View itemView, int itemPosition, Task task) {
+        if (task == null) {
+            mTaskOptionsPanel.setVisibility(View.INVISIBLE);
+        } else {
+            mTaskOptionsPanel.setVisibility(View.VISIBLE);
         }
     }
 }
