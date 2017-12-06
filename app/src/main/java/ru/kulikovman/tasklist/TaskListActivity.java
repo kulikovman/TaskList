@@ -104,7 +104,7 @@ public class TaskListActivity extends AppCompatActivity
                 .equalTo(Task.DONE, false)
                 .findAll()
                 .sort(new String[]{Task.TARGET_DATE, Task.PRIORITY, Task.TITLE},
-                        new Sort[] {Sort.ASCENDING, Sort.ASCENDING, Sort.ASCENDING});
+                        new Sort[]{Sort.ASCENDING, Sort.ASCENDING, Sort.ASCENDING});
     }
 
     @Override
@@ -187,15 +187,22 @@ public class TaskListActivity extends AppCompatActivity
                 }
             }
 
-            // Выделяем созданную задачу и перемещаемся к ней
-            // ...
+            // Нажимаем на созданный элемент
+            moveToItem(task);
         }
     }
 
-    @Override
-    public void onItemClick(View itemView, int itemPosition, Task task) {
-        mTask = task;
+    private void moveToItem(Task task) {
+        int position = mAdapter.getPosition(task.getId());
+        mTask = mAdapter.getTaskById(task.getId());
 
+        mRecyclerView.scrollToPosition(position);
+        mAdapter.selectPosition(position);
+
+        showingOptionsPanel(mTask);
+    }
+
+    public void showingOptionsPanel(Task task) {
         if (task == null) {
             // Скрываем панель
             mTaskOptionsPanel.setVisibility(View.INVISIBLE);
@@ -211,5 +218,11 @@ public class TaskListActivity extends AppCompatActivity
                 mSetReminderButton.setEnabled(true);
             }
         }
+    }
+
+    @Override
+    public void onItemClick(View itemView, int itemPosition, Task task) {
+        mTask = task;
+        showingOptionsPanel(mTask);
     }
 }

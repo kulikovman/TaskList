@@ -68,6 +68,13 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
         Log.d("log", "Завершен onBindViewHolder / TaskAdapter");
     }
 
+    public void selectPosition(int position) {
+        resetSelection();
+
+        mSavedPosition = position;
+        notifyItemChanged(mSavedPosition);
+    }
+
     public void resetSelection() {
         // Обнуляем элемент
         mTask = null;
@@ -76,6 +83,25 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
         int oldPosition = mSavedPosition;
         mSavedPosition = RecyclerView.NO_POSITION;
         notifyItemChanged(oldPosition);
+    }
+
+    public int getPosition(long taskId) {
+        // Важно искать объект по id
+        for (Task task : mResults) {
+            if (task.getId() == taskId) {
+                return mResults.indexOf(task);
+            }
+        }
+        return 0;
+    }
+
+    public Task getTaskById(long taskId) {
+        for (Task task : mResults) {
+            if (task.getId() == taskId) {
+                return task;
+            }
+        }
+        return null;
     }
 
     public class TaskHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
