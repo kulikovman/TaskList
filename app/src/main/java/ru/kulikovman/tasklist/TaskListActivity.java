@@ -36,7 +36,8 @@ public class TaskListActivity extends AppCompatActivity
 
     private EditText mTaskField;
     private ImageButton mAddTask;
-    private ImageButton mSetDateButton, mSetPriorityButton, mSetGroupButton, mSetRepeatButton, mSetReminderButton, mDeleteButton;
+    private ImageButton mSetDateButton, mSetPriorityButton, mSetGroupButton, mSetRepeatButton,
+            mSetReminderButton, mDeleteButton;
     private LinearLayout mTaskOptionsPanel;
 
     @Override
@@ -75,6 +76,15 @@ public class TaskListActivity extends AppCompatActivity
 
         // Создаем и запускаем список
         setUpRecyclerView();
+
+        mTaskField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                mAdapter.resetSelection();
+                mTaskOptionsPanel.setVisibility(View.INVISIBLE);
+                hideKeyboard();
+            }
+        });
     }
 
     @Override
@@ -180,13 +190,7 @@ public class TaskListActivity extends AppCompatActivity
             mTaskField.setText(null);
 
             // Прячем клавиатуру
-            View v = this.getCurrentFocus();
-            if (v != null) {
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                if (imm != null) {
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                }
-            }
+            hideKeyboard();
 
             // Переходим к созданной задаче
             moveToItem(task);
@@ -222,8 +226,13 @@ public class TaskListActivity extends AppCompatActivity
     }
 
     @Override
-    public void onItemClick(View itemView, int itemPosition, Task task) {
+    public void onItemClick(View itemView, int position, Task task) {
         mTask = task;
+
+        hideKeyboard();
+        mTaskField.clearFocus();
+        itemView.setSelected(true);
+        //mAdapter.selectPosition(position);
         showingOptionsPanel(mTask);
     }
 
@@ -234,5 +243,15 @@ public class TaskListActivity extends AppCompatActivity
 
         mAdapter.resetSelection();
         mTaskOptionsPanel.setVisibility(View.INVISIBLE);
+    }
+
+    private void hideKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        }
     }
 }
