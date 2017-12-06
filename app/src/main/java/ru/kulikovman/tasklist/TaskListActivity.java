@@ -19,7 +19,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
@@ -33,10 +32,11 @@ public class TaskListActivity extends AppCompatActivity
     private Realm mRealm;
     private RecyclerView mRecyclerView;
     private TaskAdapter mAdapter;
+    private Task mTask;
 
     private EditText mTaskField;
     private ImageButton mAddTask;
-    private ImageButton mSetDateBtn, mSetPriorityBtn, mSetGroupBtn, mSetRepeatBtn, mSetReminderBtn;
+    private ImageButton mSetDateButton, mSetPriorityButton, mSetGroupButton, mSetRepeatButton, mSetReminderButton;
     private LinearLayout mTaskOptionsPanel;
 
     @Override
@@ -59,11 +59,18 @@ public class TaskListActivity extends AppCompatActivity
         Realm.init(this);
         mRealm = Realm.getDefaultInstance();
 
-        // Инициализируем необходимые вью элементы
+        // Инициализируем базовые вью элементы
         mRecyclerView = (RecyclerView) findViewById(R.id.task_recycler_view);
         mTaskField = (EditText) findViewById(R.id.task_field);
         mAddTask = (ImageButton) findViewById(R.id.add_task_button);
+
+        // Инициализируем вью элементы панели инструментов
         mTaskOptionsPanel = (LinearLayout) findViewById(R.id.task_options_panel);
+        mSetDateButton = (ImageButton) findViewById(R.id.task_set_date_button);
+        mSetPriorityButton = (ImageButton) findViewById(R.id.task_set_priority_button);
+        mSetGroupButton = (ImageButton) findViewById(R.id.task_set_group_button);
+        mSetRepeatButton = (ImageButton) findViewById(R.id.task_set_repeat_button);
+        mSetReminderButton = (ImageButton) findViewById(R.id.task_set_reminder_button);
 
         // Создаем и запускаем список
         setUpRecyclerView();
@@ -187,10 +194,21 @@ public class TaskListActivity extends AppCompatActivity
 
     @Override
     public void onItemClick(View itemView, int itemPosition, Task task) {
+        mTask = task;
+
         if (task == null) {
+            // Скрываем панель
             mTaskOptionsPanel.setVisibility(View.INVISIBLE);
         } else {
+            // Показываем панель и настраиваем активность кнопок
             mTaskOptionsPanel.setVisibility(View.VISIBLE);
+
+            if (task.getTargetDate() == Long.MAX_VALUE) {
+                mSetRepeatButton.setEnabled(false);
+                mSetReminderButton.setEnabled(false);
+            } else {
+                //mSetRepeatButton.setEnabled(true);
+            }
         }
     }
 }
