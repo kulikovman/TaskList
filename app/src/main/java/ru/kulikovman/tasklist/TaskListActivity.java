@@ -207,7 +207,8 @@ public class TaskListActivity extends AppCompatActivity
                 mSetRepeatButton.setEnabled(false);
                 mSetReminderButton.setEnabled(false);
             } else {
-                //mSetRepeatButton.setEnabled(true);
+                mSetRepeatButton.setEnabled(true);
+                mSetReminderButton.setEnabled(true);
             }
         }
     }
