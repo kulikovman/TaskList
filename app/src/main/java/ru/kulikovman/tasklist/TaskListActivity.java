@@ -178,7 +178,7 @@ public class TaskListActivity extends AppCompatActivity
     }
 
     @Override
-    public void onItemClick(View itemView, int position, Task task) {
+    public void onItemClick(int position, Task task) {
         // Прячем клавиатуру
         hideKeyboard();
 

@@ -124,7 +124,7 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
 
             // Код для проброса слушателя
             if (mOnItemClickListener != null) {
-                mOnItemClickListener.onItemClick(view, getLayoutPosition(), mTask);
+                mOnItemClickListener.onItemClick(getLayoutPosition(), mTask);
             }
         }
 
@@ -252,9 +252,7 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
 
     // Интерфейс для проброса слушателя наружу
     public interface OnItemClickListener {
-        // Возможно здесь стоит оставить только задачу
-        // ...
-        void onItemClick(View itemView, int itemPosition, Task task);
+        void onItemClick(int position, Task task);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
