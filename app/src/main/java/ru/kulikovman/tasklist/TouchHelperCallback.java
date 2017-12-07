@@ -6,8 +6,12 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 
 public class TouchHelperCallback extends ItemTouchHelper.SimpleCallback {
 
-    public TouchHelperCallback() {
-        super(ItemTouchHelper.UP | ItemTouchHelper.DOWN, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
+    /*public TouchHelperCallback(int dragDirs, int swipeDirs) {
+        super(dragDirs, swipeDirs);
+    }*/
+
+    TouchHelperCallback() {
+        super(ItemTouchHelper.UP | ItemTouchHelper.DOWN, ItemTouchHelper.LEFT);
     }
 
     @Override
@@ -16,15 +20,7 @@ public class TouchHelperCallback extends ItemTouchHelper.SimpleCallback {
     }
 
     @Override
-    public void onSwiped(final RecyclerView.ViewHolder viewHolder, int direction) {
-        //DataHelper.deleteItemAsync(realm, viewHolder.getItemId());
-        //String taskId = String.valueOf(viewHolder.getItemId());
-        //Toast.makeText(getApplicationContext(), taskId, Toast.LENGTH_SHORT).show();
-    }
+    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
 
-    @Override
-    public boolean isLongPressDragEnabled() {
-        return false;
     }
-
 }

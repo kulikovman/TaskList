@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -107,9 +108,9 @@ public class TaskListActivity extends AppCompatActivity
         mAdapter.setOnItemClickListener(this);
 
         // Обработчик свайпов
-        /*SwipeController swipeController = new SwipeController();
-        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
-        itemTouchhelper.attachToRecyclerView(mRecyclerView);*/
+        TouchHelperCallback touchHelperCallback = new TouchHelperCallback();
+        ItemTouchHelper touchHelper = new ItemTouchHelper(touchHelperCallback);
+        touchHelper.attachToRecyclerView(mRecyclerView);
     }
 
     private OrderedRealmCollection<Task> loadUnfinishedTasks() {
