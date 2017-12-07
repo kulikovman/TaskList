@@ -106,12 +106,12 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
             super(view);
 
             // Инициализируем вью элемента списка
-            mTaskTitle = (TextView) view.findViewById(R.id.item_task_title);
-            mTaskDate = (TextView) view.findViewById(R.id.item_task_date);
-            mTaskPriority = (TextView) view.findViewById(R.id.item_task_priority);
-            mTaskRepeat = (TextView) view.findViewById(R.id.item_task_repeat);
-            mTaskColor = (ImageButton) view.findViewById(R.id.item_task_color);
-            mTaskWarning = (ImageView) view.findViewById(R.id.item_task_warning);
+            mTaskTitle = view.findViewById(R.id.item_task_title);
+            mTaskDate = view.findViewById(R.id.item_task_date);
+            mTaskPriority = view.findViewById(R.id.item_task_priority);
+            mTaskRepeat = view.findViewById(R.id.item_task_repeat);
+            mTaskColor = view.findViewById(R.id.item_task_color);
+            mTaskWarning = view.findViewById(R.id.item_task_warning);
 
             // Слушатель нажатий по элементу
             view.setOnClickListener(this);
