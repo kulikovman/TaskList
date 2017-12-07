@@ -27,7 +27,7 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
 
     private OnItemClickListener mOnItemClickListener;
 
-    private int mSavedPosition = -1;
+    private int mSelectedPosition = -1;
     private Task mTask;
 
     public TaskAdapter(Context context, OrderedRealmCollection<Task> results) {
@@ -63,25 +63,18 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
         holder.bindTask(mResults.get(position));
 
         // Выделяет или снимает выделение с элемента
-        holder.itemView.setSelected(mSavedPosition == position);
-
-        Log.d("log", "Завершен onBindViewHolder / TaskAdapter");
+        holder.itemView.setSelected(mSelectedPosition == position);
     }
 
-    public void selectPosition(int position) {
+    public void selectItem(int position) {
         resetSelection();
-
-        mSavedPosition = position;
-        notifyItemChanged(mSavedPosition);
+        mSelectedPosition = position;
+        notifyItemChanged(mSelectedPosition);
     }
 
     public void resetSelection() {
-        // Обнуляем элемент
-        mTask = null;
-
-        // Снимаем выделение
-        int oldPosition = mSavedPosition;
-        mSavedPosition = RecyclerView.NO_POSITION;
+        int oldPosition = mSelectedPosition;
+        mSelectedPosition = RecyclerView.NO_POSITION;
         notifyItemChanged(oldPosition);
     }
 
@@ -126,28 +119,29 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
 
         @Override
         public void onClick(View view) {
-            // Обновляем айтем нажатый ранее
-            notifyItemChanged(mSavedPosition);
+            /*// Обновляем айтем нажатый ранее
+            notifyItemChanged(mSelectedPosition);
 
             // Если старая и текущая позиции совпадают
-            if (getLayoutPosition() == mSavedPosition) {
+            if (getLayoutPosition() == mSelectedPosition) {
                 // То это повторное нажатие - снимаем выделение
                 resetSelection();
             } else {
                 // Сохраняем новую позицию и задачу
-                mSavedPosition = getLayoutPosition();
-                mTask = mResults.get(getLayoutPosition());
+                mSelectedPosition = getLayoutPosition();
+
             }
 
             // Обновляем айтем нажатый сейчас
-            notifyItemChanged(getLayoutPosition());
+            notifyItemChanged(getLayoutPosition());*/
+
+            // Получаем задачу
+            mTask = mResults.get(getLayoutPosition());
 
             // Код для проброса слушателя
             if (mOnItemClickListener != null) {
                 mOnItemClickListener.onItemClick(view, getLayoutPosition(), mTask);
             }
-
-            Log.d("log", "Завершен onClick / TaskHolder / TaskAdapter");
         }
 
         // Назначаем содержимое для текущего элемента списка

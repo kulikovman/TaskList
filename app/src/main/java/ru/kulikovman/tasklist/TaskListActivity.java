@@ -32,13 +32,16 @@ public class TaskListActivity extends AppCompatActivity
     private Realm mRealm;
     private RecyclerView mRecyclerView;
     private TaskAdapter mAdapter;
+
     private Task mTask;
+    private int mPosition = -1;
 
     private EditText mTaskField;
     private ImageButton mAddTask;
-    private ImageButton mSetDateButton, mSetPriorityButton, mSetGroupButton, mSetRepeatButton,
-            mSetReminderButton, mDeleteButton;
+
     private LinearLayout mTaskOptionsPanel;
+    private ImageButton mSetDateButton, mSetPriorityButton, mSetGroupButton, mSetRepeatButton,
+    mSetReminderButton, mDeleteButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,12 +80,11 @@ public class TaskListActivity extends AppCompatActivity
         // Создаем и запускаем список
         setUpRecyclerView();
 
+        // Нажатие по полю ввода
         mTaskField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                mAdapter.resetSelection();
-                mTaskOptionsPanel.setVisibility(View.INVISIBLE);
-                hideKeyboard();
+                resetItemSelection();
             }
         });
     }
@@ -175,6 +177,20 @@ public class TaskListActivity extends AppCompatActivity
         return true;
     }
 
+    @Override
+    public void onItemClick(View itemView, int position, Task task) {
+        // Прячем клавиатуру
+        hideKeyboard();
+
+        // Определяем повторное нажатие по элементу
+        if (position == mPosition) {
+            resetItemSelection();
+        } else {
+            mTask = task;
+            selectItem(position);
+        }
+    }
+
     public void addTask(View view) {
         String taskTitle = mTaskField.getText().toString().trim();
 
@@ -189,61 +205,20 @@ public class TaskListActivity extends AppCompatActivity
             // Очищаем поле
             mTaskField.setText(null);
 
-            // Прячем клавиатуру
+            // Прячем клавиатуру и переходим к созданной задаче
             hideKeyboard();
-
-            // Переходим к созданной задаче
-            moveToItem(task);
+            moveToItem(task.getId());
         }
     }
 
-    private void moveToItem(Task task) {
-        int position = mAdapter.getPosition(task.getId());
-        mTask = mAdapter.getTaskById(task.getId());
+    private void moveToItem(long taskId) {
+        // Получаем позицию и задачу
+        int position = mAdapter.getPosition(taskId);
+        mTask = mAdapter.getTaskById(taskId);
 
+        // Скролим и выделяем
         mRecyclerView.scrollToPosition(position);
-        mAdapter.selectPosition(position);
-
-        showingOptionsPanel(mTask);
-    }
-
-    public void showingOptionsPanel(Task task) {
-        if (task == null) {
-            // Скрываем панель
-            mTaskOptionsPanel.setVisibility(View.INVISIBLE);
-        } else {
-            // Показываем панель и настраиваем активность кнопок
-            mTaskOptionsPanel.setVisibility(View.VISIBLE);
-
-            if (task.getTargetDate() == Long.MAX_VALUE) {
-                mSetRepeatButton.setEnabled(false);
-                mSetReminderButton.setEnabled(false);
-            } else {
-                mSetRepeatButton.setEnabled(true);
-                mSetReminderButton.setEnabled(true);
-            }
-        }
-    }
-
-    @Override
-    public void onItemClick(View itemView, int position, Task task) {
-        mTask = task;
-
-        hideKeyboard();
-        mTaskField.clearFocus();
-        itemView.setSelected(true);
-        //mAdapter.selectPosition(position);
-        showingOptionsPanel(mTask);
-
-        // Слушатель передает только позицию и задачу
-        // Логика выделения элементов реализована прямо здесь
-        // В адаптере сделать два метода для выделения и снятия выделения заданной позиции
-        // Переданную задачу в адаптере больше не сохраняем и не обнуляем
-
-        // Все это задумано для того чтобы можно было выделить элемент сразу после сброса фокуса с поля ввода задачи
-        // Сейчас после сброса фокуса теряется сделаное выделение (при этом панел инструментов остается)
-
-
+        selectItem(position);
     }
 
     public void deleteTask(View view) {
@@ -251,11 +226,11 @@ public class TaskListActivity extends AppCompatActivity
         mTask.deleteFromRealm();
         mRealm.commitTransaction();
 
-        mAdapter.resetSelection();
-        mTaskOptionsPanel.setVisibility(View.INVISIBLE);
+        resetItemSelection();
     }
 
     private void hideKeyboard() {
+        // Прячем клавиатуру
         View view = this.getCurrentFocus();
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -263,5 +238,28 @@ public class TaskListActivity extends AppCompatActivity
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
         }
+
+        // Снимаем фокус с поля ввода
+        mTaskField.clearFocus();
+    }
+
+    private void resetItemSelection() {
+        mAdapter.resetSelection();
+        mTaskOptionsPanel.setVisibility(View.INVISIBLE);
+        mPosition = RecyclerView.NO_POSITION;
+        mTask = null;
+    }
+
+    private void selectItem(int position) {
+        mAdapter.selectItem(position);
+        mPosition = position;
+
+        // Показываем панель инструментов
+        mTaskOptionsPanel.setVisibility(View.VISIBLE);
+
+        // Настраиваем активность кнопок
+        long date = mTask.getTargetDate();
+        mSetRepeatButton.setEnabled(date != Long.MAX_VALUE);
+        mSetReminderButton.setEnabled(date != Long.MAX_VALUE);
     }
 }
