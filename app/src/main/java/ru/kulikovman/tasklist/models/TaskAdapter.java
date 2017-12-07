@@ -119,22 +119,6 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
 
         @Override
         public void onClick(View view) {
-            /*// Обновляем айтем нажатый ранее
-            notifyItemChanged(mSelectedPosition);
-
-            // Если старая и текущая позиции совпадают
-            if (getLayoutPosition() == mSelectedPosition) {
-                // То это повторное нажатие - снимаем выделение
-                resetSelection();
-            } else {
-                // Сохраняем новую позицию и задачу
-                mSelectedPosition = getLayoutPosition();
-
-            }
-
-            // Обновляем айтем нажатый сейчас
-            notifyItemChanged(getLayoutPosition());*/
-
             // Получаем задачу
             mTask = mResults.get(getLayoutPosition());
 
