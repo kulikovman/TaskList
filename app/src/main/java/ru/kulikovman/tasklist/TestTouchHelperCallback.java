@@ -4,14 +4,14 @@ package ru.kulikovman.tasklist;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
-public class TouchHelperCallback extends ItemTouchHelper.SimpleCallback {
+public class TestTouchHelperCallback extends ItemTouchHelper.SimpleCallback {
 
-    /*public TouchHelperCallback(int dragDirs, int swipeDirs) {
+    /*public TestTouchHelperCallback(int dragDirs, int swipeDirs) {
         super(dragDirs, swipeDirs);
     }*/
 
-    TouchHelperCallback() {
-        super(ItemTouchHelper.UP | ItemTouchHelper.DOWN, ItemTouchHelper.LEFT);
+    TestTouchHelperCallback() {
+        super(ItemTouchHelper.UP | ItemTouchHelper.DOWN, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
     }
 
     @Override

@@ -97,6 +97,10 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
         return null;
     }
 
+    public Task getTaskByPosition(int position) {
+        return mResults.get(position);
+    }
+
     public class TaskHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView mTaskTitle, mTaskDate, mTaskPriority, mTaskRepeat;
         private ImageButton mTaskColor;

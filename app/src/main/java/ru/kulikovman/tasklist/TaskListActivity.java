@@ -1,12 +1,22 @@
 package ru.kulikovman.tasklist;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,14 +28,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
 import io.realm.Sort;
 import ru.kulikovman.tasklist.models.Task;
 import ru.kulikovman.tasklist.models.TaskAdapter;
+import ru.kulikovman.tasklist.models.TaskAdapter.TaskHolder;
 
 public class TaskListActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, TaskAdapter.OnItemClickListener {
@@ -42,7 +55,7 @@ public class TaskListActivity extends AppCompatActivity
 
     private LinearLayout mTaskOptionsPanel;
     private ImageButton mSetDateButton, mSetPriorityButton, mSetGroupButton, mSetRepeatButton,
-    mSetReminderButton, mDeleteButton;
+            mSetReminderButton, mDeleteButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +101,9 @@ public class TaskListActivity extends AppCompatActivity
                 resetItemSelection();
             }
         });
+
+        // Эксперимент
+        // ...
     }
 
     @Override
@@ -108,10 +124,102 @@ public class TaskListActivity extends AppCompatActivity
         mAdapter.setOnItemClickListener(this);
 
         // Обработчик свайпов
-        TouchHelperCallback touchHelperCallback = new TouchHelperCallback();
+        /*TouchHelperCallback touchHelperCallback = new TouchHelperCallback();
         ItemTouchHelper touchHelper = new ItemTouchHelper(touchHelperCallback);
-        touchHelper.attachToRecyclerView(mRecyclerView);
+        touchHelper.attachToRecyclerView(mRecyclerView);*/
+
+        initSwipe();
     }
+
+    private void initSwipe() {
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+                mTask = mAdapter.getTaskByPosition(position);
+
+                if (direction == ItemTouchHelper.LEFT) {
+                    // Завершаем задачу
+                    mRealm.beginTransaction();
+                    mTask.setDone(true);
+                    mRealm.commitTransaction();
+                } else {
+                    // Удаляем задачу
+                    mRealm.beginTransaction();
+                    mTask.deleteFromRealm();
+                    mRealm.commitTransaction();
+
+                    // Обнуляем сохраненную задачу
+                    mTask = null;
+                }
+            }
+
+            @Override
+            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
+                    View itemView = viewHolder.itemView;
+
+                    float height = (float) itemView.getBottom() - (float) itemView.getTop();
+                    float width = height / 3;
+
+                    Paint p = new Paint();
+                    Bitmap icon;
+
+                    if (dX > 0) {
+                        // Цвет и размер фона
+                        p.setColor(ResourcesCompat.getColor(getResources(), R.color.red, null));
+                        RectF background = new RectF((float) itemView.getLeft(), (float) itemView.getTop(), dX, (float) itemView.getBottom());
+                        c.drawRect(background, p);
+
+                        // Иконка и ее расположение
+                        Drawable d = getResources().getDrawable(R.drawable.ic_delete_white_24dp);
+                        icon = drawableToBitmap(d);
+                        RectF iconDest = new RectF((float) itemView.getLeft() + width, (float) itemView.getTop() + width, (float) itemView.getLeft() + 2 * width, (float) itemView.getBottom() - width);
+                        c.drawBitmap(icon, null, iconDest, p);
+
+                    } else {
+                        // Цвет и размер фона
+                        p.setColor(ResourcesCompat.getColor(getResources(), R.color.green, null));
+                        RectF background = new RectF((float) itemView.getRight() + dX, (float) itemView.getTop(), (float) itemView.getRight(), (float) itemView.getBottom());
+                        c.drawRect(background, p);
+
+                        // Иконка и ее расположение
+                        Drawable d = getResources().getDrawable(R.drawable.ic_done_white_24dp);
+                        icon = drawableToBitmap(d);
+                        RectF iconDest = new RectF((float) itemView.getRight() - 2 * width, (float) itemView.getTop() + width, (float) itemView.getRight() - width, (float) itemView.getBottom() - width);
+                        c.drawBitmap(icon, null, iconDest, p);
+                    }
+
+                    super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+                }
+            }
+
+            public Bitmap drawableToBitmap(Drawable drawable) {
+
+                if (drawable instanceof BitmapDrawable) {
+                    return ((BitmapDrawable) drawable).getBitmap();
+                }
+
+                Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bitmap);
+                drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+                drawable.draw(canvas);
+
+                return bitmap;
+            }
+        };
+
+        // Присоединяем всю эту конструкцию к нашему mRecyclerView
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(mRecyclerView);
+    }
+
 
     private OrderedRealmCollection<Task> loadUnfinishedTasks() {
         return mRealm.where(Task.class)
@@ -177,6 +285,36 @@ public class TaskListActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    /*private class TouchHelperCallback extends ItemTouchHelper.SimpleCallback {
+        TouchHelperCallback() {
+            super(0, ItemTouchHelper.LEFT);
+        }
+
+        @Override
+        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+            //resetItemSelection();
+            Toast.makeText(getApplicationContext(), "Элемент - " + viewHolder.getLayoutPosition(), Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+            View itemView = viewHolder.itemView;
+            mSwipeBackground.setY(itemView.getTop());
+            if (isCurrentlyActive) {
+                mSwipeBackground.setVisibility(View.VISIBLE);
+            } else {
+                mSwipeBackground.setVisibility(View.GONE);
+            }
+
+            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+        }
+    }*/
 
     @Override
     public void onItemClick(int position, Task task) {
