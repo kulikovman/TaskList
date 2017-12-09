@@ -10,16 +10,14 @@
     <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:background="@drawable/item_ripple_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <RelativeLayout
             android:id="@+id/clipBackground"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            tools:layout_width="wrap_content"
-            android:layout_gravity="center">
+            android:layout_height="match_parent"
+            tools:layout_width="match_parent">
 
             <include layout="@layout/task_swipe_buttons"/>
 
@@ -28,7 +26,7 @@
         <RelativeLayout
             android:id="@+id/clipForeground"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <include layout="@layout/item_task"/>
 

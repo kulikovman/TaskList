@@ -4,6 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:layout_centerVertical="true"
+    android:layout_marginLeft="12dp"
+    android:layout_marginStart="12dp"
+    android:focusable="false"
+    tools:ignore="ContentDescription"
     android:orientation="horizontal">
 
     <ImageButton

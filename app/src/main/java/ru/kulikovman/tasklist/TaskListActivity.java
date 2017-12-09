@@ -113,15 +113,11 @@ public class TaskListActivity extends AppCompatActivity
         mAdapter.setOnItemClickListener(this);
 
         // Обработчик свайпов
-        /*TestTouchHelperCallback touchHelperCallback = new TestTouchHelperCallback();
-        ItemTouchHelper touchHelper = new ItemTouchHelper(touchHelperCallback);
-        touchHelper.attachToRecyclerView(mRecyclerView);*/
-
         initSwipe();
     }
 
     private void initSwipe() {
-        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
