@@ -17,6 +17,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -38,7 +39,6 @@ import io.realm.Realm;
 import io.realm.Sort;
 import ru.kulikovman.tasklist.models.Task;
 import ru.kulikovman.tasklist.models.TaskAdapter;
-import ru.kulikovman.tasklist.models.TaskAdapter.TaskHolder;
 
 public class TaskListActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, TaskAdapter.OnItemClickListener {
@@ -124,14 +124,15 @@ public class TaskListActivity extends AppCompatActivity
         mAdapter.setOnItemClickListener(this);
 
         // Обработчик свайпов
-        /*TouchHelperCallback touchHelperCallback = new TouchHelperCallback();
+        TestTouchHelperCallback touchHelperCallback = new TestTouchHelperCallback();
         ItemTouchHelper touchHelper = new ItemTouchHelper(touchHelperCallback);
-        touchHelper.attachToRecyclerView(mRecyclerView);*/
+        touchHelper.attachToRecyclerView(mRecyclerView);
 
-        initSwipe();
+        //initSwipe();
     }
 
     private void initSwipe() {
+        // Рабочая версия самой простой реализации свайп-меню
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 
             @Override
