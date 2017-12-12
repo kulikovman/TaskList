@@ -187,26 +187,26 @@ public class TaskListActivity extends AppCompatActivity
 
                 // TODO: should animate out instead. how?
                 //backgroundView.setRight(0);
+
+                // Сбрасываем фоновый макет в начальную позицию
                 backgroundView.setRight(itemView.getWidth());
                 backgroundView.setLeft(itemView.getWidth());
 
+                // Магия
                 getDefaultUIUtil().clearView(foregroundView);
             }
 
             private void drawBackground(RecyclerView.ViewHolder viewHolder, float dX, int actionState) {
-                final View backgroundView = ((TaskAdapter.TaskHolder) viewHolder).mClipBackground;
-                View itemView = viewHolder.itemView;
-
-
-
                 if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
+                    final View backgroundView = ((TaskAdapter.TaskHolder) viewHolder).mClipBackground;
+                    View itemView = viewHolder.itemView;
+
                     //noinspection NumericCastThatLosesPrecision
                     //backgroundView.setRight((int) Math.max(dX, 0));
 
                     //Log.d("log", "dX = " + dX);
                     backgroundView.setLeft(itemView.getWidth() + (int) dX);
                 }
-
             }
             
             /*@Override
