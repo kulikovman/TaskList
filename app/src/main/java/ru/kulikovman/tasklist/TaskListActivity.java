@@ -123,7 +123,7 @@ public class TaskListActivity extends AppCompatActivity
     }
 
     private void initSwipe() {
-        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
@@ -132,16 +132,12 @@ public class TaskListActivity extends AppCompatActivity
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                Log.d("log", "Запущен onSwiped в ItemTouchHelper");
-
                 mPosition = viewHolder.getAdapterPosition();
                 mTask = mAdapter.getTaskByPosition(mPosition);
             }
 
             @Override
             public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
-                Log.d("log", "Запущен onSelectedChanged в ItemTouchHelper");
-
                 if (viewHolder != null){
                     final View foregroundView = ((TaskAdapter.TaskHolder) viewHolder).mClipForeground;
                     getDefaultUIUtil().onSelected(foregroundView);
@@ -150,8 +146,6 @@ public class TaskListActivity extends AppCompatActivity
 
             @Override
             public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-                Log.d("log", "Запущен onChildDraw в ItemTouchHelper");
-
                 final View foregroundView = ((TaskAdapter.TaskHolder) viewHolder).mClipForeground;
                 drawBackground(viewHolder, dX, actionState);
                 getDefaultUIUtil().onDraw(c, recyclerView, foregroundView, dX, dY, actionState, isCurrentlyActive);
@@ -159,8 +153,6 @@ public class TaskListActivity extends AppCompatActivity
 
             @Override
             public void onChildDrawOver(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-                Log.d("log", "Запущен onChildDrawOver в ItemTouchHelper");
-
                 final View foregroundView = ((TaskAdapter.TaskHolder) viewHolder).mClipForeground;
                 drawBackground(viewHolder, dX, actionState);
                 getDefaultUIUtil().onDrawOver(c, recyclerView, foregroundView, dX, dY, actionState, isCurrentlyActive);
@@ -168,31 +160,30 @@ public class TaskListActivity extends AppCompatActivity
 
             @Override
             public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder){
-                Log.d("log", "Запущен clearView в ItemTouchHelper");
-
                 final View backgroundView = ((TaskAdapter.TaskHolder) viewHolder).mClipBackground;
                 final View foregroundView = ((TaskAdapter.TaskHolder) viewHolder).mClipForeground;
+                View itemView = viewHolder.itemView;
 
                 // TODO: should animate out instead. how?
-                backgroundView.setRight(0);
+                //backgroundView.setRight(0);
+                backgroundView.setRight(itemView.getWidth());
+                backgroundView.setLeft(itemView.getWidth());
+
                 getDefaultUIUtil().clearView(foregroundView);
             }
 
             private void drawBackground(RecyclerView.ViewHolder viewHolder, float dX, int actionState) {
-                Log.d("log", "Запущен drawBackground в ItemTouchHelper");
-
                 final View backgroundView = ((TaskAdapter.TaskHolder) viewHolder).mClipBackground;
                 View itemView = viewHolder.itemView;
+
+
 
                 if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
                     //noinspection NumericCastThatLosesPrecision
                     //backgroundView.setRight((int) Math.max(dX, 0));
 
-                    if (dX > 0) {
-                        backgroundView.setRight((int) dX);
-                    } else {
-                        backgroundView.setLeft(backgroundView.getWidth() - (int) dX);
-                    }
+                    Log.d("log", "dX = " + dX);
+                    backgroundView.setLeft(itemView.getWidth() + (int) dX);
                 }
 
             }
@@ -424,10 +415,6 @@ public class TaskListActivity extends AppCompatActivity
             mTask.setDone(true);
             mRealm.commitTransaction();
             Log.d("log", "Задача завершена");
-        } else if (id == R.id.swipe_cancel_task_button) {
-            // Отменяем свайп
-            mAdapter.notifyItemChanged(mPosition);
-            Log.d("log", "Действие отменено");
         }
 
         // Сбрасываем выделение и все обнуляем
