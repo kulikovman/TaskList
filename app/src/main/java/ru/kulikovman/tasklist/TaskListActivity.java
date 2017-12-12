@@ -41,6 +41,7 @@ public class TaskListActivity extends AppCompatActivity
     private Realm mRealm;
     private RecyclerView mRecyclerView;
     private TaskAdapter mAdapter;
+    private String LOG = "log";
 
     private Task mTask;
     private int mPosition = -1;
@@ -89,16 +90,16 @@ public class TaskListActivity extends AppCompatActivity
         // Создаем и запускаем список
         setUpRecyclerView();
 
-        // Нажатие по полю ввода
+        // Смена фокуса поля ввода
         mTaskField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                resetItemSelection();
+                // Снимаем выделение, если есть
+                if (mPosition != RecyclerView.NO_POSITION) {
+                    resetItemSelection();
+                }
             }
         });
-
-        // Эксперимент
-        // ...
     }
 
     @Override
@@ -132,20 +133,34 @@ public class TaskListActivity extends AppCompatActivity
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                mPosition = viewHolder.getAdapterPosition();
-                mTask = mAdapter.getTaskByPosition(mPosition);
+                //mPosition = viewHolder.getAdapterPosition();
+                //mTask = mAdapter.getTaskByPosition(mPosition);
             }
 
             @Override
             public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
                 if (viewHolder != null){
+                    // Получаем необходимые вью
                     final View foregroundView = ((TaskAdapter.TaskHolder) viewHolder).mClipForeground;
                     final View backgroundView = ((TaskAdapter.TaskHolder) viewHolder).mClipBackground;
                     View itemView = viewHolder.itemView;
 
+                    // Снимаем выделение, если было
+                    if (itemView.isSelected()) {
+                        itemView.setSelected(false);
+                        mPosition = RecyclerView.NO_POSITION;
+                    } else if (mPosition != -1){
+                        resetItemSelection();
+                    }
+
+                    // Скрываем панель инструментов
+                    mTaskOptionsPanel.setVisibility(View.INVISIBLE);
+
+                    // Размещаем фоновый макет в нужном месте
                     backgroundView.setRight(itemView.getWidth());
                     backgroundView.setLeft(itemView.getWidth());
 
+                    // Магия в которой я пока не разобрался
                     getDefaultUIUtil().onSelected(foregroundView);
                 }
             }
@@ -188,7 +203,7 @@ public class TaskListActivity extends AppCompatActivity
                     //noinspection NumericCastThatLosesPrecision
                     //backgroundView.setRight((int) Math.max(dX, 0));
 
-                    Log.d("log", "dX = " + dX);
+                    //Log.d("log", "dX = " + dX);
                     backgroundView.setLeft(itemView.getWidth() + (int) dX);
                 }
 
