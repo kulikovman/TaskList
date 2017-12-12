@@ -204,7 +204,7 @@ public class TaskListActivity extends AppCompatActivity
                     //noinspection NumericCastThatLosesPrecision
                     //backgroundView.setRight((int) Math.max(dX, 0));
 
-                    //Log.d("log", "dX = " + dX);
+                    Log.d(LOG, "dX = " + dX + " | Ш: " + backgroundView.getWidth());
                     backgroundView.setLeft(itemView.getWidth() + (int) dX);
                 }
             }
