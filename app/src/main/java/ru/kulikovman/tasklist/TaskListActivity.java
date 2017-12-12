@@ -1,9 +1,15 @@
 package ru.kulikovman.tasklist;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -126,12 +132,16 @@ public class TaskListActivity extends AppCompatActivity
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                Log.d("log", "Запущен onSwiped в ItemTouchHelper");
+
                 mPosition = viewHolder.getAdapterPosition();
                 mTask = mAdapter.getTaskByPosition(mPosition);
             }
 
             @Override
             public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
+                Log.d("log", "Запущен onSelectedChanged в ItemTouchHelper");
+
                 if (viewHolder != null){
                     final View foregroundView = ((TaskAdapter.TaskHolder) viewHolder).mClipForeground;
                     getDefaultUIUtil().onSelected(foregroundView);
@@ -140,6 +150,8 @@ public class TaskListActivity extends AppCompatActivity
 
             @Override
             public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                Log.d("log", "Запущен onChildDraw в ItemTouchHelper");
+
                 final View foregroundView = ((TaskAdapter.TaskHolder) viewHolder).mClipForeground;
                 drawBackground(viewHolder, dX, actionState);
                 getDefaultUIUtil().onDraw(c, recyclerView, foregroundView, dX, dY, actionState, isCurrentlyActive);
@@ -147,6 +159,8 @@ public class TaskListActivity extends AppCompatActivity
 
             @Override
             public void onChildDrawOver(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                Log.d("log", "Запущен onChildDrawOver в ItemTouchHelper");
+
                 final View foregroundView = ((TaskAdapter.TaskHolder) viewHolder).mClipForeground;
                 drawBackground(viewHolder, dX, actionState);
                 getDefaultUIUtil().onDrawOver(c, recyclerView, foregroundView, dX, dY, actionState, isCurrentlyActive);
@@ -154,6 +168,8 @@ public class TaskListActivity extends AppCompatActivity
 
             @Override
             public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder){
+                Log.d("log", "Запущен clearView в ItemTouchHelper");
+
                 final View backgroundView = ((TaskAdapter.TaskHolder) viewHolder).mClipBackground;
                 final View foregroundView = ((TaskAdapter.TaskHolder) viewHolder).mClipForeground;
 
@@ -163,7 +179,10 @@ public class TaskListActivity extends AppCompatActivity
             }
 
             private void drawBackground(RecyclerView.ViewHolder viewHolder, float dX, int actionState) {
+                Log.d("log", "Запущен drawBackground в ItemTouchHelper");
+
                 final View backgroundView = ((TaskAdapter.TaskHolder) viewHolder).mClipBackground;
+                View itemView = viewHolder.itemView;
 
                 if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
                     //noinspection NumericCastThatLosesPrecision
@@ -172,7 +191,7 @@ public class TaskListActivity extends AppCompatActivity
                     if (dX > 0) {
                         backgroundView.setRight((int) dX);
                     } else {
-                        backgroundView.setRight(backgroundView.getWidth() - (int) dX);
+                        backgroundView.setLeft(backgroundView.getWidth() - (int) dX);
                     }
                 }
 
@@ -216,9 +235,9 @@ public class TaskListActivity extends AppCompatActivity
 
                     super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
                 }
-            }*/
+            }
 
-            /*public Bitmap drawableToBitmap(Drawable drawable) {
+            public Bitmap drawableToBitmap(Drawable drawable) {
 
                 if (drawable instanceof BitmapDrawable) {
                     return ((BitmapDrawable) drawable).getBitmap();
