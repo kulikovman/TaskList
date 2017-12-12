@@ -140,6 +140,12 @@ public class TaskListActivity extends AppCompatActivity
             public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
                 if (viewHolder != null){
                     final View foregroundView = ((TaskAdapter.TaskHolder) viewHolder).mClipForeground;
+                    final View backgroundView = ((TaskAdapter.TaskHolder) viewHolder).mClipBackground;
+                    View itemView = viewHolder.itemView;
+
+                    backgroundView.setRight(itemView.getWidth());
+                    backgroundView.setLeft(itemView.getWidth());
+
                     getDefaultUIUtil().onSelected(foregroundView);
                 }
             }
