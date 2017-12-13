@@ -156,9 +156,10 @@ public class TaskListActivity extends AppCompatActivity
                     // Скрываем панель инструментов
                     mTaskOptionsPanel.setVisibility(View.INVISIBLE);
 
-                    // Размещаем фоновый макет в нужном месте
+                    // Размещаем фоновый макет в нужном месте и делаем его видимым
                     backgroundView.setRight(itemView.getWidth());
                     backgroundView.setLeft(itemView.getWidth());
+                    backgroundView.setVisibility(View.VISIBLE);
 
                     // Магия в которой я пока не разобрался
                     getDefaultUIUtil().onSelected(foregroundView);
@@ -191,6 +192,8 @@ public class TaskListActivity extends AppCompatActivity
                 // Сбрасываем фоновый макет в начальную позицию
                 backgroundView.setRight(itemView.getWidth());
                 backgroundView.setLeft(itemView.getWidth());
+                backgroundView.setVisibility(View.INVISIBLE);
+
 
                 // Магия
                 getDefaultUIUtil().clearView(foregroundView);
@@ -204,7 +207,7 @@ public class TaskListActivity extends AppCompatActivity
                     //noinspection NumericCastThatLosesPrecision
                     //backgroundView.setRight((int) Math.max(dX, 0));
 
-                    Log.d(LOG, "dX = " + dX + " | Ш: " + backgroundView.getWidth());
+                    //Log.d(LOG, "dX = " + dX + " | Ш: " + backgroundView.getWidth());
                     backgroundView.setLeft(itemView.getWidth() + (int) dX);
                 }
             }
