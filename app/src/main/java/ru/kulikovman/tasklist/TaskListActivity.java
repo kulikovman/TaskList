@@ -405,26 +405,4 @@ public class TaskListActivity extends AppCompatActivity
         mSetRepeatButton.setEnabled(date != Long.MAX_VALUE);
         mSetReminderButton.setEnabled(date != Long.MAX_VALUE);
     }
-
-    /*public void swipeTaskButton(View view) {
-        int id = view.getId();
-
-        if (id == R.id.swipe_delete_task_button) {
-            // Удаляем задачу
-            mRealm.beginTransaction();
-            mTask.deleteFromRealm();
-            mRealm.commitTransaction();
-            Log.d("log", "Задача удалена");
-        } else if (id == R.id.swipe_done_task_button) {
-            // Завершаем задачу
-            mRealm.beginTransaction();
-            mTask.setDone(true);
-            mRealm.commitTransaction();
-            Log.d("log", "Задача завершена");
-        }
-
-        // Сбрасываем выделение и все обнуляем
-        resetItemSelection();
-    }*/
-
 }
