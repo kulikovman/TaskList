@@ -7,8 +7,20 @@
     android:layout_centerInParent="true"
     android:layout_marginStart="10dp"
     android:layout_marginEnd="10dp"
-    android:focusable="false"
     android:orientation="horizontal">
+
+    <ImageButton
+        android:id="@+id/swipe_cancel_button"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/button_options_task"
+        android:onClick="swipeTaskButton"
+        android:tint="@color/blue"
+        app:srcCompat="@drawable/ic_replay_black_24dp"/>
+
+    <Space
+        android:layout_width="20dp"
+        android:layout_height="match_parent"/>
 
     <ImageButton
         android:id="@+id/swipe_delete_task_button"

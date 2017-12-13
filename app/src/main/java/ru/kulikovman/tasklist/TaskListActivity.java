@@ -161,6 +161,8 @@ public class TaskListActivity extends AppCompatActivity
                     backgroundView.setLeft(itemView.getWidth());
                     backgroundView.setVisibility(View.VISIBLE);
 
+
+
                     // Магия в которой я пока не разобрался
                     getDefaultUIUtil().onSelected(foregroundView);
                 }
@@ -193,7 +195,6 @@ public class TaskListActivity extends AppCompatActivity
                 backgroundView.setRight(itemView.getWidth());
                 backgroundView.setLeft(itemView.getWidth());
                 backgroundView.setVisibility(View.INVISIBLE);
-
 
                 // Магия
                 getDefaultUIUtil().clearView(foregroundView);
