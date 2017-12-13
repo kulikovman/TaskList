@@ -54,7 +54,7 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
     @Override
     public TaskHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View item = inflater.inflate(R.layout.swipe_item, parent, false);
+        View item = inflater.inflate(R.layout.item_task, parent, false);
         return new TaskHolder(item);
     }
 
@@ -107,9 +107,6 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
         private ImageButton mTaskColor;
         private ImageView mTaskWarning;
 
-        public RelativeLayout mClipBackground;
-        public RelativeLayout mClipForeground;
-
         public TaskHolder(View view) {
             super(view);
 
@@ -120,9 +117,6 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
             mTaskRepeat = view.findViewById(R.id.item_task_repeat);
             mTaskColor = view.findViewById(R.id.item_task_color);
             mTaskWarning = view.findViewById(R.id.item_task_warning);
-
-            mClipBackground = view.findViewById(R.id.clipBackground);
-            mClipForeground = view.findViewById(R.id.clipForeground);
 
             // Слушатель нажатий по элементу
             view.setOnClickListener(this);

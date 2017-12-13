@@ -3,6 +3,7 @@ package ru.kulikovman.tasklist;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
@@ -124,7 +125,7 @@ public class TaskListActivity extends AppCompatActivity
     }
 
     private void initSwipe() {
-        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
@@ -136,90 +137,13 @@ public class TaskListActivity extends AppCompatActivity
                 //mPosition = viewHolder.getAdapterPosition();
                 //mTask = mAdapter.getTaskByPosition(mPosition);
             }
-
-            @Override
-            public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
-                if (viewHolder != null){
-                    // Получаем необходимые вью
-                    final View foregroundView = ((TaskAdapter.TaskHolder) viewHolder).mClipForeground;
-                    final View backgroundView = ((TaskAdapter.TaskHolder) viewHolder).mClipBackground;
-                    View itemView = viewHolder.itemView;
-
-                    // Снимаем выделение, если было
-                    if (itemView.isSelected()) {
-                        itemView.setSelected(false);
-                        mPosition = RecyclerView.NO_POSITION;
-                    } else if (mPosition != -1){
-                        resetItemSelection();
-                    }
-
-                    // Скрываем панель инструментов
-                    mTaskOptionsPanel.setVisibility(View.INVISIBLE);
-
-                    // Размещаем фоновый макет в нужном месте и делаем его видимым
-                    backgroundView.setRight(itemView.getWidth());
-                    backgroundView.setLeft(itemView.getWidth());
-                    backgroundView.setVisibility(View.VISIBLE);
-
-
-
-                    // Магия в которой я пока не разобрался
-                    getDefaultUIUtil().onSelected(foregroundView);
-                }
-            }
-
-            @Override
-            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-                final View foregroundView = ((TaskAdapter.TaskHolder) viewHolder).mClipForeground;
-                drawBackground(viewHolder, dX, actionState);
-                getDefaultUIUtil().onDraw(c, recyclerView, foregroundView, dX, dY, actionState, isCurrentlyActive);
-            }
-
-            @Override
-            public void onChildDrawOver(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-                final View foregroundView = ((TaskAdapter.TaskHolder) viewHolder).mClipForeground;
-                drawBackground(viewHolder, dX, actionState);
-                getDefaultUIUtil().onDrawOver(c, recyclerView, foregroundView, dX, dY, actionState, isCurrentlyActive);
-            }
-
-            @Override
-            public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder){
-                final View backgroundView = ((TaskAdapter.TaskHolder) viewHolder).mClipBackground;
-                final View foregroundView = ((TaskAdapter.TaskHolder) viewHolder).mClipForeground;
-                View itemView = viewHolder.itemView;
-
-                // TODO: should animate out instead. how?
-                //backgroundView.setRight(0);
-
-                // Сбрасываем фоновый макет в начальную позицию
-                backgroundView.setRight(itemView.getWidth());
-                backgroundView.setLeft(itemView.getWidth());
-                backgroundView.setVisibility(View.INVISIBLE);
-
-                // Магия
-                getDefaultUIUtil().clearView(foregroundView);
-            }
-
-            private void drawBackground(RecyclerView.ViewHolder viewHolder, float dX, int actionState) {
-                if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
-                    final View backgroundView = ((TaskAdapter.TaskHolder) viewHolder).mClipBackground;
-                    View itemView = viewHolder.itemView;
-
-                    //noinspection NumericCastThatLosesPrecision
-                    //backgroundView.setRight((int) Math.max(dX, 0));
-
-                    //Log.d(LOG, "dX = " + dX + " | Ш: " + backgroundView.getWidth());
-                    backgroundView.setLeft(itemView.getWidth() + (int) dX);
-                }
-            }
             
-            /*@Override
+            @Override
             public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
                 if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
                     View itemView = viewHolder.itemView;
 
-                    float height = (float) itemView.getBottom() - (float) itemView.getTop();
-                    float width = height / 3;
+                    float height = itemView.getBottom() - itemView.getTop();
 
                     Paint p = new Paint();
                     Bitmap icon;
@@ -233,7 +157,16 @@ public class TaskListActivity extends AppCompatActivity
                         // Иконка и ее расположение
                         Drawable d = getResources().getDrawable(R.drawable.ic_delete_white_24dp);
                         icon = drawableToBitmap(d);
-                        RectF iconDest = new RectF((float) itemView.getLeft() + width, (float) itemView.getTop() + width, (float) itemView.getLeft() + 2 * width, (float) itemView.getBottom() - width);
+
+                        int iconWidth = icon.getWidth();
+                        int iconHeight = icon.getHeight();
+
+                        float leftPosition = iconWidth;
+                        float rightPosition = leftPosition + iconWidth;
+                        float topPosition = itemView.getTop() + ((height - iconHeight) / 2);
+                        float bottomPosition = topPosition + iconHeight;
+
+                        RectF iconDest = new RectF(leftPosition, topPosition, rightPosition, bottomPosition);
                         c.drawBitmap(icon, null, iconDest, p);
 
                     } else {
@@ -245,12 +178,26 @@ public class TaskListActivity extends AppCompatActivity
                         // Иконка и ее расположение
                         Drawable d = getResources().getDrawable(R.drawable.ic_done_white_24dp);
                         icon = drawableToBitmap(d);
-                        RectF iconDest = new RectF((float) itemView.getRight() - 2 * width, (float) itemView.getTop() + width, (float) itemView.getRight() - width, (float) itemView.getBottom() - width);
+
+                        int iconWidth = icon.getWidth();
+                        int iconHeight = icon.getHeight();
+
+                        float rightPosition = itemView.getRight() - iconWidth;
+                        float leftPosition = rightPosition - iconWidth;
+                        float topPosition = itemView.getTop() + ((height - iconHeight) / 2);
+                        float bottomPosition = topPosition + iconHeight;
+
+                        RectF iconDest = new RectF(leftPosition, topPosition, rightPosition, bottomPosition);
                         c.drawBitmap(icon, null, iconDest, p);
                     }
 
                     super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
                 }
+            }
+
+            @Override
+            public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                super.clearView(recyclerView, viewHolder);
             }
 
             public Bitmap drawableToBitmap(Drawable drawable) {
@@ -265,7 +212,7 @@ public class TaskListActivity extends AppCompatActivity
                 drawable.draw(canvas);
 
                 return bitmap;
-            }*/
+            }
         };
 
         // Присоединяем всю эту конструкцию к нашему mRecyclerView
