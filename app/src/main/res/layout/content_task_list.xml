@@ -73,16 +73,6 @@
             android:tint="@color/icon_options_color"
             app:srcCompat="@drawable/ic_alarm_black_24dp"/>
 
-        <ImageButton
-            android:id="@+id/task_delete_button"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="5dp"
-            android:background="@drawable/button_options_task"
-            android:padding="10dp"
-            android:onClick="deleteTask"
-            android:tint="@color/icon_options_color"
-            app:srcCompat="@drawable/ic_delete_black_24dp"/>
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
