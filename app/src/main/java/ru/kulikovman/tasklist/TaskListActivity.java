@@ -133,9 +133,44 @@ public class TaskListActivity extends AppCompatActivity
             }
 
             @Override
+            public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
+                if (viewHolder != null){
+                    // Получаем сдвигаемый элемент
+                    View itemView = viewHolder.itemView;
+
+                    // Снимаем выделение, если оно есть
+                    if (itemView.isSelected()) {
+                        itemView.setSelected(false);
+                        mPosition = RecyclerView.NO_POSITION;
+                    } else if (mPosition != -1){
+                        resetItemSelection();
+                    }
+
+                    // Скрываем панель инструментов
+                    mTaskOptionsPanel.setVisibility(View.INVISIBLE);
+                }
+
+                super.onSelectedChanged(viewHolder, actionState);
+            }
+
+            @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                //mPosition = viewHolder.getAdapterPosition();
-                //mTask = mAdapter.getTaskByPosition(mPosition);
+                // Получаем позицию и задачу
+                mPosition = viewHolder.getAdapterPosition();
+                mTask = mAdapter.getTaskByPosition(mPosition);
+
+                // Завершаем или удаляем
+                if (direction == ItemTouchHelper.RIGHT) {
+                    mRealm.beginTransaction();
+                    mTask.deleteFromRealm();
+                    mRealm.commitTransaction();
+                    Log.d(LOG, "Задача удалена");
+                } else {
+                    mRealm.beginTransaction();
+                    mTask.setDone(true);
+                    mRealm.commitTransaction();
+                    Log.d(LOG, "Задача завершена");
+                }
             }
             
             @Override
@@ -201,7 +236,6 @@ public class TaskListActivity extends AppCompatActivity
             }
 
             public Bitmap drawableToBitmap(Drawable drawable) {
-
                 if (drawable instanceof BitmapDrawable) {
                     return ((BitmapDrawable) drawable).getBitmap();
                 }
@@ -372,7 +406,7 @@ public class TaskListActivity extends AppCompatActivity
         mSetReminderButton.setEnabled(date != Long.MAX_VALUE);
     }
 
-    public void swipeTaskButton(View view) {
+    /*public void swipeTaskButton(View view) {
         int id = view.getId();
 
         if (id == R.id.swipe_delete_task_button) {
@@ -391,6 +425,6 @@ public class TaskListActivity extends AppCompatActivity
 
         // Сбрасываем выделение и все обнуляем
         resetItemSelection();
-    }
+    }*/
 
 }
