@@ -174,6 +174,10 @@ public class TaskListActivity extends AppCompatActivity
                     mRealm.commitTransaction();
                     Log.d(LOG, "Задача завершена");
                 }
+
+                // Обнуляем переменные
+                mPosition = RecyclerView.NO_POSITION;
+                mTask = null;
             }
             
             @Override
