@@ -6,14 +6,25 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.widget.TextView;
 
-import ru.kulikovman.todoapp.R;
+import io.realm.Realm;
+import ru.kulikovman.tasklist.R;
+import ru.kulikovman.tasklist.models.Task;
 
 public class RepeatDialog extends DialogFragment {
+    private Realm mRealm;
+    private Task mTask;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        // Получаем аргументы
+        long taskId = getArguments().getLong("taskId");
+
+        // Подключаем базу и получаем задачу
+        mRealm = Realm.getDefaultInstance();
+        mTask = mRealm.where(Task.class).equalTo(Task.ID, taskId).findFirst();
+
+        // Строки для списка вариантов
         final String day = getString(R.string.repeat_day);
         final String week = getString(R.string.repeat_week);
         final String month = getString(R.string.repeat_month);
@@ -22,23 +33,45 @@ public class RepeatDialog extends DialogFragment {
 
         final String repeat[] = {day, week, month, year, not};
 
+        // Создаем диалог
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.repeat_title)
                 .setItems(repeat, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d("myLog", String.valueOf(which));
 
-                        TextView repeatState = (TextView) getActivity().findViewById(R.id.repeat_state);
-                        TextView reminderState = (TextView) getActivity().findViewById(R.id.reminder_state);
+                        // Открываем транзакцию
+                        mRealm.beginTransaction();
 
-                        if (which == repeat.length - 1) {
-                            repeatState.setText(R.string.repeat_without);
-                        } else {
-                            repeatState.setText(repeat[which]);
+                        switch (which) {
+                            case 0: // Ежедневно
+                                mTask.setRepeat("day");
+                                break;
+                            case 1: // Каждую неделю
+                                mTask.setRepeat("week");
+                                break;
+                            case 2: // Раз в месяц
+                                mTask.setRepeat("month");
+                                break;
+                            case 3: // Через год
+                                mTask.setRepeat("year");
+                                break;
+                            case 4: // Не повторять
+                                mTask.setRepeat(null);
+                                break;
                         }
+
+                        // Закрываем транзакцию
+                        mRealm.commitTransaction();
                     }
                 });
 
         return builder.create();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mRealm.close();
     }
 }

@@ -10,6 +10,34 @@
 
 
 
+    <!-- Выбор даты задачи -->
+    <string name="date_title">Дата выполнения</string>
+    <string name="date_today">Сегодня</string>
+    <string name="date_tomorrow">Завтра</string>
+    <string name="date_pick_date">Выбрать дату</string>
+    <string name="date_not">Без даты</string>
+
+    <!-- Выбор приоритета задачи -->
+    <string name="priority_title">Приоритет</string>
+    <string name="priority_emergency">Чрезвычайный</string>
+    <string name="priority_high">Высокий</string>
+    <string name="priority_common">Обычный</string>
+    <string name="priority_low">Низкий</string>
+    <string name="priority_lowest">Самый низкий</string>
+
+    <!-- Выбор повтора задачи -->
+    <string name="repeat_title">Повторение</string>
+    <string name="repeat_day">Ежедневно</string>
+    <string name="repeat_week">Каждую неделю</string>
+    <string name="repeat_month">Раз в месяц</string>
+    <string name="repeat_year">Через год</string>
+    <string name="repeat_not">Не повторять</string>
+
+    <!-- Выбор группы задачи -->
+    <string name="group_title">Группа</string>
+    <string name="group_not">Без группы</string>
+    <string name="group_message">Вы пока не создали ни одной группы</string>
+    <string name="group_button_create">Создать</string>
 
 
 
@@ -26,29 +54,11 @@
     <string name="title_activity_main">Список задач</string>
     <string name="title_activity_group_list">Группы</string>
 
-    <!-- Выбор даты задачи -->
-    <string name="date_title">Дата выполнения</string>
-    <string name="date_without">Не установлена</string>
-    <string name="date_today">Сегодня</string>
-    <string name="date_tomorrow">Завтра</string>
-    <string name="date_pick_date">Выбрать дату</string>
-    <string name="date_not">Без даты</string>
 
-    <!-- Выбор приоритета задачи -->
-    <string name="priority_title">Приоритет</string>
-    <string name="priority_emergency">Чрезвычайный</string>
-    <string name="priority_high">Высокий</string>
-    <string name="priority_common">Обычный</string>
-    <string name="priority_low">Низкий</string>
-    <string name="priority_lowest">Самый низкий</string>
 
-    <!-- Выбор группы задачи -->
-    <string name="group_title">Группа</string>
-    <string name="group_without">Не выбрана</string>
-    <string name="group_not">Без группы</string>
-    <string name="group_button_ok">Создать</string>
-    <string name="group_button_cancel">Отмена</string>
-    <string name="group_message">Вы пока не создали ни одной группы</string>
+
+
+
 
     <!-- Диалог - создание группы -->
     <string name="create_group_title">Название группы</string>
@@ -71,26 +81,8 @@
     <string name="save_button">Сохранить</string>
     <string name="cancel_button">Отмена</string>
 
-    <!-- Выбор повтора задачи -->
-    <string name="repeat_title">Повторение</string>
-    <string name="repeat_without">Без повтора</string>
-    <string name="repeat_day">Ежедневно</string>
-    <string name="repeat_week">Каждую неделю</string>
-    <string name="repeat_month">Раз в месяц</string>
-    <string name="repeat_year">Через год</string>
-    <string name="repeat_not">Не повторять</string>
 
-    <!-- Напоминание о задаче -->
-    <string name="reminder_title">Напоминание</string>
-    <string name="reminder_without">Без напоминания</string>
-    <string name="reminder_on_the_day">В день выполнения</string>
-    <string name="reminder_day_before">За один день</string>
-    <string name="reminder_two_day_before">За два дня</string>
-    <string name="reminder_week_before">За неделю</string>
-    <string name="reminder_month_before">За месяц</string>
-    <string name="reminder_not">Не напоминать</string>
-    <string name="reminder_enabled">Включено</string>
-    <string name="reminder_disabled">Без напоминания</string>
+
 
     <!-- Имена пунктов главного бокового меню -->
     <string name="menu_unsorted_tasks">Не отсортированные</string>
