@@ -6,18 +6,26 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.widget.DatePicker;
-import android.widget.TextView;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import ru.kulikovman.todoapp.Helper;
-import ru.kulikovman.todoapp.R;
+import io.realm.Realm;
+import ru.kulikovman.tasklist.models.Task;
 
 public class TaskDatePickerDialog extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+    private Realm mRealm;
+    private Task mTask;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        // Получаем аргументы
+        long taskId = getArguments().getLong("taskId");
+
+        // Подключаем базу и получаем задачу
+        mRealm = Realm.getDefaultInstance();
+        mTask = mRealm.where(Task.class).equalTo(Task.ID, taskId).findFirst();
+
         // Получаем сегодняшнюю дату
         final Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -35,8 +43,15 @@ public class TaskDatePickerDialog extends DialogFragment implements DatePickerDi
         // Получаем выбранную дату
         Calendar calendar = new GregorianCalendar(view.getYear(), view.getMonth(), view.getDayOfMonth());
 
-        // Инициализируем вью и записываем в него дату
-        TextView dateState = (TextView) getActivity().findViewById(R.id.date_state);
-        dateState.setText(Helper.convertCalendarToLongTextDate(calendar));
+        // Сохраняем дату в задаче
+        mRealm.beginTransaction();
+        mTask.setTargetDate(calendar.getTimeInMillis());
+        mRealm.commitTransaction();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mRealm.close();
     }
 }

@@ -416,21 +416,30 @@ public class TaskListActivity extends AppCompatActivity
     public void taskOptionsButtons(View view) {
         int id = view.getId();
 
+        // Сохраняем id задачи для передачи в диалог
+        Bundle args = new Bundle();
+        args.putLong("taskId", mTask.getId());
+
+        // Обрабатываем нажатие
         switch (id) {
             case R.id.task_set_date_button:
                 DialogFragment dateDialog = new DateDialog();
+                dateDialog.setArguments(args);
                 dateDialog.show(getSupportFragmentManager(), "dateDialog");
                 break;
             case R.id.task_set_priority_button:
                 DialogFragment priorityDialog = new PriorityDialog();
+                priorityDialog.setArguments(args);
                 priorityDialog.show(getSupportFragmentManager(), "priorityDialog");
                 break;
             case R.id.task_set_group_button:
                 DialogFragment groupDialog = new GroupDialog();
+                groupDialog.setArguments(args);
                 groupDialog.show(getSupportFragmentManager(), "groupDialog");
                 break;
             case R.id.task_set_repeat_button:
                 DialogFragment repeatDialog = new RepeatDialog();
+                repeatDialog.setArguments(args);
                 repeatDialog.show(getSupportFragmentManager(), "repeatDialog");
                 break;
             case R.id.task_set_reminder_button:

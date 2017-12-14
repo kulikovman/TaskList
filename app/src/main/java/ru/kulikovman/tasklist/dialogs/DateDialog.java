@@ -7,19 +7,28 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.widget.TextView;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 
-import ru.kulikovman.todoapp.Helper;
-import ru.kulikovman.todoapp.R;
+import io.realm.Realm;
+import ru.kulikovman.tasklist.Helper;
+import ru.kulikovman.tasklist.R;
+import ru.kulikovman.tasklist.models.Task;
 
 public class DateDialog extends DialogFragment {
+    private Realm mRealm;
+    private Task mTask;
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        // Получаем аргументы
+        long taskId = getArguments().getLong("taskId");
+
+        // Подключаем базу и получаем задачу
+        mRealm = Realm.getDefaultInstance();
+        mTask = mRealm.where(Task.class).equalTo(Task.ID, taskId).findFirst();
+
+        // Строки для списка вариантов
         final String today = getString(R.string.date_today);
         final String tomorrow = getString(R.string.date_tomorrow);
         final String pickDate = getString(R.string.date_pick_date);
@@ -27,43 +36,51 @@ public class DateDialog extends DialogFragment {
 
         final String date[] = {today, tomorrow, pickDate, withoutDate};
 
+        // Создаем диалог
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.date_title)
                 .setItems(date, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d("myLog", String.valueOf(which));
+                        Log.d("log", String.valueOf(which));
 
-                        // Инициализируем необходимые вью
-                        TextView dateState = (TextView) getActivity().findViewById(R.id.date_state);
-                        TextView repeatState = (TextView) getActivity().findViewById(R.id.repeat_state);
-                        TextView reminderState = (TextView) getActivity().findViewById(R.id.reminder_state);
+                        // Открываем транзакцию
+                        mRealm.beginTransaction();
 
                         // Получаем текущую дату
-                        Calendar calendar = Helper.getTodayRoundCalendar();
+                        Calendar calendar = Helper.getTodayCalendarWithoutTime();
 
                         switch (which) {
                             case 0: // На сегодня
-                                dateState.setText(Helper.convertCalendarToLongTextDate(calendar));
+                                mTask.setTargetDate(calendar.getTimeInMillis());
                                 break;
                             case 1: // На завтра
                                 calendar.add(Calendar.DATE, 1);
-                                dateState.setText(Helper.convertCalendarToLongTextDate(calendar));
+                                mTask.setTargetDate(calendar.getTimeInMillis());
                                 break;
                             case 2: // Выбрать дату
                                 DialogFragment datePickerFragment = new TaskDatePickerDialog();
+                                Bundle args = new Bundle();
+                                args.putLong("taskId", mTask.getId());
+                                datePickerFragment.setArguments(args);
                                 datePickerFragment.show(getFragmentManager(), "datePicker");
                                 break;
                             case 3: // Без даты
-                                dateState.setText(R.string.date_without);
-                                repeatState.setText(R.string.repeat_without);
-
-                                // Выключаем напоминание
-                                reminderState.setText(R.string.reminder_disabled);
+                                mTask.setTargetDate(Long.MAX_VALUE);
+                                mTask.setReminder(false);
                                 break;
                         }
+
+                        // Закрываем транзакцию
+                        mRealm.commitTransaction();
                     }
                 });
 
         return builder.create();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mRealm.close();
     }
 }

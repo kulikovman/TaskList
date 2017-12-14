@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
 public class Helper {
@@ -84,9 +85,19 @@ public class Helper {
         return mShortDateFormat.format(new Date(longDate));
     }
 
-    public static Calendar getTodayRoundCalendar() {
+    /*public static Calendar getTodayCalendarWithoutTime() {
         String date = convertLongToLongTextDate(Calendar.getInstance().getTimeInMillis());
         return convertLongTextDateToCalendar(date);
+    }*/
+
+    public static Calendar getTodayCalendarWithoutTime() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        return calendar;
     }
 
     public static int convertDpToPx(Context context, int valueInDp) {

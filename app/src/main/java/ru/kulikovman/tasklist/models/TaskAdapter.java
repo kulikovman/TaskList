@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.Calendar;
@@ -165,7 +164,7 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
 
                 // Считаем количество дней до задачи
                 Calendar taskDate = Helper.convertLongToCalendar(task.getTargetDate());
-                Calendar todayDate = Helper.getTodayRoundCalendar();
+                Calendar todayDate = Helper.getTodayCalendarWithoutTime();
 
                 int daysBeforeTaskDate = (int) ((taskDate.getTimeInMillis() - todayDate.getTimeInMillis()) / 1000 / 60 / 60 / 24);
                 Log.d("log", "Разница в днях: " + daysBeforeTaskDate);
