@@ -435,7 +435,8 @@ public class TaskListActivity extends AppCompatActivity
                 break;
             case R.id.task_set_reminder_button:
                 mRealm.beginTransaction();
-                mTask.setReminder(true);
+                boolean reminder = mTask.getReminder();
+                mTask.setReminder(!reminder);
                 mRealm.commitTransaction();
                 break;
         }
