@@ -36,8 +36,16 @@
     <!-- Выбор группы задачи -->
     <string name="group_title">Группа</string>
     <string name="group_not">Без группы</string>
-    <string name="group_message">Вы пока не создали ни одной группы</string>
+    <string name="group_message">Вы пока не создали ни одной группы.</string>
     <string name="group_button_create">Создать</string>
+
+    <!-- Создание группы -->
+    <string name="create_group_title">Название группы</string>
+    <string name="create_group_button_ok">OK</string>
+
+    <!-- Информационные сообщения -->
+    <string name="message_group_is_exist">Группа с таким названием уже существует.</string>
+
 
 
 
@@ -57,11 +65,6 @@
 
 
 
-
-
-
-    <!-- Диалог - создание группы -->
-    <string name="create_group_title">Название группы</string>
 
     <!-- Цвет группы -->
     <string name="color_title">Цвет</string>
@@ -98,10 +101,7 @@
     <string name="group_name_hint">Название группы…</string>
     <string name="group_description_hint">Описание группы…</string>
 
-    <!-- Информационные сообщения -->
-    <string name="message_group_is_exist">Группа с таким названием уже существует.</string>
-    <string name="message_set_task_date">Сначала установите дату выполнения задачи.</string>
-    <string name="message_can_not_set_reminder">Нельзя установить напоминание для задачи назначенной на сегодня.</string>
+
 
     <!-- Кнопки диалогов -->
     <string name="dialog_button_ok">OK</string>

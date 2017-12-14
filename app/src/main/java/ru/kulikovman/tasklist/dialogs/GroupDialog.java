@@ -25,9 +25,6 @@ public class GroupDialog extends DialogFragment {
         // Получаем аргументы
         long taskId = getArguments().getLong("taskId");
 
-        // Сохраняем id задачи для использования
-
-
         // Подключаем базу, получаем задачу и группы
         mRealm = Realm.getDefaultInstance();
         mTask = mRealm.where(Task.class).equalTo(Task.ID, taskId).findFirst();
