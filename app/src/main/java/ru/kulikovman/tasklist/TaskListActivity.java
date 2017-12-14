@@ -33,10 +33,10 @@ import android.widget.LinearLayout;
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
 import io.realm.Sort;
-import ru.kulikovman.tasklist.dialogs.task.DateDialog;
+import ru.kulikovman.tasklist.dialogs.DateDialog;
 import ru.kulikovman.tasklist.dialogs.GroupDialog;
-import ru.kulikovman.tasklist.dialogs.task.PriorityDialog;
-import ru.kulikovman.tasklist.dialogs.task.RepeatDialog;
+import ru.kulikovman.tasklist.dialogs.PriorityDialog;
+import ru.kulikovman.tasklist.dialogs.RepeatDialog;
 import ru.kulikovman.tasklist.models.Task;
 import ru.kulikovman.tasklist.models.TaskAdapter;
 

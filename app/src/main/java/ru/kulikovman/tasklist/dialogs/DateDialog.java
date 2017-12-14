@@ -1,4 +1,4 @@
-package ru.kulikovman.tasklist.dialogs.task;
+package ru.kulikovman.tasklist.dialogs;
 
 
 import android.app.Dialog;
