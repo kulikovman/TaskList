@@ -10,14 +10,14 @@
     tools:showIn="@layout/app_bar_task_list">
 
     <LinearLayout
+        android:id="@+id/task_options_panel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/task_options_panel"
         android:layout_marginEnd="15dp"
         android:layout_marginTop="15dp"
-        android:orientation="vertical"
         android:background="@drawable/options_layout"
         android:elevation="1dp"
+        android:orientation="vertical"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -40,6 +40,7 @@
             android:layout_height="40dp"
             android:layout_margin="5dp"
             android:background="@drawable/button_options_task"
+            android:onClick="taskOptionsButtons"
             android:padding="10dp"
             android:tint="@color/icon_options_color"
             app:srcCompat="@drawable/ic_low_priority_black_24dp"/>
@@ -50,6 +51,7 @@
             android:layout_height="40dp"
             android:layout_margin="5dp"
             android:background="@drawable/button_options_task"
+            android:onClick="taskOptionsButtons"
             android:padding="10dp"
             android:tint="@color/icon_options_color"
             app:srcCompat="@drawable/ic_dns_black_24dp"/>
@@ -60,6 +62,7 @@
             android:layout_height="40dp"
             android:layout_margin="5dp"
             android:background="@drawable/button_options_task"
+            android:onClick="taskOptionsButtons"
             android:padding="10dp"
             android:tint="@color/icon_options_color"
             app:srcCompat="@drawable/ic_replay_black_24dp"/>
@@ -70,6 +73,7 @@
             android:layout_height="40dp"
             android:layout_margin="5dp"
             android:background="@drawable/button_options_task"
+            android:onClick="taskOptionsButtons"
             android:padding="10dp"
             android:tint="@color/icon_options_color"
             app:srcCompat="@drawable/ic_alarm_black_24dp"/>
@@ -81,8 +85,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:paddingTop="10dp"
         android:paddingBottom="79dp"
+        android:paddingTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -95,8 +99,8 @@
         android:layout_marginEnd="15dp"
         android:background="@drawable/button_add_task"
         android:elevation="1dp"
-        android:tint="@color/white"
         android:onClick="addTask"
+        android:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_add_black_24dp"/>
