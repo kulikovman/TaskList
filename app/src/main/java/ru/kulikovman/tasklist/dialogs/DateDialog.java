@@ -41,8 +41,6 @@ public class DateDialog extends DialogFragment {
         builder.setTitle(R.string.date_title)
                 .setItems(date, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d("log", String.valueOf(which));
-
                         // Открываем транзакцию
                         mRealm.beginTransaction();
 
@@ -81,6 +79,7 @@ public class DateDialog extends DialogFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        Log.d("log", "Запущен onDestroyView в DateDialog");
         mRealm.close();
     }
 }

@@ -103,6 +103,14 @@ public class TaskListActivity extends AppCompatActivity
                 }
             }
         });
+
+        Log.d(LOG, "Завершен onCreate в TaskListActivity");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(LOG, "Запущен onResume в TaskListActivity");
     }
 
     @Override

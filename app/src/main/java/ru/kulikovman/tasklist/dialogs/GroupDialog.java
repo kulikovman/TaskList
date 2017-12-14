@@ -66,8 +66,6 @@ public class GroupDialog extends DialogFragment {
             builder.setTitle(R.string.group_title)
                     .setItems(names, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            Log.d("myLog", String.valueOf(which));
-
                             // Открываем транзакцию
                             mRealm.beginTransaction();
 

@@ -165,9 +165,7 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
                 // Считаем количество дней до задачи
                 Calendar taskDate = Helper.convertLongToCalendar(task.getTargetDate());
                 Calendar todayDate = Helper.getTodayCalendarWithoutTime();
-
                 int daysBeforeTaskDate = (int) ((taskDate.getTimeInMillis() - todayDate.getTimeInMillis()) / 1000 / 60 / 60 / 24);
-                Log.d("log", "Разница в днях: " + daysBeforeTaskDate);
 
                 // Если задача просрочена, то выделяем дату
                 if (daysBeforeTaskDate < 0) {
