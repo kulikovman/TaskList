@@ -10,6 +10,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import android.support.v4.app.DialogFragment;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,6 +34,10 @@ import android.widget.LinearLayout;
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
 import io.realm.Sort;
+import ru.kulikovman.tasklist.dialogs.DateDialog;
+import ru.kulikovman.tasklist.dialogs.GroupDialog;
+import ru.kulikovman.tasklist.dialogs.PriorityDialog;
+import ru.kulikovman.tasklist.dialogs.RepeatDialog;
 import ru.kulikovman.tasklist.models.Task;
 import ru.kulikovman.tasklist.models.TaskAdapter;
 
@@ -51,8 +56,7 @@ public class TaskListActivity extends AppCompatActivity
     private ImageButton mAddTask;
 
     private LinearLayout mTaskOptionsPanel;
-    private ImageButton mSetDateButton, mSetPriorityButton, mSetGroupButton, mSetRepeatButton,
-            mSetReminderButton, mDeleteButton;
+    private ImageButton mSetDateButton, mSetPriorityButton, mSetGroupButton, mSetRepeatButton, mSetReminderButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +90,6 @@ public class TaskListActivity extends AppCompatActivity
         mSetGroupButton = findViewById(R.id.task_set_group_button);
         mSetRepeatButton = findViewById(R.id.task_set_repeat_button);
         mSetReminderButton = findViewById(R.id.task_set_reminder_button);
-        mDeleteButton = findViewById(R.id.task_delete_button);
 
         // Создаем и запускаем список
         setUpRecyclerView();
@@ -404,5 +407,33 @@ public class TaskListActivity extends AppCompatActivity
         long date = mTask.getTargetDate();
         mSetRepeatButton.setEnabled(date != Long.MAX_VALUE);
         mSetReminderButton.setEnabled(date != Long.MAX_VALUE);
+    }
+
+    public void taskOptionsButtons(View view) {
+        int id = view.getId();
+
+        switch (id) {
+            case R.id.task_set_date_button:
+                DialogFragment dateDialog = new DateDialog();
+                dateDialog.show(getSupportFragmentManager(), "dateDialog");
+                break;
+            case R.id.task_set_priority_button:
+                DialogFragment priorityDialog = new PriorityDialog();
+                priorityDialog.show(getSupportFragmentManager(), "priorityDialog");
+                break;
+            case R.id.task_set_group_button:
+                DialogFragment groupDialog = new GroupDialog();
+                groupDialog.show(getSupportFragmentManager(), "groupDialog");
+                break;
+            case R.id.task_set_repeat_button:
+                DialogFragment repeatDialog = new RepeatDialog();
+                repeatDialog.show(getSupportFragmentManager(), "repeatDialog");
+                break;
+            case R.id.task_set_reminder_button:
+                mRealm.beginTransaction();
+                mTask.setReminder(true);
+                mRealm.commitTransaction();
+                break;
+        }
     }
 }
