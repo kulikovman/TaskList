@@ -370,14 +370,6 @@ public class TaskListActivity extends AppCompatActivity
         selectItem(position);
     }
 
-    public void deleteTask(View view) {
-        mRealm.beginTransaction();
-        mTask.deleteFromRealm();
-        mRealm.commitTransaction();
-
-        resetItemSelection();
-    }
-
     private void hideKeyboard() {
         // Прячем клавиатуру
         View view = this.getCurrentFocus();
