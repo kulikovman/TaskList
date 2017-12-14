@@ -9,7 +9,7 @@
 
 
 
-
+    <!-- Диалоги для задач -->
     <!-- Выбор даты задачи -->
     <string name="date_title">Дата выполнения</string>
     <string name="date_today">Сегодня</string>
@@ -42,6 +42,12 @@
     <!-- Создание группы -->
     <string name="create_group_title">Название группы</string>
     <string name="create_group_button_ok">OK</string>
+
+
+    <!-- Диалоги для групп -->
+
+
+
 
     <!-- Информационные сообщения -->
     <string name="message_group_is_exist">Группа с таким названием уже существует.</string>
