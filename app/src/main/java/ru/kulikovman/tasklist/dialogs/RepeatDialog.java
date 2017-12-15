@@ -1,20 +1,34 @@
 package ru.kulikovman.tasklist.dialogs;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 
 import io.realm.Realm;
+import ru.kulikovman.tasklist.CallbackDialogFragment;
 import ru.kulikovman.tasklist.R;
 import ru.kulikovman.tasklist.models.Task;
 
-public class RepeatDialog extends DialogFragment {
+public class RepeatDialog extends CallbackDialogFragment {
     private Realm mRealm;
     private Task mTask;
 
+    CallbackDialogListener mListener;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mListener = (CallbackDialogListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement CallbackDialogListener");
+        }
+    }
+
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Получаем аргументы
@@ -71,5 +85,8 @@ public class RepeatDialog extends DialogFragment {
     public void onDestroyView() {
         super.onDestroyView();
         mRealm.close();
+
+        // Запускаем код в активити
+        mListener.onDialogFinish(RepeatDialog.this);
     }
 }

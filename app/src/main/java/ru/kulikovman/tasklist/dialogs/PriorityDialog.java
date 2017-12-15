@@ -21,12 +21,9 @@ public class PriorityDialog extends CallbackDialogFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        // Verify that the host activity implements the callback interface
         try {
-            // Instantiate the NoticeDialogListener so we can send events to the host
             mListener = (CallbackDialogListener) context;
         } catch (ClassCastException e) {
-            // The activity doesn't implement the interface, throw exception
             throw new ClassCastException(context.toString() + " must implement CallbackDialogListener");
         }
     }
@@ -89,7 +86,7 @@ public class PriorityDialog extends CallbackDialogFragment {
         super.onDestroyView();
         mRealm.close();
 
-        // Запускаем событие при завершении
+        // Запускаем код в активити
         mListener.onDialogFinish(PriorityDialog.this);
     }
 }

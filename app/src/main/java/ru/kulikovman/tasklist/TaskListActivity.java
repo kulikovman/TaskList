@@ -30,7 +30,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
@@ -467,6 +466,7 @@ public class TaskListActivity extends AppCompatActivity
 
     @Override
     public void onDialogFinish(DialogFragment dialog) {
-        Toast.makeText(this, "Диалог завершен!", Toast.LENGTH_SHORT).show();
+        Log.d("log", "Запущен onDialogFinish в TaskListActivity");
+
     }
 }
