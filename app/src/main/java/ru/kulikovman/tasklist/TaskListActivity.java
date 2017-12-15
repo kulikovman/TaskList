@@ -1,6 +1,7 @@
 package ru.kulikovman.tasklist;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -44,7 +45,7 @@ public class TaskListActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, TaskAdapter.OnItemClickListener {
 
     private Realm mRealm;
-    private RecyclerView mRecyclerView;
+    public RecyclerView mRecyclerView;
     private TaskAdapter mAdapter;
     private String LOG = "log";
 
@@ -56,6 +57,8 @@ public class TaskListActivity extends AppCompatActivity
 
     private LinearLayout mTaskOptionsPanel;
     private ImageButton mSetDateButton, mSetPriorityButton, mSetGroupButton, mSetRepeatButton, mSetReminderButton;
+
+    private int RC_PRIORITY = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +114,12 @@ public class TaskListActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
         Log.d(LOG, "Запущен onResume в TaskListActivity");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(LOG, "Запущен onPause в TaskListActivity");
     }
 
     @Override
@@ -410,6 +419,12 @@ public class TaskListActivity extends AppCompatActivity
         long date = mTask.getTargetDate();
         mSetRepeatButton.setEnabled(date != Long.MAX_VALUE);
         mSetReminderButton.setEnabled(date != Long.MAX_VALUE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(LOG, "Запущен onActivityResult в TaskListActivity");
     }
 
     public void taskOptionsButtons(View view) {

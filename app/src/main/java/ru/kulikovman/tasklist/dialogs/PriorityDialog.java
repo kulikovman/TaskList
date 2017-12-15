@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 
 import io.realm.Realm;
 import ru.kulikovman.tasklist.R;
@@ -61,6 +60,8 @@ public class PriorityDialog extends DialogFragment {
 
                         // Закрываем транзакцию
                         mRealm.commitTransaction();
+
+                        //getActivity().m
                     }
                 });
 
