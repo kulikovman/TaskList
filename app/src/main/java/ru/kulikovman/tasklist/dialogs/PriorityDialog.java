@@ -78,8 +78,6 @@ public class PriorityDialog extends CallbackDialogFragment {
 
                         // Закрываем транзакцию
                         mRealm.commitTransaction();
-
-                        //getActivity().m
                     }
                 });
 
@@ -90,5 +88,8 @@ public class PriorityDialog extends CallbackDialogFragment {
     public void onDestroyView() {
         super.onDestroyView();
         mRealm.close();
+
+        // Запускаем событие при завершении
+        mListener.onDialogFinish(PriorityDialog.this);
     }
 }
