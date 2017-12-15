@@ -99,10 +99,7 @@ public class TaskListActivity extends AppCompatActivity
         mTaskField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                // Снимаем выделение, если есть
-                if (mPosition != RecyclerView.NO_POSITION) {
-                    resetItemSelection();
-                }
+                resetItemSelection();
             }
         });
 
@@ -152,7 +149,7 @@ public class TaskListActivity extends AppCompatActivity
 
             @Override
             public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
-                if (viewHolder != null){
+                if (viewHolder != null) {
                     // Получаем сдвигаемый элемент
                     View itemView = viewHolder.itemView;
 
@@ -160,7 +157,7 @@ public class TaskListActivity extends AppCompatActivity
                     if (itemView.isSelected()) {
                         itemView.setSelected(false);
                         mPosition = RecyclerView.NO_POSITION;
-                    } else if (mPosition != -1){
+                    } else if (mPosition != -1) {
                         resetItemSelection();
                     }
 
@@ -194,7 +191,7 @@ public class TaskListActivity extends AppCompatActivity
                 mPosition = RecyclerView.NO_POSITION;
                 mTask = null;
             }
-            
+
             @Override
             public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
                 if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
@@ -370,20 +367,15 @@ public class TaskListActivity extends AppCompatActivity
             // Очищаем поле
             mTaskField.setText(null);
 
-            // Прячем клавиатуру и переходим к созданной задаче
-            hideKeyboard();
-            moveToItem(task.getId());
+            // Получаем задачу или null
+            mTask = mAdapter.getTaskById(task.getId());
+
+            if (mTask != null) {
+                // Получаем позицию и скролим к задаче
+                mPosition = mAdapter.getPosition(mTask.getId());
+                mRecyclerView.scrollToPosition(mPosition);
+            }
         }
-    }
-
-    private void moveToItem(long taskId) {
-        // Получаем позицию и задачу
-        int position = mAdapter.getPosition(taskId);
-        mTask = mAdapter.getTaskById(taskId);
-
-        // Скролим и выделяем
-        mRecyclerView.scrollToPosition(position);
-        selectItem(position);
     }
 
     private void hideKeyboard() {
@@ -401,10 +393,12 @@ public class TaskListActivity extends AppCompatActivity
     }
 
     private void resetItemSelection() {
-        mAdapter.resetSelection();
-        mTaskOptionsPanel.setVisibility(View.INVISIBLE);
-        mPosition = RecyclerView.NO_POSITION;
-        mTask = null;
+        if (mPosition != RecyclerView.NO_POSITION) {
+            mAdapter.resetSelection();
+            mTaskOptionsPanel.setVisibility(View.INVISIBLE);
+            mPosition = RecyclerView.NO_POSITION;
+            mTask = null;
+        }
     }
 
     private void selectItem(int position) {
@@ -468,5 +462,21 @@ public class TaskListActivity extends AppCompatActivity
     public void onDialogFinish(DialogFragment dialog) {
         Log.d("log", "Запущен onDialogFinish в TaskListActivity");
 
+        // Сбрасываем выделение и позицию
+        mAdapter.resetSelection();
+        mPosition = RecyclerView.NO_POSITION;
+
+        // Получаем задачу или null
+        mTask = mAdapter.getTaskById(mTask.getId());
+
+        if (mTask != null) {
+            // Получаем позицию, скролим к задаче и выделяем ее
+            mPosition = mAdapter.getPosition(mTask.getId());
+            mRecyclerView.scrollToPosition(mPosition);
+            selectItem(mPosition);
+        } else {
+            // Скрываем панель инструментов
+            mTaskOptionsPanel.setVisibility(View.INVISIBLE);
+        }
     }
 }
