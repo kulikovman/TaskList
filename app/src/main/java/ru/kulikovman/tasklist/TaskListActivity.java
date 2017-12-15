@@ -473,4 +473,9 @@ public class TaskListActivity extends AppCompatActivity
     public void onDialogNegativeClick(DialogFragment dialog) {
 
     }
+
+    @Override
+    public void onDialogFinish(DialogFragment dialog) {
+
+    }
 }

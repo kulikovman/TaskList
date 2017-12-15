@@ -9,5 +9,6 @@ public class CallbackDialogFragment extends DialogFragment {
     public interface CallbackDialogListener {
         public void onDialogPositiveClick(DialogFragment dialog);
         public void onDialogNegativeClick(DialogFragment dialog);
+        public void onDialogFinish(DialogFragment dialog);
     }
 }
