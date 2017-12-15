@@ -42,7 +42,8 @@ import ru.kulikovman.tasklist.models.Task;
 import ru.kulikovman.tasklist.models.TaskAdapter;
 
 public class TaskListActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, TaskAdapter.OnItemClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener, TaskAdapter.OnItemClickListener,
+        CallbackDialogFragment.CallbackDialogListener {
 
     private Realm mRealm;
     public RecyclerView mRecyclerView;
@@ -57,8 +58,6 @@ public class TaskListActivity extends AppCompatActivity
 
     private LinearLayout mTaskOptionsPanel;
     private ImageButton mSetDateButton, mSetPriorityButton, mSetGroupButton, mSetRepeatButton, mSetReminderButton;
-
-    private int RC_PRIORITY = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -463,5 +462,15 @@ public class TaskListActivity extends AppCompatActivity
                 mRealm.commitTransaction();
                 break;
         }
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+
     }
 }
