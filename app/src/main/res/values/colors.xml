@@ -18,11 +18,13 @@
     <color name="gray_9">#333333</color>
     <color name="gray_10">#1A1A1A</color>
     <color name="black">#000000</color>
+    <color name="brown">#c69c6d</color>
     <color name="red">#ff5e5e</color>
-    <color name="orange">#ffa65e</color>
+    <color name="orange">#fbb03b</color>
     <color name="yellow">#fff45e</color>
     <color name="green">#6fe455</color>
     <color name="blue">#5ebcff</color>
+    <color name="turquoise">#00bcaf</color>
     <color name="violet">#a95eff</color>
     <color name="pink">#ff5efa</color>
 

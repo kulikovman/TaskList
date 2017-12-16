@@ -43,7 +43,31 @@
 
 
     <!-- Диалоги для групп -->
+    <!-- Выбор цвета группы -->
+    <string name="color_title">Цвет</string>
+    <string-array name="color_array">
+        <item>Коричневый</item>
+        <item>Красный</item>
+        <item>Оранжевый</item>
+        <item>Желтый</item>
+        <item>Зеленый</item>
+        <item>Синий</item>
+        <item>Бирюзовый</item>
+        <item>Фиолетовый</item>
+        <item>Розовый</item>
+        <item>Без цвета</item>
+    </string-array>
 
+    <string name="color_1_brown">Коричневый</string>
+    <string name="color_2_red">Красный</string>
+    <string name="color_3_orange">Оранжевый</string>
+    <string name="color_4_yellow">Желтый</string>
+    <string name="color_5_green">Зеленый</string>
+    <string name="color_6_blue">Синий</string>
+    <string name="color_7_turquoise">Бирюзовый</string>
+    <string name="color_8_violet">Фиолетовый</string>
+    <string name="color_9_pink">Розовый</string>
+    <string name="color_not">Без цвета</string>
 
     <!-- Информационные сообщения -->
     <string name="message_group_is_exist">Группа с таким названием уже существует.</string>
@@ -69,7 +93,6 @@
 
 
 
-
     <!-- Ниже находятся старые строки -->
     <!-- (все нужное перенести наверх) -->
 
@@ -80,17 +103,7 @@
     <string name="title_activity_group_list">Группы</string>
 
 
-    <!-- Цвет группы -->
-    <string name="color_title">Цвет</string>
-    <string name="color_without">Не выбран</string>
-    <string name="color_1_red">Красный</string>
-    <string name="color_2_orange">Оранжевый</string>
-    <string name="color_3_yellow">Желтый</string>
-    <string name="color_4_green">Зеленый</string>
-    <string name="color_5_blue">Синий</string>
-    <string name="color_6_violet">Фиолетовый</string>
-    <string name="color_7_pink">Розовый</string>
-    <string name="color_not">Без цвета</string>
+
 
     <!-- Создание описание группы -->
     <string name="description_title">Описание</string>

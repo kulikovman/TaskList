@@ -24,7 +24,9 @@ import android.widget.LinearLayout;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
+import ru.kulikovman.tasklist.dialogs.ColorDialog;
 import ru.kulikovman.tasklist.dialogs.DateDialog;
+import ru.kulikovman.tasklist.dialogs.DescriptionDialog;
 import ru.kulikovman.tasklist.dialogs.GroupDialog;
 import ru.kulikovman.tasklist.dialogs.PriorityDialog;
 import ru.kulikovman.tasklist.dialogs.RepeatDialog;
@@ -270,13 +272,12 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
         // Обрабатываем нажатие
         switch (id) {
             case R.id.group_set_description:
-                // TODO: 16.12.2017 Подключить диалоги
-                DialogFragment descriptionDialog = new DateDialog();
+                DialogFragment descriptionDialog = new DescriptionDialog();
                 descriptionDialog.setArguments(args);
                 descriptionDialog.show(getSupportFragmentManager(), "descriptionDialog");
                 break;
             case R.id.group_set_color:
-                DialogFragment colorDialog = new PriorityDialog();
+                DialogFragment colorDialog = new ColorDialog();
                 colorDialog.setArguments(args);
                 colorDialog.show(getSupportFragmentManager(), "colorDialog");
                 break;

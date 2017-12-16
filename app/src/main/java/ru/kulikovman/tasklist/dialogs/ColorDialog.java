@@ -1,67 +1,103 @@
 package ru.kulikovman.tasklist.dialogs;
 
+
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
-import android.widget.TextView;
 
+import io.realm.Realm;
+import ru.kulikovman.tasklist.CallbackDialogFragment;
 import ru.kulikovman.tasklist.R;
+import ru.kulikovman.tasklist.models.Group;
+import ru.kulikovman.tasklist.models.Task;
 
-public class ColorDialog extends DialogFragment {
+public class ColorDialog extends CallbackDialogFragment {
+    private Realm mRealm;
+    private Group mGroup;
+
+    CallbackDialogListener mListener;
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mListener = (CallbackDialogListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement CallbackDialogListener");
+        }
+    }
+
+    @NonNull
+    @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final String red = getString(R.string.color_1_red);
-        final String orange = getString(R.string.color_2_orange);
-        final String yellow = getString(R.string.color_3_yellow);
-        final String green = getString(R.string.color_4_green);
-        final String blue = getString(R.string.color_5_blue);
-        final String violet = getString(R.string.color_6_violet);
-        final String pink = getString(R.string.color_7_pink);
-        final String without = getString(R.string.color_not);
+        // Получаем аргументы
+        long taskId = getArguments().getLong("taskId");
 
-        final String color[] = {red, orange, yellow, green, blue, violet, pink, without};
+        // Подключаем базу и получаем задачу
+        mRealm = Realm.getDefaultInstance();
+        mGroup = mRealm.where(Group.class).equalTo(Task.ID, taskId).findFirst();
 
+        // Строки для списка вариантов
+        final String color[] = getResources().getStringArray(R.array.color_array);
+
+        // Создаем диалог
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.color_title)
                 .setItems(color, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d("myLog", String.valueOf(which));
-
-                        TextView colorField = (TextView) getActivity().findViewById(R.id.color_state);
+                        // Открываем транзакцию
+                        mRealm.beginTransaction();
 
                         switch (which) {
-                            case 0:
-                                colorField.setText(red);
+                            case 0: // Чрезвычайный
+                                mGroup.setColor("brown");
                                 break;
-                            case 1:
-                                colorField.setText(orange);
+                            case 1: // Высокий
+                                mGroup.setColor("red");
                                 break;
-                            case 2:
-                                colorField.setText(yellow);
+                            case 2: // Обычный
+                                mGroup.setColor("orange");
                                 break;
-                            case 3:
-                                colorField.setText(green);
+                            case 3: // Низкий
+                                mGroup.setColor("yellow");
                                 break;
-                            case 4:
-                                colorField.setText(blue);
+                            case 4: // Самый низкий
+                                mGroup.setColor("green");
                                 break;
-                            case 5:
-                                colorField.setText(violet);
+                            case 5: // Самый низкий
+                                mGroup.setColor("blue");
                                 break;
-                            case 6:
-                                colorField.setText(pink);
+                            case 6: // Самый низкий
+                                mGroup.setColor("turquoise");
                                 break;
-                            case 7:
-                                colorField.setText(R.string.color_without);
+                            case 7: // Самый низкий
+                                mGroup.setColor("violet");
+                                break;
+                            case 8: // Самый низкий
+                                mGroup.setColor("pink");
+                                break;
+                            case 9: // Самый низкий
+                                mGroup.setColor(null);
                                 break;
                         }
+
+                        // Закрываем транзакцию
+                        mRealm.commitTransaction();
                     }
                 });
 
         return builder.create();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mRealm.close();
+
+        // Запускаем код в активити
+        mListener.onDialogFinish(ColorDialog.this);
     }
 }
