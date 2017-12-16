@@ -32,10 +32,6 @@ public class GroupAdapter extends RealmRecyclerViewAdapter<Group, GroupAdapter.G
         mContext = context;
     }
 
-    public void setResults(OrderedRealmCollection<Group> results) {
-        mResults = results;
-    }
-
     @Override
     public long getItemId(int index) {
         //noinspection ConstantConditions
