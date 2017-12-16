@@ -35,11 +35,11 @@
     <string name="group_title">Группа</string>
     <string name="group_not">Без группы</string>
     <string name="group_message">Вы пока не создали ни одной группы.</string>
-    <string name="group_button_create">Создать</string>
+    <string name="group_create_button">Создать</string>
 
     <!-- Создание группы -->
     <string name="create_group_title">Название группы</string>
-    <string name="create_group_button_ok">OK</string>
+    <string name="create_group_ok_button">OK</string>
 
 
     <!-- Диалоги для групп -->
@@ -68,6 +68,15 @@
     <string name="color_8_violet">Фиолетовый</string>
     <string name="color_9_pink">Розовый</string>
     <string name="color_not">Без цвета</string>
+
+    <!-- Создание описание группы -->
+    <string name="description_title">Описание</string>
+    <string name="description_save_button">Сохранить</string>
+
+
+
+
+
 
     <!-- Информационные сообщения -->
     <string name="message_group_is_exist">Группа с таким названием уже существует.</string>
@@ -105,11 +114,7 @@
 
 
 
-    <!-- Создание описание группы -->
-    <string name="description_title">Описание</string>
-    <string name="without_description">Без описания</string>
-    <string name="save_button">Сохранить</string>
-    <string name="cancel_button">Отмена</string>
+
 
 
     <!-- Имена пунктов главного бокового меню -->

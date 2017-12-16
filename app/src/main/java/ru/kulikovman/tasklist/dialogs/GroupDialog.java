@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -57,7 +56,7 @@ public class GroupDialog extends CallbackDialogFragment {
             // Если список пуст, то создаем диалог с сообщением
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setMessage(R.string.group_message)
-                    .setPositiveButton(R.string.group_button_create, new DialogInterface.OnClickListener() {
+                    .setPositiveButton(R.string.group_create_button, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // Запускаем диалог создания группы
@@ -96,7 +95,7 @@ public class GroupDialog extends CallbackDialogFragment {
                             mRealm.commitTransaction();
                         }
                     })
-                    .setPositiveButton(R.string.group_button_create, new DialogInterface.OnClickListener() {
+                    .setPositiveButton(R.string.group_create_button, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // Запускаем диалог создания группы

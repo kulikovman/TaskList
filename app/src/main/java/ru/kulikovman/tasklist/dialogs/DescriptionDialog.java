@@ -10,7 +10,6 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import io.realm.Realm;
 import ru.kulikovman.tasklist.CallbackDialogFragment;
@@ -44,30 +43,18 @@ public class DescriptionDialog extends CallbackDialogFragment {
         mRealm = Realm.getDefaultInstance();
         mGroup = mRealm.where(Group.class).equalTo(Task.ID, taskId).findFirst();
 
-        // Строки для списка вариантов
-
         // Это нужно для привязки к диалогу вью из макета
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View dialogDescription = inflater.inflate(R.layout.dialog_input_text, null);
 
-        // Инициализируем вью элементы
-        final EditText dialogInputText = (EditText) dialogDescription.findViewById(R.id.dialog_input_text);
-        final TextView descriptionState = (TextView) getActivity().findViewById(R.id.description_state);
+        // Инициализируем поле с описанием
+        final EditText dialogInputText = dialogDescription.findViewById(R.id.dialog_input_text);
 
-        // Получаем строки для последующего сравнения
-        String currentDescription = descriptionState.getText().toString();
-        String withoutDescription = getString(R.string.without_description);
-
-        // Передаем текст текущего описания в поле диалога
-        if (!currentDescription.equals(withoutDescription)) {
-            dialogInputText.setText(currentDescription);
-        }
-
-        // Формируем диалог при помощи конструктора
+        // Создаем диалог
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.description_title)
                 .setView(dialogDescription)
-                .setPositiveButton(R.string.save_button, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.description_save_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Получаем введенный текст и очищаем от лишних пробелов
@@ -75,7 +62,10 @@ public class DescriptionDialog extends CallbackDialogFragment {
 
                         // Сохраняем введенный текст в поле с описанием группы
                         if (updatedDescription.length() > 0) {
-                            descriptionState.setText(updatedDescription);
+                            // Сохраняем новое описание
+                            mRealm.beginTransaction();
+                            mGroup.setDescription(updatedDescription);
+                            mRealm.commitTransaction();
                         }
                     }
                 });
