@@ -52,6 +52,24 @@
     <string name="menu_info">Информация</string>
 
 
+    <!-- Другие разные строки -->
+    <string name="task_title_hint">Описание задачи…</string>
+    <string name="group_name_hint">Название группы…</string>
+    <string name="group_description_hint">Описание группы…</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- Ниже находятся старые строки -->
     <!-- (все нужное перенести наверх) -->
 
@@ -90,10 +108,7 @@
     <string name="menu_finished_tasks">Завершенные</string>
     <string name="menu_edit_groups">Редактировать группы</string>
 
-    <!-- Другие разные строки -->
-    <string name="task_title_hint">Описание задачи…</string>
-    <string name="group_name_hint">Название группы…</string>
-    <string name="group_description_hint">Описание группы…</string>
+
 
 
     <!-- Кнопки диалогов -->
