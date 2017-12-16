@@ -24,12 +24,14 @@ import android.widget.LinearLayout;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
+import io.realm.RealmResults;
 import ru.kulikovman.tasklist.dialogs.ColorDialog;
 import ru.kulikovman.tasklist.dialogs.DateDialog;
 import ru.kulikovman.tasklist.dialogs.DescriptionDialog;
 import ru.kulikovman.tasklist.dialogs.GroupDialog;
 import ru.kulikovman.tasklist.dialogs.PriorityDialog;
 import ru.kulikovman.tasklist.dialogs.RepeatDialog;
+import ru.kulikovman.tasklist.messages.GroupIsExist;
 import ru.kulikovman.tasklist.models.Group;
 import ru.kulikovman.tasklist.models.GroupAdapter;
 import ru.kulikovman.tasklist.models.Task;
@@ -310,23 +312,31 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
         String groupName = mGroupField.getText().toString().trim();
 
         if (groupName.length() > 0) {
-            // Создаем группу и добавляем в базу
-            Group group = new Group(groupName);
+            //RealmResults<Group> existGroups = mRealm.where(Group.class).equalTo(Group.NAME, groupName).findAll();
+            Group existGroup = mRealm.where(Group.class).equalTo(Group.NAME, groupName).findFirst();
 
-            mRealm.beginTransaction();
-            mRealm.insert(group);
-            mRealm.commitTransaction();
+            if (existGroup == null) {
+                // Создаем группу и добавляем в базу
+                Group group = new Group(groupName);
+                mRealm.beginTransaction();
+                mRealm.insert(group);
+                mRealm.commitTransaction();
 
-            // Очищаем поле
-            mGroupField.setText(null);
+                // Очищаем поле
+                mGroupField.setText(null);
 
-            // Получаем группу или null
-            mGroup = mAdapter.getGroupById(group.getId());
+                // Получаем группу или null
+                mGroup = mAdapter.getGroupById(group.getId());
 
-            if (mGroup != null) {
-                // Получаем позицию и скролим к группе
-                mPosition = mAdapter.getPosition(mGroup.getId());
-                mRecyclerView.scrollToPosition(mPosition);
+                if (mGroup != null) {
+                    // Получаем позицию и скролим к группе
+                    mPosition = mAdapter.getPosition(mGroup.getId());
+                    mRecyclerView.scrollToPosition(mPosition);
+                }
+            } else {
+                // Показываем сообщение об ошибке
+                DialogFragment groupIsExist = new GroupIsExist();
+                groupIsExist.show(getSupportFragmentManager(), "groupIsExist");
             }
         }
     }
