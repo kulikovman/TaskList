@@ -1,9 +1,18 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
        android:shape="rectangle">
+
+    <!-- Оттенки серого
     <gradient
         android:angle="135"
-        android:centerColor="#009688"
-        android:endColor="#00695C"
-        android:startColor="#4DB6AC"
+        android:centerColor="@color/gray_6"
+        android:endColor="@color/gray_7"
+        android:startColor="@color/gray_5"
+        android:type="linear"/> -->
+
+    <gradient
+        android:angle="135"
+        android:startColor="#8ed0ff"
+        android:centerColor="#51b7ff"
+        android:endColor="#20a3ff"
         android:type="linear"/>
 </shape>

@@ -7,8 +7,6 @@
     <string name="action_settings">Settings</string>
 
 
-
-
     <!-- Диалоги для задач -->
     <!-- Выбор даты задачи -->
     <string name="date_title">Дата выполнения</string>
@@ -47,16 +45,11 @@
     <!-- Диалоги для групп -->
 
 
-
-
     <!-- Информационные сообщения -->
     <string name="message_group_is_exist">Группа с таким названием уже существует.</string>
 
     <!-- Название пунктов меню -->
     <string name="menu_info">Информация</string>
-
-
-
 
 
     <!-- Ниже находятся старые строки -->
@@ -67,9 +60,6 @@
     <string name="title_activity_edit_group">Группа</string>
     <string name="title_activity_main">Список задач</string>
     <string name="title_activity_group_list">Группы</string>
-
-
-
 
 
     <!-- Цвет группы -->
@@ -91,8 +81,6 @@
     <string name="cancel_button">Отмена</string>
 
 
-
-
     <!-- Имена пунктов главного бокового меню -->
     <string name="menu_unsorted_tasks">Не отсортированные</string>
     <string name="menu_today_tasks">Сегодня</string>
@@ -108,20 +96,10 @@
     <string name="group_description_hint">Описание группы…</string>
 
 
-
     <!-- Кнопки диалогов -->
     <string name="dialog_button_ok">OK</string>
     <string name="dialog_button_cancel">Отмена</string>
     <string name="dialog_button_create_group">Создать</string>
-
-
-
-
-
-
-
-
-
 
 
 </resources>
