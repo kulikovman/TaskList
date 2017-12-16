@@ -52,34 +52,34 @@ public class ColorDialog extends CallbackDialogFragment {
                         mRealm.beginTransaction();
 
                         switch (which) {
-                            case 0: // Чрезвычайный
+                            case 0: // Коричневый
                                 mGroup.setColor("brown");
                                 break;
-                            case 1: // Высокий
+                            case 1: // Красный
                                 mGroup.setColor("red");
                                 break;
-                            case 2: // Обычный
+                            case 2: // Оранжевый
                                 mGroup.setColor("orange");
                                 break;
-                            case 3: // Низкий
+                            case 3: // Желтый
                                 mGroup.setColor("yellow");
                                 break;
-                            case 4: // Самый низкий
+                            case 4: // Зеленый
                                 mGroup.setColor("green");
                                 break;
-                            case 5: // Самый низкий
+                            case 5: // Синий
                                 mGroup.setColor("blue");
                                 break;
-                            case 6: // Самый низкий
+                            case 6: // Бирюзовый
                                 mGroup.setColor("turquoise");
                                 break;
-                            case 7: // Самый низкий
+                            case 7: // Фиолетовый
                                 mGroup.setColor("violet");
                                 break;
-                            case 8: // Самый низкий
+                            case 8: // Розовый
                                 mGroup.setColor("pink");
                                 break;
-                            case 9: // Самый низкий
+                            case 9: // Без цвета
                                 mGroup.setColor(null);
                                 break;
                         }
