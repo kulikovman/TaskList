@@ -36,6 +36,7 @@ import io.realm.Realm;
 import io.realm.Sort;
 import ru.kulikovman.tasklist.dialogs.DateDialog;
 import ru.kulikovman.tasklist.dialogs.GroupDialog;
+import ru.kulikovman.tasklist.dialogs.InfoDialog;
 import ru.kulikovman.tasklist.dialogs.PriorityDialog;
 import ru.kulikovman.tasklist.dialogs.RepeatDialog;
 import ru.kulikovman.tasklist.models.Task;
@@ -323,7 +324,8 @@ public class TaskListActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-
+            DialogFragment infoDialog = new InfoDialog();
+            infoDialog.show(getSupportFragmentManager(), "infoDialog");
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {

@@ -41,4 +41,6 @@
     <color name="optionsTextColor">#808080</color>
     <color name="optionsTitleColor">#484848</color>
     <color name="addTaskButton">#44de56</color>
+
+    <color name="test_color">#963787ff</color>
 </resources>
