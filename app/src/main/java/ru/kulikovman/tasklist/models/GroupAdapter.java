@@ -80,7 +80,7 @@ public class GroupAdapter extends RealmRecyclerViewAdapter<Group, GroupAdapter.G
         return 0;
     }
 
-    public Group getTaskById(long groupId) {
+    public Group getGroupById(long groupId) {
         for (Group group : mResults) {
             if (group.getId() == groupId) {
                 return group;
@@ -89,7 +89,7 @@ public class GroupAdapter extends RealmRecyclerViewAdapter<Group, GroupAdapter.G
         return null;
     }
 
-    public Group getTaskByPosition(int position) {
+    public Group getGroupByPosition(int position) {
         return mResults.get(position);
     }
 

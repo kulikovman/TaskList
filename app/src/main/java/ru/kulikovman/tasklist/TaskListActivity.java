@@ -36,7 +36,6 @@ import io.realm.Realm;
 import io.realm.Sort;
 import ru.kulikovman.tasklist.dialogs.DateDialog;
 import ru.kulikovman.tasklist.dialogs.GroupDialog;
-import ru.kulikovman.tasklist.dialogs.InfoDialog;
 import ru.kulikovman.tasklist.dialogs.PriorityDialog;
 import ru.kulikovman.tasklist.dialogs.RepeatDialog;
 import ru.kulikovman.tasklist.models.Task;
@@ -138,6 +137,14 @@ public class TaskListActivity extends AppCompatActivity
 
         // Обработчик свайпов
         initSwipe();
+    }
+
+    private OrderedRealmCollection<Task> loadUnfinishedTasks() {
+        return mRealm.where(Task.class)
+                .equalTo(Task.DONE, false)
+                .findAll()
+                .sort(new String[]{Task.TARGET_DATE, Task.PRIORITY, Task.TITLE},
+                        new Sort[]{Sort.ASCENDING, Sort.ASCENDING, Sort.ASCENDING});
     }
 
     private void initSwipe() {
@@ -274,15 +281,6 @@ public class TaskListActivity extends AppCompatActivity
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
     }
 
-
-    private OrderedRealmCollection<Task> loadUnfinishedTasks() {
-        return mRealm.where(Task.class)
-                .equalTo(Task.DONE, false)
-                .findAll()
-                .sort(new String[]{Task.TARGET_DATE, Task.PRIORITY, Task.TITLE},
-                        new Sort[]{Sort.ASCENDING, Sort.ASCENDING, Sort.ASCENDING});
-    }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -410,12 +408,6 @@ public class TaskListActivity extends AppCompatActivity
         long date = mTask.getTargetDate();
         mSetRepeatButton.setEnabled(date != Long.MAX_VALUE);
         mSetReminderButton.setEnabled(date != Long.MAX_VALUE);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Log.d(LOG, "Запущен onActivityResult в TaskListActivity");
     }
 
     public void taskOptionsButtons(View view) {
