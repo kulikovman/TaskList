@@ -34,7 +34,7 @@ public class ColorDialog extends CallbackDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Получаем аргументы
-        long taskId = getArguments().getLong("taskId");
+        long taskId = getArguments().getLong("groupId");
 
         // Подключаем базу и получаем задачу
         mRealm = Realm.getDefaultInstance();

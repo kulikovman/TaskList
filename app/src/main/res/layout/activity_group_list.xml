@@ -16,7 +16,7 @@
         android:background="@drawable/options_layout"
         android:elevation="1dp"
         android:orientation="vertical"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
