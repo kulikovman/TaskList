@@ -190,6 +190,7 @@ public class TaskListActivity extends AppCompatActivity
                     Log.d(LOG, "Задача удалена");
                 } else {
                     mRealm.beginTransaction();
+                    mTask.setCompletionDate(System.currentTimeMillis());
                     mTask.setDone(true);
                     mRealm.commitTransaction();
                     Log.d(LOG, "Задача завершена");

@@ -78,12 +78,21 @@
     <string name="description_save_button">Сохранить</string>
 
 
-
-
-
-
     <!-- Информационные сообщения -->
+    <!-- Группа существует -->
     <string name="message_group_is_exist">Группа с таким названием уже существует.</string>
+
+    <!-- Удаление группы -->
+    <string name="message_group_has_tasks">В этой группе есть задачи. Что с ними следует сделать?</string>
+    <string name="delete_group_save_button">Сохранить</string>
+    <string name="delete_group_delete_button">Удалить</string>
+
+
+
+
+
+
+
 
     <!-- Название пунктов меню -->
     <string name="menu_info">Информация</string>

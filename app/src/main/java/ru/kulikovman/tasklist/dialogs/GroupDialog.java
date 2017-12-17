@@ -47,12 +47,6 @@ public class GroupDialog extends CallbackDialogFragment {
         mTask = mRealm.where(Task.class).equalTo(Task.ID, taskId).findFirst();
         mGroups = mRealm.where(Group.class).findAll();
 
-        /*// Готовим запуск диалога создания группы
-        mCreateGroup = new CreateGroupDialog();
-        Bundle args = new Bundle();
-        args.putLong("taskId", mTask.getId());
-        mCreateGroup.setArguments(args);*/
-
         // Проверяем наличие групп
         if (mGroups.size() == 0) {
             // Если список пуст, то создаем диалог с сообщением
