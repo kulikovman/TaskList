@@ -90,7 +90,7 @@ public class GroupAdapter extends RealmRecyclerViewAdapter<Group, GroupAdapter.G
     }
 
     public class GroupHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView mGroupName, mGroupDescription;
+        private TextView mGroupName, mGroupDescription, mCountTask;
         private ImageButton mGroupColor;
 
         public GroupHolder(View view) {
@@ -100,6 +100,7 @@ public class GroupAdapter extends RealmRecyclerViewAdapter<Group, GroupAdapter.G
             mGroupName = view.findViewById(R.id.item_group_name);
             mGroupDescription = view.findViewById(R.id.item_group_description);
             mGroupColor = view.findViewById(R.id.item_group_color);
+            mCountTask = view.findViewById(R.id.item_group_count_task);
 
             // Слушатель нажатий по элементу
             view.setOnClickListener(this);
@@ -127,6 +128,12 @@ public class GroupAdapter extends RealmRecyclerViewAdapter<Group, GroupAdapter.G
             // Устанавливаем описание группы
             mGroupDescription.setText(group.getDescription());
 
+            // Количество задач в группе
+            int countTask = group.getCountTasks();
+            if (countTask > 0) {
+                mCountTask.setText(countTask);
+            }
+
             // Получаем цвет и закрашиваем ярлычок
             String color = group.getColor();
 
@@ -141,6 +148,7 @@ public class GroupAdapter extends RealmRecyclerViewAdapter<Group, GroupAdapter.G
             // Обнуляем все поля
             mGroupName.setText(null);
             mGroupDescription.setText(null);
+            mCountTask.setText(null);
 
             // Цвет ярлычка по умолчанию
             mGroupColor.setBackgroundResource(R.color.gray_2);
