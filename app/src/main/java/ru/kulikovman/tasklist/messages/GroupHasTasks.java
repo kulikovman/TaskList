@@ -48,7 +48,6 @@ public class GroupHasTasks extends DialogFragment {
                         mRealm.beginTransaction();
 
                         RealmResults<Task> tasks = mRealm.where(Task.class).findAll();
-
                         for (Task task : tasks) {
                             Group group = task.getGroup();
                             if (group != null && group.getId() == mGroup.getId()) {

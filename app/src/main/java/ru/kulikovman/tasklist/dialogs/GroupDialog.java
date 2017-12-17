@@ -79,17 +79,17 @@ public class GroupDialog extends CallbackDialogFragment {
                             // Открываем транзакцию
                             mRealm.beginTransaction();
 
-                            // Удаляем старые связи
+                            // Понижаем счетчик в группе и удаляем ее из задачи
                             Group group = mTask.getGroup();
                             if (group != null) {
-                                group.deleteTask(mTask);
+                                group.setDownCountTask();
                                 mTask.setGroup(null);
                             }
 
-                            // Создаем связь между группой и задачей
+                            // Назначаем группу и повышаем в ней счетчик
                             if (which < names.length - 1) {
-                                mGroups.get(which).addTask(mTask);
                                 mTask.setGroup(mGroups.get(which));
+                                mGroups.get(which).setUpCountTask();
                             }
 
                             // Закрываем транзакцию

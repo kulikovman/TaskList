@@ -194,10 +194,10 @@ public class TaskListActivity extends AppCompatActivity
                     mTask.setCompletionDate(System.currentTimeMillis());
                     mTask.setDone(true);
 
-                    // Обновляем счетчик количества связанных незавершенных задач
+                    // Понижаем счетчик задач в связанной группе
                     Group group = mTask.getGroup();
                     if (group != null) {
-                        group.setCountTask(group.getUnfinishedTasks());
+                        group.setDownCountTask();
                     }
 
                     Log.d(LOG, "Задача завершена");

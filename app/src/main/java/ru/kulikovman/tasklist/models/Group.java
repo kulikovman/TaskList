@@ -100,6 +100,14 @@ public class Group extends RealmObject {
 
 
     // Вспомогательные методы
+    public void setUpCountTask() {
+        mCountTask++;
+    }
+
+    public void setDownCountTask() {
+        mCountTask--;
+    }
+
     public void addTask(Task task) {
         mTasks.add(task);
         mCountTask++;

@@ -152,19 +152,17 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
 
                 // Удаление группы
                 if (direction == ItemTouchHelper.RIGHT) {
-                    // TODO: 17.12.2017 сделать возможность удаления задач связанных с группой
-
                     if (mGroup.getCountTask() > 0) {
                         // Сохраняем id группы для передачи в диалог
                         Bundle args = new Bundle();
                         args.putLong("groupId", mGroup.getId());
 
-                        // Показываем сообщение
+                        // Показываем сообщение, что есть связанные задачи
                         DialogFragment groupHasTasks = new GroupHasTasks();
                         groupHasTasks.setArguments(args);
                         groupHasTasks.show(getSupportFragmentManager(), "groupHasTasks");
                     } else {
-                        // Удаляем группу
+                        // Просто удаляем группу
                         mRealm.beginTransaction();
                         mGroup.deleteFromRealm();
                         mRealm.commitTransaction();
