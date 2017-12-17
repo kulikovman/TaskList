@@ -56,7 +56,7 @@ public class GroupDialog extends CallbackDialogFragment {
             // Если список пуст, то создаем диалог с сообщением
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setMessage(R.string.group_message)
-                    .setPositiveButton(R.string.group_create_button, new DialogInterface.OnClickListener() {
+                    .setPositiveButton(R.string.group_open_button, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // Запускаем диалог создания группы
@@ -95,7 +95,7 @@ public class GroupDialog extends CallbackDialogFragment {
                             mRealm.commitTransaction();
                         }
                     })
-                    .setPositiveButton(R.string.group_create_button, new DialogInterface.OnClickListener() {
+                    .setPositiveButton(R.string.group_open_button, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // Запускаем диалог создания группы

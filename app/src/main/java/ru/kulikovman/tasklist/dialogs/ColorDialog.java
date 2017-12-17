@@ -41,7 +41,7 @@ public class ColorDialog extends CallbackDialogFragment {
         mGroup = mRealm.where(Group.class).equalTo(Task.ID, taskId).findFirst();
 
         // Строки для списка вариантов
-        final String color[] = getResources().getStringArray(R.array.color_array);
+        String color[] = getResources().getStringArray(R.array.color_array);
 
         // Создаем диалог
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

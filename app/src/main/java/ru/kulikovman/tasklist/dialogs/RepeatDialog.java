@@ -39,13 +39,7 @@ public class RepeatDialog extends CallbackDialogFragment {
         mTask = mRealm.where(Task.class).equalTo(Task.ID, taskId).findFirst();
 
         // Строки для списка вариантов
-        final String day = getString(R.string.repeat_day);
-        final String week = getString(R.string.repeat_week);
-        final String month = getString(R.string.repeat_month);
-        final String year = getString(R.string.repeat_year);
-        final String not = getString(R.string.repeat_not);
-
-        final String repeat[] = {day, week, month, year, not};
+        String repeat[] = getResources().getStringArray(R.array.repeat_array);
 
         // Создаем диалог
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
