@@ -22,7 +22,6 @@ public class GroupDialog extends CallbackDialogFragment {
     private Realm mRealm;
     private Task mTask;
     private RealmResults<Group> mGroups;
-    private DialogFragment mCreateGroup;
 
     CallbackDialogListener mListener;
 
@@ -83,8 +82,15 @@ public class GroupDialog extends CallbackDialogFragment {
 
                             // Сохраняем группу в задачу
                             if (which == names.length - 1) {
-                                mTask.setGroup(null);
+                                // Удаляем связи между группой и задачей
+                                Group group = mTask.getGroup();
+                                if (group != null) {
+                                    group.deleteTask(mTask);
+                                    mTask.setGroup(null);
+                                }
                             } else {
+                                // Добавляем задачу в группу и присваеваем группу задаче
+                                mGroups.get(which).addTask(mTask);
                                 mTask.setGroup(mGroups.get(which));
                             }
 
