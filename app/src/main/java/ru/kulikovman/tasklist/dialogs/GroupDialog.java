@@ -4,6 +4,7 @@ package ru.kulikovman.tasklist.dialogs;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -12,6 +13,7 @@ import android.support.v7.app.AlertDialog;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import ru.kulikovman.tasklist.CallbackDialogFragment;
+import ru.kulikovman.tasklist.GroupListActivity;
 import ru.kulikovman.tasklist.R;
 import ru.kulikovman.tasklist.models.Group;
 import ru.kulikovman.tasklist.models.Task;
@@ -45,11 +47,11 @@ public class GroupDialog extends CallbackDialogFragment {
         mTask = mRealm.where(Task.class).equalTo(Task.ID, taskId).findFirst();
         mGroups = mRealm.where(Group.class).findAll();
 
-        // Готовим запуск диалога создания группы
+        /*// Готовим запуск диалога создания группы
         mCreateGroup = new CreateGroupDialog();
         Bundle args = new Bundle();
         args.putLong("taskId", mTask.getId());
-        mCreateGroup.setArguments(args);
+        mCreateGroup.setArguments(args);*/
 
         // Проверяем наличие групп
         if (mGroups.size() == 0) {
@@ -59,8 +61,9 @@ public class GroupDialog extends CallbackDialogFragment {
                     .setPositiveButton(R.string.group_open_button, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            // Запускаем диалог создания группы
-                            mCreateGroup.show(getActivity().getSupportFragmentManager(), "mCreateGroup");
+                            // Переходим к списку групп
+                            Intent intent = new Intent(getActivity(), GroupListActivity.class);
+                            startActivity(intent);
                         }
                     });
 
@@ -98,8 +101,9 @@ public class GroupDialog extends CallbackDialogFragment {
                     .setPositiveButton(R.string.group_open_button, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            // Запускаем диалог создания группы
-                            mCreateGroup.show(getActivity().getSupportFragmentManager(), "mCreateGroup");
+                            // Переходим к списку групп
+                            Intent intent = new Intent(getActivity(), GroupListActivity.class);
+                            startActivity(intent);
                         }
                     });
 
