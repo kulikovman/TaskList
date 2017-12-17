@@ -131,7 +131,7 @@ public class GroupAdapter extends RealmRecyclerViewAdapter<Group, GroupAdapter.G
             // Количество задач в группе
             int countTask = group.getCountTasks();
             if (countTask > 0) {
-                mCountTask.setText(countTask);
+                mCountTask.setText(String.valueOf(countTask));
             }
 
             // Получаем цвет и закрашиваем ярлычок

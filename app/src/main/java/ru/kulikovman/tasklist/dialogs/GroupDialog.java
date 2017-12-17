@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 
 import io.realm.Realm;
@@ -80,16 +79,15 @@ public class GroupDialog extends CallbackDialogFragment {
                             // Открываем транзакцию
                             mRealm.beginTransaction();
 
-                            // Сохраняем группу в задачу
-                            if (which == names.length - 1) {
-                                // Удаляем связи между группой и задачей
-                                Group group = mTask.getGroup();
-                                if (group != null) {
-                                    group.deleteTask(mTask);
-                                    mTask.setGroup(null);
-                                }
-                            } else {
-                                // Добавляем задачу в группу и присваеваем группу задаче
+                            // Удаляем старые связи
+                            Group group = mTask.getGroup();
+                            if (group != null) {
+                                group.deleteTask(mTask);
+                                mTask.setGroup(null);
+                            }
+
+                            // Создаем связь между группой и задачей
+                            if (which < names.length - 1) {
                                 mGroups.get(which).addTask(mTask);
                                 mTask.setGroup(mGroups.get(which));
                             }
