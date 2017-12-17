@@ -62,7 +62,18 @@ public class Group extends RealmObject {
         }
     }
 
-    public int getCountTasks() {
+    public int getCountUnfinishedTasks() {
+        int count = 0;
+        for (Task task : mTasks) {
+            if (!task.isDone()) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    public int getCountAllTasks() {
         return mTasks.size();
     }
 
