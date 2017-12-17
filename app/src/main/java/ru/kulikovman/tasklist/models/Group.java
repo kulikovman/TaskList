@@ -11,6 +11,7 @@ public class Group extends RealmObject {
     public static final String DESCRIPTION = "mDescription";
     public static final String COLOR = "mColor";
     public static final String TASKS = "mTasks";
+    public static final String COUNT_TASK = "mCountTask";
 
     @PrimaryKey
     private long mId;
@@ -19,6 +20,7 @@ public class Group extends RealmObject {
     private String mDescription;
     private String mColor;
     private RealmList<Task> mTasks;
+    private int mCountTask;
 
     public Group(long id, String name, String description, String color) {
         mId = id;
@@ -52,29 +54,12 @@ public class Group extends RealmObject {
         return mTasks;
     }
 
-    public void addTask(Task task) {
-        mTasks.add(task);
+    public int getCountTask() {
+        return mCountTask;
     }
 
-    public void deleteTask(Task task) {
-        if (mTasks.contains(task)) {
-            mTasks.remove(task);
-        }
-    }
-
-    public int getCountUnfinishedTasks() {
-        int count = 0;
-        for (Task task : mTasks) {
-            if (!task.isDone()) {
-                count++;
-            }
-        }
-
-        return count;
-    }
-
-    public int getCountAllTasks() {
-        return mTasks.size();
+    public void setCountTask(int countTask) {
+        mCountTask = countTask;
     }
 
     public long getId() {
@@ -107,5 +92,29 @@ public class Group extends RealmObject {
 
     public void setDescription(String description) {
         mDescription = description;
+    }
+
+
+    // Вспомогательные методы
+    public void addTask(Task task) {
+        mTasks.add(task);
+        mCountTask++;
+    }
+
+    public void deleteTask(Task task) {
+        if (mTasks.contains(task)) {
+            mTasks.remove(task);
+            mCountTask--;
+        }
+    }
+
+    public int getUnfinishedTasks() {
+        int count = 0;
+        for (Task task : mTasks) {
+            if (!task.isDone()) {
+                count++;
+            }
+        }
+        return count;
     }
 }

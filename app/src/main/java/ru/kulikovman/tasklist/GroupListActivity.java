@@ -25,6 +25,7 @@ import android.widget.LinearLayout;
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
 import io.realm.RealmResults;
+import io.realm.Sort;
 import ru.kulikovman.tasklist.dialogs.ColorDialog;
 import ru.kulikovman.tasklist.dialogs.DateDialog;
 import ru.kulikovman.tasklist.dialogs.DescriptionDialog;
@@ -107,7 +108,10 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
     }
 
     private OrderedRealmCollection<Group> loadGroupList() {
-        return mRealm.where(Group.class).findAll();
+        return mRealm.where(Group.class)
+                .findAll()
+                .sort(new String[]{Group.COUNT_TASK, Group.NAME},
+                        new Sort[]{Sort.DESCENDING, Sort.ASCENDING});
     }
 
     private void initSwipe() {

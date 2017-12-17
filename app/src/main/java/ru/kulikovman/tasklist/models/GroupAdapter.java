@@ -129,7 +129,7 @@ public class GroupAdapter extends RealmRecyclerViewAdapter<Group, GroupAdapter.G
             mGroupDescription.setText(group.getDescription());
 
             // Количество задач в группе
-            int countTask = group.getCountUnfinishedTasks();
+            int countTask = group.getUnfinishedTasks();
             if (countTask > 0) {
                 mCountTask.setText(String.valueOf(countTask));
             }

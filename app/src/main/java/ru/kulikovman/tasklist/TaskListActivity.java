@@ -33,7 +33,6 @@ import android.widget.LinearLayout;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
 import io.realm.Sort;
 import ru.kulikovman.tasklist.dialogs.DateDialog;
 import ru.kulikovman.tasklist.dialogs.GroupDialog;
@@ -194,6 +193,13 @@ public class TaskListActivity extends AppCompatActivity
                 } else {
                     mTask.setCompletionDate(System.currentTimeMillis());
                     mTask.setDone(true);
+
+                    // Обновляем счетчик количества связанных незавершенных задач
+                    Group group = mTask.getGroup();
+                    if (group != null) {
+                        group.setCountTask(group.getUnfinishedTasks());
+                    }
+
                     Log.d(LOG, "Задача завершена");
                 }
 
