@@ -33,6 +33,7 @@ import android.widget.LinearLayout;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import io.realm.Sort;
 import ru.kulikovman.tasklist.dialogs.DateDialog;
 import ru.kulikovman.tasklist.dialogs.GroupDialog;
