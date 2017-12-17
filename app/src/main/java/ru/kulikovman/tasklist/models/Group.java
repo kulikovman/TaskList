@@ -1,6 +1,7 @@
 package ru.kulikovman.tasklist.models;
 
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -9,6 +10,7 @@ public class Group extends RealmObject {
     public static final String NAME = "mName";
     public static final String DESCRIPTION = "mDescription";
     public static final String COLOR = "mColor";
+    public static final String TASKS = "mTasks";
 
     @PrimaryKey
     private long mId;
@@ -16,6 +18,7 @@ public class Group extends RealmObject {
     private String mName;
     private String mDescription;
     private String mColor;
+    private RealmList<Task> mTasks;
 
     public Group(long id, String name, String description, String color) {
         mId = id;
@@ -43,6 +46,24 @@ public class Group extends RealmObject {
     }
 
     public Group() {
+    }
+
+    public RealmList<Task> getTasks() {
+        return mTasks;
+    }
+
+    public void addTask(Task task) {
+        mTasks.add(task);
+    }
+
+    public void deleteTask(Task task) {
+        if (mTasks.contains(task)) {
+            mTasks.remove(task);
+        }
+    }
+
+    public int getCountTasks() {
+        return mTasks.size();
     }
 
     public long getId() {
