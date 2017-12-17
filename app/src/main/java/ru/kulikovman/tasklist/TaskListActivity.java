@@ -39,6 +39,7 @@ import ru.kulikovman.tasklist.dialogs.DateDialog;
 import ru.kulikovman.tasklist.dialogs.GroupDialog;
 import ru.kulikovman.tasklist.dialogs.PriorityDialog;
 import ru.kulikovman.tasklist.dialogs.RepeatDialog;
+import ru.kulikovman.tasklist.models.Group;
 import ru.kulikovman.tasklist.models.Task;
 import ru.kulikovman.tasklist.models.TaskAdapter;
 
@@ -183,19 +184,21 @@ public class TaskListActivity extends AppCompatActivity
                 mPosition = viewHolder.getAdapterPosition();
                 mTask = mAdapter.getTaskByPosition(mPosition);
 
+                // Открываем транзакцию
+                mRealm.beginTransaction();
+
                 // Завершаем или удаляем
                 if (direction == ItemTouchHelper.RIGHT) {
-                    mRealm.beginTransaction();
                     mTask.deleteFromRealm();
-                    mRealm.commitTransaction();
                     Log.d(LOG, "Задача удалена");
                 } else {
-                    mRealm.beginTransaction();
                     mTask.setCompletionDate(System.currentTimeMillis());
                     mTask.setDone(true);
-                    mRealm.commitTransaction();
                     Log.d(LOG, "Задача завершена");
                 }
+
+                // Закрываем транзакцию
+                mRealm.commitTransaction();
 
                 // Обнуляем переменные
                 mPosition = RecyclerView.NO_POSITION;
