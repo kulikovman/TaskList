@@ -32,6 +32,7 @@ import ru.kulikovman.tasklist.dialogs.DescriptionDialog;
 import ru.kulikovman.tasklist.dialogs.GroupDialog;
 import ru.kulikovman.tasklist.dialogs.PriorityDialog;
 import ru.kulikovman.tasklist.dialogs.RepeatDialog;
+import ru.kulikovman.tasklist.messages.GroupHasTasks;
 import ru.kulikovman.tasklist.messages.GroupIsExist;
 import ru.kulikovman.tasklist.models.Group;
 import ru.kulikovman.tasklist.models.GroupAdapter;
@@ -152,14 +153,23 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
                 // Удаление группы
                 if (direction == ItemTouchHelper.RIGHT) {
                     // TODO: 17.12.2017 сделать возможность удаления задач связанных с группой
-                    // для этого нужно менять структуру данных группы
-                    // добавить массив со списком связаных задач
 
-                    // Пока просто удаляем группу
-                    mRealm.beginTransaction();
-                    mGroup.deleteFromRealm();
-                    mRealm.commitTransaction();
-                    Log.d(LOG, "Группа удалена");
+                    if (mGroup.getCountTask() > 0) {
+                        // Сохраняем id группы для передачи в диалог
+                        Bundle args = new Bundle();
+                        args.putLong("groupId", mGroup.getId());
+
+                        // Показываем сообщение
+                        DialogFragment groupHasTasks = new GroupHasTasks();
+                        groupHasTasks.setArguments(args);
+                        groupHasTasks.show(getSupportFragmentManager(), "groupHasTasks");
+                    } else {
+                        // Удаляем группу
+                        mRealm.beginTransaction();
+                        mGroup.deleteFromRealm();
+                        mRealm.commitTransaction();
+                        Log.d(LOG, "Группа удалена");
+                    }
                 }
 
                 // Обнуляем переменные

@@ -54,6 +54,10 @@ public class Group extends RealmObject {
         return mTasks;
     }
 
+    public void setTasks(RealmList<Task> tasks) {
+        mTasks = tasks;
+    }
+
     public int getCountTask() {
         return mCountTask;
     }

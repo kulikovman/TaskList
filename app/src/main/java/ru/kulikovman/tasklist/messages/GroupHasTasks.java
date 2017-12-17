@@ -8,26 +8,58 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 
+import io.realm.Realm;
+import io.realm.RealmList;
+import io.realm.RealmResults;
 import ru.kulikovman.tasklist.R;
+import ru.kulikovman.tasklist.models.Group;
+import ru.kulikovman.tasklist.models.Task;
 
 public class GroupHasTasks extends DialogFragment {
+    private Realm mRealm;
+    private Group mGroup;
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        // Получаем аргументы
+        long taskId = getArguments().getLong("groupId");
+
+        // Подключаем базу и получаем группу
+        mRealm = Realm.getDefaultInstance();
+        mGroup = mRealm.where(Group.class).equalTo(Task.ID, taskId).findFirst();
+
+        // Создаем диалог
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(R.string.message_group_has_tasks)
                 .setPositiveButton(R.string.delete_group_save_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Сохраняем связанные задачи
-
+                        // Удаляем только группу
+                        mRealm.beginTransaction();
+                        mGroup.deleteFromRealm();
+                        mRealm.commitTransaction();
                     }
                 })
                 .setNegativeButton(R.string.delete_group_delete_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Удаляем связанные задачи
+                        // Открываем транзакцию
+                        mRealm.beginTransaction();
 
+                        RealmResults<Task> tasks = mRealm.where(Task.class).findAll();
+
+                        for (Task task : tasks) {
+                            Group group = task.getGroup();
+                            if (group != null && group.getId() == mGroup.getId()) {
+                                task.deleteFromRealm();
+                            }
+                        }
+
+                        mGroup.deleteFromRealm();
+
+                        // Закрываем транзакцию
+                        mRealm.commitTransaction();
                     }
                 });
 

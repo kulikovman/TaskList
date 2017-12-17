@@ -39,7 +39,7 @@ public class DescriptionDialog extends CallbackDialogFragment {
         // Получаем аргументы
         long taskId = getArguments().getLong("groupId");
 
-        // Подключаем базу и получаем задачу
+        // Подключаем базу и получаем группу
         mRealm = Realm.getDefaultInstance();
         mGroup = mRealm.where(Group.class).equalTo(Task.ID, taskId).findFirst();
 
