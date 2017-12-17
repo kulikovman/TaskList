@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+import io.realm.Sort;
 import ru.kulikovman.tasklist.CallbackDialogFragment;
 import ru.kulikovman.tasklist.GroupListActivity;
 import ru.kulikovman.tasklist.R;
@@ -43,7 +44,9 @@ public class GroupDialog extends CallbackDialogFragment {
         // Подключаем базу, получаем задачу и группы
         mRealm = Realm.getDefaultInstance();
         mTask = mRealm.where(Task.class).equalTo(Task.ID, taskId).findFirst();
-        mGroups = mRealm.where(Group.class).findAll();
+        mGroups = mRealm.where(Group.class).findAll()
+                .sort(new String[]{Group.COUNT_TASK, Group.NAME},
+                        new Sort[]{Sort.DESCENDING, Sort.ASCENDING});
 
         // Проверяем наличие групп
         if (mGroups.size() == 0) {
@@ -79,17 +82,17 @@ public class GroupDialog extends CallbackDialogFragment {
                             // Открываем транзакцию
                             mRealm.beginTransaction();
 
-                            // Понижаем счетчик в группе и удаляем ее из задачи
+                            // Взаимно удаляем
                             Group group = mTask.getGroup();
                             if (group != null) {
-                                group.setDownCountTask();
+                                group.deleteTask(mTask);
                                 mTask.setGroup(null);
                             }
 
                             // Назначаем группу и повышаем в ней счетчик
                             if (which < names.length - 1) {
                                 mTask.setGroup(mGroups.get(which));
-                                mGroups.get(which).setUpCountTask();
+                                mGroups.get(which).addTask(mTask);
                             }
 
                             // Закрываем транзакцию

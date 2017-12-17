@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 
 import io.realm.Realm;
 import io.realm.RealmList;
@@ -47,13 +48,9 @@ public class GroupHasTasks extends DialogFragment {
                         // Открываем транзакцию
                         mRealm.beginTransaction();
 
-                        RealmResults<Task> tasks = mRealm.where(Task.class).findAll();
-                        for (Task task : tasks) {
-                            Group group = task.getGroup();
-                            if (group != null && group.getId() == mGroup.getId()) {
-                                task.deleteFromRealm();
-                            }
-                        }
+                        // Удаляем задачи и группу
+                        RealmList<Task> tasks = mGroup.getTasks();
+                        tasks.deleteAllFromRealm();
 
                         mGroup.deleteFromRealm();
 

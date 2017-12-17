@@ -150,6 +150,7 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
                 mPosition = viewHolder.getAdapterPosition();
                 mGroup = mAdapter.getGroupByPosition(mPosition);
 
+                // TODO: 18.12.2017 Найти баг со счетчиком задач в группе
                 // Удаление группы
                 if (direction == ItemTouchHelper.RIGHT) {
                     if (mGroup.getCountTask() > 0) {
