@@ -168,7 +168,7 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
                 int daysBeforeTaskDate = (int) ((taskDate.getTimeInMillis() - todayDate.getTimeInMillis()) / 1000 / 60 / 60 / 24);
 
                 // Если задача просрочена, то выделяем дату
-                if (daysBeforeTaskDate < 0) {
+                if (daysBeforeTaskDate < 0 && !task.isDone()) {
                     mTaskDate.setTextColor(mContext.getResources().getColor(R.color.red_date));
                 }
             }
