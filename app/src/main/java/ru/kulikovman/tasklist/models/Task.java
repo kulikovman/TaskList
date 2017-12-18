@@ -7,13 +7,14 @@ import io.realm.annotations.PrimaryKey;
 public class Task extends RealmObject {
     public static final String ID = "mId";
     public static final String TITLE = "mTitle";
-    public static final String PRIORITY = "mPriority";
-    public static final String DONE = "mDone";
     public static final String TARGET_DATE = "mTargetDate";
-    public static final String COMPLETION_DATE = "mCompletionDate";
+    public static final String PRIORITY = "mPriority";
+    public static final String GROUP = "mGroup";
+    public static final String GROUP_ID = "mGroupId";
     public static final String REPEAT = "mRepeat";
     public static final String REMINDER = "mReminder";
-    public static final String GROUP = "mGroup";
+    public static final String DONE = "mDone";
+    public static final String COMPLETION_DATE = "mCompletionDate";
 
     @PrimaryKey
     private long mId;
@@ -22,6 +23,7 @@ public class Task extends RealmObject {
     private long mTargetDate;
     private int mPriority;
     private Group mGroup;
+    private long mGroupId;
     private String mRepeat;
     private boolean mReminder;
     private boolean mDone;
@@ -107,6 +109,12 @@ public class Task extends RealmObject {
     }
 
     public void setGroup(Group group) {
-        mGroup = group;
+        if (group != null) {
+            mGroup = group;
+            mGroupId = group.getId();
+        } else {
+            mGroup = null;
+            mGroupId = 0;
+        }
     }
 }
