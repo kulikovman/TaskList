@@ -15,11 +15,12 @@ import android.widget.ImageButton;
 import io.realm.Realm;
 import ru.kulikovman.tasklist.CallbackDialogFragment;
 import ru.kulikovman.tasklist.R;
+import ru.kulikovman.tasklist.models.Group;
 import ru.kulikovman.tasklist.models.Task;
 
 public class EditGroupDialog extends CallbackDialogFragment {
     private Realm mRealm;
-    private Task mTask;
+    private Group mGroup;
 
     CallbackDialogListener mListener;
 
@@ -37,11 +38,11 @@ public class EditGroupDialog extends CallbackDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Получаем аргументы
-        long taskId = getArguments().getLong("taskId");
+        long groupId = getArguments().getLong("groupId");
 
         // Подключаем базу и получаем задачу
         mRealm = Realm.getDefaultInstance();
-        mTask = mRealm.where(Task.class).equalTo(Task.ID, taskId).findFirst();
+        mGroup = mRealm.where(Group.class).equalTo(Group.ID, groupId).findFirst();
 
         // Это нужно для привязки к диалогу вью из макета
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -52,7 +53,7 @@ public class EditGroupDialog extends CallbackDialogFragment {
         final ImageButton clearButton = editTextLayout.findViewById(R.id.clear_field_button);
 
         // Вставляем в поле описание задачи
-        String oldTaskTitle = mTask.getTitle();
+        String oldTaskTitle = mGroup.getName();
         editText.setText(oldTaskTitle);
 
         // Слушатель для кнопки очищения поля
@@ -65,18 +66,18 @@ public class EditGroupDialog extends CallbackDialogFragment {
 
         // Создаем диалог
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(R.string.edit_task_title)
+        builder.setTitle(R.string.edit_group_title)
                 .setView(editTextLayout)
-                .setPositiveButton(R.string.edit_task_save_button, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.edit_group_save_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Получаем измененное описание и очищаем от лишних пробелов
-                        String taskTitle = editText.getText().toString().trim();
+                        String groupName = editText.getText().toString().trim();
 
                         // Сохраняем описание задачи
-                        if (taskTitle.length() > 0) {
+                        if (groupName.length() > 0) {
                             mRealm.beginTransaction();
-                            mTask.setTitle(taskTitle);
+                            mGroup.setName(groupName);
                             mRealm.commitTransaction();
                         }
                     }
