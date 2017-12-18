@@ -197,7 +197,7 @@ public class TaskListActivity extends AppCompatActivity
                     // Понижаем счетчик задач в связанной группе
                     Group group = mTask.getGroup();
                     if (group != null) {
-                        group.setDownCountTask();
+                        group.decreaseCountTask();
                     }
 
                     Log.d(LOG, "Задача завершена");

@@ -24,11 +24,11 @@ public class GroupHasTasks extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Получаем аргументы
-        long taskId = getArguments().getLong("groupId");
+        final long groupId = getArguments().getLong("groupId");
 
         // Подключаем базу и получаем группу
         mRealm = Realm.getDefaultInstance();
-        mGroup = mRealm.where(Group.class).equalTo(Task.ID, taskId).findFirst();
+        mGroup = mRealm.where(Group.class).equalTo(Group.ID, groupId).findFirst();
 
         // Создаем диалог
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -48,10 +48,15 @@ public class GroupHasTasks extends DialogFragment {
                         // Открываем транзакцию
                         mRealm.beginTransaction();
 
-                        // Удаляем задачи и группу
-                        RealmList<Task> tasks = mGroup.getTasks();
+                        // Удаляем задачи связанные с группой
+                        RealmResults<Task> tasks = mRealm.where(Task.class)
+                                .equalTo(Task.DONE, false)
+                                .equalTo(Task.GROUP_ID, mGroup.getId())
+                                .findAll();
+
                         tasks.deleteAllFromRealm();
 
+                        // Удаляем группу
                         mGroup.deleteFromRealm();
 
                         // Закрываем транзакцию

@@ -90,11 +90,11 @@ public class Group extends RealmObject {
 
 
     // Вспомогательные методы
-    public void setUpCountTask() {
+    public void increaseCountTask() {
         mCountTask++;
     }
 
-    public void setDownCountTask() {
+    public void decreaseCountTask() {
         mCountTask--;
     }
 }
