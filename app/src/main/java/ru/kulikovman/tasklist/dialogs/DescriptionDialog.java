@@ -45,10 +45,10 @@ public class DescriptionDialog extends CallbackDialogFragment {
 
         // Это нужно для привязки к диалогу вью из макета
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View dialogDescription = inflater.inflate(R.layout.dialog_input_text, null);
+        View dialogDescription = inflater.inflate(R.layout.edit_text_layout, null);
 
         // Инициализируем поле с описанием
-        final EditText dialogInputText = dialogDescription.findViewById(R.id.dialog_input_text);
+        final EditText dialogInputText = dialogDescription.findViewById(R.id.edit_text_field);
 
         // Создаем диалог
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
