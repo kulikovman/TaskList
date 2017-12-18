@@ -1,10 +1,9 @@
 <resources>
+    <!-- Заголовки и названия -->
     <string name="app_name">Список задач</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <string name="action_settings">Settings</string>
+    <string name="title_activity_main">Список задач</string>
+    <string name="title_activity_group_list">Группы</string>
+    <string name="title_activity_finished_list">Завершенные задачи</string>
 
 
     <!-- Диалоги для задач -->
@@ -81,17 +80,12 @@
     <!-- Информационные сообщения -->
     <!-- Группа существует -->
     <string name="message_group_is_exist">Группа с таким названием уже существует.</string>
+    <string name="exist_group_ok_button">Сохранить</string>
 
     <!-- Удаление группы -->
     <string name="message_group_has_tasks">В этой группе есть задачи. Что вы хотите с ними сделать?</string>
     <string name="delete_group_save_button">Сохранить</string>
     <string name="delete_group_delete_button">Удалить</string>
-
-
-
-
-
-
 
 
     <!-- Название пунктов меню -->
@@ -104,30 +98,14 @@
     <string name="group_description_hint">Описание группы…</string>
 
 
-
-
     <!-- Шаблон массива строк -->
     <string-array name="array">
         <item>Зеленый</item>
     </string-array>
 
 
-
-
-
-
-
     <!-- Ниже находятся старые строки -->
     <!-- (все нужное перенести наверх) -->
-
-    <!-- Заголовки и названия -->
-    <string name="title_activity_edit_task">Задача</string>
-    <string name="title_activity_edit_group">Группа</string>
-    <string name="title_activity_main">Список задач</string>
-    <string name="title_activity_group_list">Группы</string>
-
-
-
 
 
 
@@ -144,10 +122,10 @@
 
 
 
-    <!-- Кнопки диалогов -->
-    <string name="dialog_button_ok">OK</string>
-    <string name="dialog_button_cancel">Отмена</string>
-    <string name="dialog_button_create_group">Создать</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
 
 
 </resources>

@@ -65,7 +65,7 @@
             android:onClick="taskOptionsButtons"
             android:padding="10dp"
             android:tint="@color/icon_options_color"
-            app:srcCompat="@drawable/ic_replay_black_24dp"/>
+            app:srcCompat="@drawable/ic_replay_white_24dp"/>
 
         <ImageButton
             android:id="@+id/task_set_reminder_button"

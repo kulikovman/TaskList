@@ -9,6 +9,10 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="Все задачи"/>
         <item
+            android:id="@+id/nav_finished_task"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Завершенные задачи"/>
+        <item
             android:id="@+id/nav_group_list"
             android:icon="@drawable/ic_menu_manage"
             android:title="Группы"/>

@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.NavUtils;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -330,12 +331,14 @@ public class TaskListActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_all_task) {
-
+            /*NavUtils.navigateUpFromSameTask(this);
+            return true;*/
         } else if (id == R.id.nav_group_list) {
             Intent intent = new Intent(this, GroupListActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_share) {
-
+        } else if (id == R.id.nav_finished_task) {
+            Intent intent = new Intent(this, FinishedListActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_fghdfhg) {
 
         }
