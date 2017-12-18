@@ -10,7 +10,6 @@ public class Group extends RealmObject {
     public static final String NAME = "mName";
     public static final String DESCRIPTION = "mDescription";
     public static final String COLOR = "mColor";
-    public static final String TASKS = "mTasks";
     public static final String COUNT_TASK = "mCountTask";
 
     @PrimaryKey
@@ -19,7 +18,6 @@ public class Group extends RealmObject {
     private String mName;
     private String mDescription;
     private String mColor;
-    private RealmList<Task> mTasks;
     private int mCountTask;
 
     public Group(long id, String name, String description, String color) {
@@ -48,14 +46,6 @@ public class Group extends RealmObject {
     }
 
     public Group() {
-    }
-
-    public RealmList<Task> getTasks() {
-        return mTasks;
-    }
-
-    public void setTasks(RealmList<Task> tasks) {
-        mTasks = tasks;
     }
 
     public int getCountTask() {
@@ -106,27 +96,5 @@ public class Group extends RealmObject {
 
     public void setDownCountTask() {
         mCountTask--;
-    }
-
-    public void addTask(Task task) {
-        mTasks.add(task);
-        mCountTask++;
-    }
-
-    public void deleteTask(Task task) {
-        if (mTasks.contains(task)) {
-            mTasks.remove(task);
-            mCountTask--;
-        }
-    }
-
-    public int getUnfinishedTasks() {
-        int count = 0;
-        for (Task task : mTasks) {
-            if (!task.isDone()) {
-                count++;
-            }
-        }
-        return count;
     }
 }
