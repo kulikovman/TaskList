@@ -186,6 +186,12 @@ public class TaskListActivity extends AppCompatActivity
                 // Открываем транзакцию
                 mRealm.beginTransaction();
 
+                // Понижаем счетчик задач в связанной группе
+                Group group = mTask.getGroup();
+                if (group != null) {
+                    group.decreaseCountTask();
+                }
+
                 // Завершаем или удаляем
                 if (direction == ItemTouchHelper.RIGHT) {
                     mTask.deleteFromRealm();
@@ -193,13 +199,6 @@ public class TaskListActivity extends AppCompatActivity
                 } else {
                     mTask.setCompletionDate(System.currentTimeMillis());
                     mTask.setDone(true);
-
-                    // Понижаем счетчик задач в связанной группе
-                    Group group = mTask.getGroup();
-                    if (group != null) {
-                        group.decreaseCountTask();
-                    }
-
                     Log.d(LOG, "Задача завершена");
                 }
 
