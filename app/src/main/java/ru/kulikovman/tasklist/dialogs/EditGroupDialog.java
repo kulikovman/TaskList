@@ -10,15 +10,16 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import io.realm.Realm;
 import ru.kulikovman.tasklist.CallbackDialogFragment;
 import ru.kulikovman.tasklist.R;
-import ru.kulikovman.tasklist.models.Group;
+import ru.kulikovman.tasklist.models.Task;
 
-public class DescriptionDialog extends CallbackDialogFragment {
+public class EditGroupDialog extends CallbackDialogFragment {
     private Realm mRealm;
-    private Group mGroup;
+    private Task mTask;
 
     CallbackDialogListener mListener;
 
@@ -36,34 +37,46 @@ public class DescriptionDialog extends CallbackDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Получаем аргументы
-        long groupId = getArguments().getLong("groupId");
+        long taskId = getArguments().getLong("taskId");
 
-        // Подключаем базу и получаем группу
+        // Подключаем базу и получаем задачу
         mRealm = Realm.getDefaultInstance();
-        mGroup = mRealm.where(Group.class).equalTo(Group.ID, groupId).findFirst();
+        mTask = mRealm.where(Task.class).equalTo(Task.ID, taskId).findFirst();
 
         // Это нужно для привязки к диалогу вью из макета
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View dialogDescription = inflater.inflate(R.layout.edit_text_300, null);
+        View editTextLayout = inflater.inflate(R.layout.edit_text_300, null);
 
-        // Инициализируем поле с описанием
-        final EditText dialogInputText = dialogDescription.findViewById(R.id.edit_text_field);
+        // Инициализируем вью элементы
+        final EditText editText = editTextLayout.findViewById(R.id.edit_text_field);
+        final ImageButton clearButton = editTextLayout.findViewById(R.id.clear_field_button);
+
+        // Вставляем в поле описание задачи
+        String oldTaskTitle = mTask.getTitle();
+        editText.setText(oldTaskTitle);
+
+        // Слушатель для кнопки очищения поля
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editText.setText(null);
+            }
+        });
 
         // Создаем диалог
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(R.string.description_title)
-                .setView(dialogDescription)
-                .setPositiveButton(R.string.description_save_button, new DialogInterface.OnClickListener() {
+        builder.setTitle(R.string.edit_task_title)
+                .setView(editTextLayout)
+                .setPositiveButton(R.string.edit_task_save_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Получаем введенный текст и очищаем от лишних пробелов
-                        String updatedDescription = dialogInputText.getText().toString().trim();
+                        // Получаем измененное описание и очищаем от лишних пробелов
+                        String taskTitle = editText.getText().toString().trim();
 
-                        // Сохраняем введенный текст в поле с описанием группы
-                        if (updatedDescription.length() > 0) {
-                            // Сохраняем новое описание
+                        // Сохраняем описание задачи
+                        if (taskTitle.length() > 0) {
                             mRealm.beginTransaction();
-                            mGroup.setDescription(updatedDescription);
+                            mTask.setTitle(taskTitle);
                             mRealm.commitTransaction();
                         }
                     }
@@ -78,6 +91,6 @@ public class DescriptionDialog extends CallbackDialogFragment {
         mRealm.close();
 
         // Запускаем код в активити
-        mListener.onDialogFinish(DescriptionDialog.this);
+        mListener.onDialogFinish(EditGroupDialog.this);
     }
 }

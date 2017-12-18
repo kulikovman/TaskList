@@ -125,6 +125,7 @@
         android:layout_marginStart="15dp"
         android:background="@drawable/task_field_style"
         android:elevation="1dp"
+        android:maxLength="300"
         android:hint="@string/task_title_hint"
         android:inputType="textMultiLine|textCapSentences"
         android:minHeight="50dp"

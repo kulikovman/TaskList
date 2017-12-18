@@ -45,7 +45,7 @@ public class EditTaskDialog extends CallbackDialogFragment {
 
         // Это нужно для привязки к диалогу вью из макета
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View editTextLayout = inflater.inflate(R.layout.edit_text_layout, null);
+        View editTextLayout = inflater.inflate(R.layout.edit_text_300, null);
 
         // Инициализируем вью элементы
         final EditText editText = editTextLayout.findViewById(R.id.edit_text_field);
@@ -65,9 +65,9 @@ public class EditTaskDialog extends CallbackDialogFragment {
 
         // Создаем диалог
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(R.string.edit_group_title)
+        builder.setTitle(R.string.edit_task_title)
                 .setView(editTextLayout)
-                .setPositiveButton(R.string.edit_group_save_button, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.edit_task_save_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Получаем измененное описание и очищаем от лишних пробелов
