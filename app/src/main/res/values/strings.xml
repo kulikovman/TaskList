@@ -73,7 +73,7 @@
     </string-array>
 
     <!-- Создание описание группы -->
-    <string name="description_title">Описание</string>
+    <string name="description_title">Описание группы</string>
     <string name="description_save_button">Сохранить</string>
 
     <!-- Редактирование описания задачи -->

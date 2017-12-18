@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import io.realm.Realm;
 import ru.kulikovman.tasklist.CallbackDialogFragment;
@@ -44,26 +45,39 @@ public class DescriptionDialog extends CallbackDialogFragment {
 
         // Это нужно для привязки к диалогу вью из макета
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View dialogDescription = inflater.inflate(R.layout.edit_text_300, null);
+        View editTextLayout = inflater.inflate(R.layout.edit_text_long, null);
 
-        // Инициализируем поле с описанием
-        final EditText dialogInputText = dialogDescription.findViewById(R.id.edit_text_field);
+        // Инициализируем вью элементы
+        final EditText editText = editTextLayout.findViewById(R.id.edit_text_field);
+        ImageButton clearButton = editTextLayout.findViewById(R.id.clear_text_button);
+
+        // Вставляем в поле описание группы
+        String oldDescription = mGroup.getDescription();
+        editText.setText(oldDescription);
+
+        // Слушатель для кнопки очищения поля
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editText.setText(null);
+            }
+        });
 
         // Создаем диалог
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.description_title)
-                .setView(dialogDescription)
+                .setView(editTextLayout)
                 .setPositiveButton(R.string.description_save_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Получаем введенный текст и очищаем от лишних пробелов
-                        String updatedDescription = dialogInputText.getText().toString().trim();
+                        String description = editText.getText().toString().trim();
 
                         // Сохраняем введенный текст в поле с описанием группы
-                        if (updatedDescription.length() > 0) {
+                        if (description.length() > 0) {
                             // Сохраняем новое описание
                             mRealm.beginTransaction();
-                            mGroup.setDescription(updatedDescription);
+                            mGroup.setDescription(description);
                             mRealm.commitTransaction();
                         }
                     }

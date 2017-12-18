@@ -16,7 +16,6 @@ import io.realm.Realm;
 import ru.kulikovman.tasklist.CallbackDialogFragment;
 import ru.kulikovman.tasklist.R;
 import ru.kulikovman.tasklist.models.Group;
-import ru.kulikovman.tasklist.models.Task;
 
 public class EditGroupDialog extends CallbackDialogFragment {
     private Realm mRealm;
@@ -46,15 +45,15 @@ public class EditGroupDialog extends CallbackDialogFragment {
 
         // Это нужно для привязки к диалогу вью из макета
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View editTextLayout = inflater.inflate(R.layout.edit_text_300, null);
+        View editTextLayout = inflater.inflate(R.layout.edit_text_short, null);
 
         // Инициализируем вью элементы
         final EditText editText = editTextLayout.findViewById(R.id.edit_text_field);
-        final ImageButton clearButton = editTextLayout.findViewById(R.id.clear_field_button);
+        ImageButton clearButton = editTextLayout.findViewById(R.id.clear_text_button);
 
         // Вставляем в поле описание задачи
-        String oldTaskTitle = mGroup.getName();
-        editText.setText(oldTaskTitle);
+        String oldName = mGroup.getName();
+        editText.setText(oldName);
 
         // Слушатель для кнопки очищения поля
         clearButton.setOnClickListener(new View.OnClickListener() {

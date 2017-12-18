@@ -11,12 +11,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:maxLength="300"
+        android:maxLength="35"
         android:layout_marginStart="20dp"
         android:inputType="textMultiLine|textCapSentences"/>
 
     <ImageButton
-        android:id="@+id/clear_field_button"
+        android:id="@+id/clear_text_button"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginEnd="14dp"

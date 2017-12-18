@@ -45,11 +45,11 @@ public class EditTaskDialog extends CallbackDialogFragment {
 
         // Это нужно для привязки к диалогу вью из макета
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View editTextLayout = inflater.inflate(R.layout.edit_text_300, null);
+        View editTextLayout = inflater.inflate(R.layout.edit_text_long, null);
 
         // Инициализируем вью элементы
         final EditText editText = editTextLayout.findViewById(R.id.edit_text_field);
-        final ImageButton clearButton = editTextLayout.findViewById(R.id.clear_field_button);
+        ImageButton clearButton = editTextLayout.findViewById(R.id.clear_text_button);
 
         // Вставляем в поле описание задачи
         String oldTaskTitle = mTask.getTitle();

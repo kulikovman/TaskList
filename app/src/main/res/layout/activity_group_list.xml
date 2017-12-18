@@ -22,7 +22,7 @@
 
         <!-- Кнопки управления задачами -->
         <ImageButton
-            android:id="@+id/group_edit_name_button"
+            android:id="@+id/group_edit_name"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="5dp"
@@ -90,7 +90,7 @@
         android:layout_marginStart="15dp"
         android:background="@drawable/task_field_style"
         android:elevation="1dp"
-        android:maxLength="30"
+        android:maxLength="35"
         android:hint="@string/group_name_hint"
         android:inputType="textMultiLine|textCapSentences"
         android:minHeight="50dp"

@@ -57,10 +57,8 @@ public class TaskListActivity extends AppCompatActivity
     private int mPosition = -1;
 
     private EditText mTaskField;
-    private ImageButton mAddTask;
-
     private LinearLayout mTaskOptionsPanel;
-    private ImageButton mSetDateButton, mSetPriorityButton, mSetGroupButton, mSetRepeatButton, mSetReminderButton;
+    private ImageButton mSetRepeatButton, mSetReminderButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,16 +80,10 @@ public class TaskListActivity extends AppCompatActivity
         Realm.init(this);
         mRealm = Realm.getDefaultInstance();
 
-        // Инициализируем базовые вью элементы
+        // Инициализируем вью элементы
         mRecyclerView = findViewById(R.id.task_recycler_view);
         mTaskField = findViewById(R.id.task_field);
-        mAddTask = findViewById(R.id.add_task_button);
-
-        // Инициализируем вью элементы панели инструментов
         mTaskOptionsPanel = findViewById(R.id.task_options_panel);
-        mSetDateButton = findViewById(R.id.task_set_date_button);
-        mSetPriorityButton = findViewById(R.id.task_set_priority_button);
-        mSetGroupButton = findViewById(R.id.task_set_group_button);
         mSetRepeatButton = findViewById(R.id.task_set_repeat_button);
         mSetReminderButton = findViewById(R.id.task_set_reminder_button);
 

@@ -24,19 +24,14 @@ import android.widget.LinearLayout;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
-import io.realm.RealmResults;
 import io.realm.Sort;
 import ru.kulikovman.tasklist.dialogs.ColorDialog;
-import ru.kulikovman.tasklist.dialogs.DateDialog;
 import ru.kulikovman.tasklist.dialogs.DescriptionDialog;
-import ru.kulikovman.tasklist.dialogs.GroupDialog;
-import ru.kulikovman.tasklist.dialogs.PriorityDialog;
-import ru.kulikovman.tasklist.dialogs.RepeatDialog;
+import ru.kulikovman.tasklist.dialogs.EditGroupDialog;
 import ru.kulikovman.tasklist.messages.GroupHasTasks;
 import ru.kulikovman.tasklist.messages.GroupIsExist;
 import ru.kulikovman.tasklist.models.Group;
 import ru.kulikovman.tasklist.models.GroupAdapter;
-import ru.kulikovman.tasklist.models.Task;
 
 public class GroupListActivity extends AppCompatActivity implements GroupAdapter.OnItemClickListener,
         CallbackDialogFragment.CallbackDialogListener {
@@ -50,10 +45,7 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
     private int mPosition = -1;
 
     private EditText mGroupField;
-    private ImageButton mAddGroup;
-
     private LinearLayout mGroupOptionsPanel;
-    private ImageButton mSetDescription, mSetColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,15 +55,10 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
         // Подключаем базу данных
         mRealm = Realm.getDefaultInstance();
 
-        // Инициализируем базовые вью элементы
+        // Инициализируем вью элементы
         mRecyclerView = findViewById(R.id.group_recycler_view);
         mGroupField = findViewById(R.id.group_field);
-        mAddGroup = findViewById(R.id.add_group_button);
-
-        // Инициализируем вью элементы панели инструментов
         mGroupOptionsPanel = findViewById(R.id.group_options_panel);
-        mSetDescription = findViewById(R.id.group_set_description);
-        mSetColor = findViewById(R.id.group_set_color);
 
         // Создаем и запускаем список
         setUpRecyclerView();
@@ -290,6 +277,11 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
 
         // Обрабатываем нажатие
         switch (id) {
+            case R.id.group_edit_name:
+                DialogFragment editGroupDialog = new EditGroupDialog();
+                editGroupDialog.setArguments(args);
+                editGroupDialog.show(getSupportFragmentManager(), "editGroupDialog");
+                break;
             case R.id.group_set_description:
                 DialogFragment descriptionDialog = new DescriptionDialog();
                 descriptionDialog.setArguments(args);
