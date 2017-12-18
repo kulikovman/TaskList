@@ -34,11 +34,11 @@ public class ColorDialog extends CallbackDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Получаем аргументы
-        long taskId = getArguments().getLong("groupId");
+        long groupId = getArguments().getLong("groupId");
 
         // Подключаем базу и получаем задачу
         mRealm = Realm.getDefaultInstance();
-        mGroup = mRealm.where(Group.class).equalTo(Task.ID, taskId).findFirst();
+        mGroup = mRealm.where(Group.class).equalTo(Group.ID, groupId).findFirst();
 
         // Строки для списка вариантов
         String color[] = getResources().getStringArray(R.array.color_array);

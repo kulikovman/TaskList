@@ -24,6 +24,17 @@
 
         <!-- Кнопки управления задачами -->
         <ImageButton
+            android:id="@+id/task_edit_title_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/button_options"
+            android:onClick="taskOptionsButtons"
+            android:padding="10dp"
+            android:tint="@color/icon_options_color"
+            app:srcCompat="@drawable/ic_edit_black_24dp"/>
+
+        <ImageButton
             android:id="@+id/task_set_date_button"
             android:layout_width="40dp"
             android:layout_height="40dp"

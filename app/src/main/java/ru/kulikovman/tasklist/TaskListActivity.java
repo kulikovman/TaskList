@@ -36,6 +36,7 @@ import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
 import io.realm.Sort;
 import ru.kulikovman.tasklist.dialogs.DateDialog;
+import ru.kulikovman.tasklist.dialogs.EditTaskDialog;
 import ru.kulikovman.tasklist.dialogs.GroupDialog;
 import ru.kulikovman.tasklist.dialogs.PriorityDialog;
 import ru.kulikovman.tasklist.dialogs.RepeatDialog;
@@ -432,6 +433,11 @@ public class TaskListActivity extends AppCompatActivity
 
         // Обрабатываем нажатие
         switch (id) {
+            case R.id.task_edit_title_button:
+                DialogFragment editTaskDialog = new EditTaskDialog();
+                editTaskDialog.setArguments(args);
+                editTaskDialog.show(getSupportFragmentManager(), "editTaskDialog");
+                break;
             case R.id.task_set_date_button:
                 DialogFragment dateDialog = new DateDialog();
                 dateDialog.setArguments(args);

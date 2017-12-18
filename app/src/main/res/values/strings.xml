@@ -76,6 +76,16 @@
     <string name="description_title">Описание</string>
     <string name="description_save_button">Сохранить</string>
 
+    <!-- Редактирование описания задачи -->
+    <string name="edit_task_title">Описание задачи</string>
+    <string name="edit_task_save_button">Сохранить</string>
+
+    <!-- Редактирование названия группы -->
+    <string name="edit_group_title">Название группы</string>
+    <string name="edit_group_save_button">Сохранить</string>
+
+
+
 
     <!-- Информационные сообщения -->
     <!-- Группа существует -->

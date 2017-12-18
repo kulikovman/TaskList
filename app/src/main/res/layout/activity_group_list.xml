@@ -22,6 +22,17 @@
 
         <!-- Кнопки управления задачами -->
         <ImageButton
+            android:id="@+id/group_edit_name_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/button_options"
+            android:onClick="groupOptionsButtons"
+            android:padding="10dp"
+            android:tint="@color/icon_options_color"
+            app:srcCompat="@drawable/ic_edit_black_24dp"/>
+
+        <ImageButton
             android:id="@+id/group_set_description"
             android:layout_width="40dp"
             android:layout_height="40dp"
