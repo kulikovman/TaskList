@@ -34,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
+                android:background="@drawable/sidebar_item"
                 android:fontFamily="sans-serif-medium"
                 android:text="Все задачи"
                 android:textColor="@color/gray_9"
@@ -63,6 +64,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="65dp"
                 android:layout_weight="1"
+                android:background="@drawable/sidebar_item"
                 android:fontFamily="sans-serif"
                 android:text="Входящие"
                 android:textSize="12sp"/>
@@ -90,6 +92,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="65dp"
                 android:layout_weight="1"
+                android:background="@drawable/sidebar_item"
                 android:fontFamily="sans-serif"
                 android:text="На сегодня"
                 android:textSize="12sp"/>
@@ -117,6 +120,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="65dp"
                 android:layout_weight="1"
+                android:background="@drawable/sidebar_item"
                 android:fontFamily="sans-serif"
                 android:text="На месяц"
                 android:textSize="12sp"/>
@@ -143,6 +147,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="65dp"
+                android:background="@drawable/sidebar_item"
                 android:fontFamily="sans-serif"
                 android:text="Завершенные"
                 android:textSize="12sp"/>
@@ -168,6 +173,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:background="@drawable/sidebar_item"
+
                 android:fontFamily="sans-serif-medium"
                 android:text="Группы"
                 android:textColor="@color/gray_9"
@@ -323,6 +330,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:background="@drawable/sidebar_item"
                 android:fontFamily="sans-serif-medium"
                 android:text="Настройки"
                 android:textColor="@color/gray_9"
@@ -349,6 +357,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:background="@drawable/sidebar_item"
                 android:fontFamily="sans-serif-medium"
                 android:text="Оценить приложение"
                 android:textColor="@color/gray_9"

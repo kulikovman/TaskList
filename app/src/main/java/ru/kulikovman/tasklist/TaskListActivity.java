@@ -31,6 +31,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
@@ -89,7 +90,7 @@ public class TaskListActivity extends AppCompatActivity
 
         // Инициализируем вью элементы бокового меню
         View header = navigationView.getHeaderView(0);
-        //mNumberOfTasks = (TextView) header.findViewById(R.id.number_of_tasks);
+        TextView menuGroup = header.findViewById(R.id.menu_group);
 
         // Создаем и запускаем список
         setUpRecyclerView();
@@ -466,6 +467,10 @@ public class TaskListActivity extends AppCompatActivity
                 mRealm.commitTransaction();
                 break;
         }
+    }
+
+    public void menuItemClick(View view) {
+
     }
 
     @Override
