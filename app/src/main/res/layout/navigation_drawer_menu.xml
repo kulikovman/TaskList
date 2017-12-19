@@ -6,281 +6,291 @@
     android:layout_marginTop="120dp"
     android:orientation="vertical">
 
-    <!-- Группа 1 -->
+
+    <!-- Задачи -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="31dp"
+            android:src="@drawable/ic_palette_black_24dp"
+            android:tint="@color/gray_7"/>
+
+        <TextView
+            android:id="@+id/menu_task_all"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/sidebar_item"
+            android:fontFamily="sans-serif-medium"
+            android:text="Все задачи"
+            android:textColor="@color/gray_9"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/menu_tasks_all_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif-medium"
+            android:text="126"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:orientation="vertical">
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp">
 
-        <!-- Задачи -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:orientation="horizontal">
+        <TextView
+            android:id="@+id/menu_tasks_income"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="65dp"
+            android:layout_weight="1"
+            android:background="@drawable/sidebar_item"
+            android:fontFamily="sans-serif"
+            android:text="Входящие"
+            android:textSize="12sp"/>
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="31dp"
-                android:src="@drawable/ic_palette_black_24dp"
-                android:tint="@color/gray_7"/>
+        <TextView
+            android:id="@+id/menu_tasks_income_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif"
+            android:text="12"
+            android:textSize="12sp"/>
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/menu_task_all"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@drawable/sidebar_item"
-                android:fontFamily="sans-serif-medium"
-                android:text="Все задачи"
-                android:textColor="@color/gray_9"
-                android:textSize="14sp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp">
 
-            <TextView
-                android:id="@+id/menu_tasks_all_counter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:fontFamily="sans-serif-medium"
-                android:text="126"
-                android:textSize="14sp"/>
+        <TextView
+            android:id="@+id/menu_tasks_today"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="65dp"
+            android:layout_weight="1"
+            android:background="@drawable/sidebar_item"
+            android:fontFamily="sans-serif"
+            android:text="На сегодня"
+            android:textSize="12sp"/>
 
-        </LinearLayout>
+        <TextView
+            android:id="@+id/menu_tasks_today_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif"
+            android:text="3"
+            android:textSize="12sp"/>
+    </LinearLayout>
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp">
+
+        <TextView
+            android:id="@+id/menu_tasks_month"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="65dp"
+            android:layout_weight="1"
+            android:background="@drawable/sidebar_item"
+            android:fontFamily="sans-serif"
+            android:text="На месяц"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/menu_tasks_month_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif"
+            android:text="18"
+            android:textSize="12sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp">
+
+        <TextView
+            android:id="@+id/menu_tasks_finished"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:orientation="horizontal">
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="65dp"
+            android:background="@drawable/sidebar_item"
+            android:fontFamily="sans-serif"
+            android:text="Завершенные"
+            android:textSize="12sp"/>
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/menu_tasks_income"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="65dp"
-                android:layout_weight="1"
-                android:background="@drawable/sidebar_item"
-                android:fontFamily="sans-serif"
-                android:text="Входящие"
-                android:textSize="12sp"/>
 
-            <TextView
-                android:id="@+id/menu_tasks_income_counter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:fontFamily="sans-serif"
-                android:text="12"
-                android:textSize="12sp"/>
-        </LinearLayout>
+    <!-- Группы -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/sidebar_item"
+        android:onClick="menuItemClick"
+        android:orientation="horizontal"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp">
 
-        <LinearLayout
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="31dp"
+            android:src="@drawable/ic_dns_black_24dp"
+            android:tint="@color/gray_7"/>
+
+        <TextView
+            android:id="@+id/menu_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:orientation="horizontal">
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif-medium"
+            android:text="Группы"
+            android:textColor="@color/gray_9"
+            android:textSize="14sp"/>
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/menu_tasks_today"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="65dp"
-                android:layout_weight="1"
-                android:background="@drawable/sidebar_item"
-                android:fontFamily="sans-serif"
-                android:text="На сегодня"
-                android:textSize="12sp"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/menu_group_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-            <TextView
-                android:id="@+id/menu_tasks_today_counter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:fontFamily="sans-serif"
-                android:text="3"
-                android:textSize="12sp"/>
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="7dp"
+            android:layout_height="7dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="7dp"
+            android:layout_marginStart="65dp"
+            android:background="@color/blue"/>
+
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:orientation="horizontal">
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:text="Личные дела"
+            android:textSize="12sp"/>
 
-            <TextView
-                android:id="@+id/menu_tasks_month"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="65dp"
-                android:layout_weight="1"
-                android:background="@drawable/sidebar_item"
-                android:fontFamily="sans-serif"
-                android:text="На месяц"
-                android:textSize="12sp"/>
-
-            <TextView
-                android:id="@+id/menu_tasks_month_counter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:fontFamily="sans-serif"
-                android:text="18"
-                android:textSize="12sp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:orientation="horizontal">
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif"
+            android:text="31"
+            android:textSize="12sp"/>
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/menu_tasks_finished"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="65dp"
-                android:background="@drawable/sidebar_item"
-                android:fontFamily="sans-serif"
-                android:text="Завершенные"
-                android:textSize="12sp"/>
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp">
 
+        <ImageView
+            android:layout_width="7dp"
+            android:layout_height="7dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="7dp"
+            android:layout_marginStart="65dp"
+            android:background="@color/green"/>
 
-        <!-- Группы -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="31dp"
-                android:src="@drawable/ic_dns_black_24dp"
-                android:tint="@color/gray_7"/>
-
-            <TextView
-                android:id="@+id/menu_group"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/sidebar_item"
-
-                android:fontFamily="sans-serif-medium"
-                android:text="Группы"
-                android:textColor="@color/gray_9"
-                android:textSize="14sp"/>
-        </LinearLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/menu_group_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:orientation="horizontal">
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:text="Программирование"
+            android:textSize="12sp"/>
 
-            <ImageView
-                android:layout_width="7dp"
-                android:layout_height="7dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="7dp"
-                android:layout_marginStart="65dp"
-                android:background="@color/blue"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:fontFamily="sans-serif"
-                android:text="Личные дела"
-                android:textSize="12sp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:fontFamily="sans-serif"
-                android:text="31"
-                android:textSize="12sp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:orientation="horizontal">
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif"
+            android:text="97"
+            android:textSize="12sp"/>
+    </LinearLayout>
 
-            <ImageView
-                android:layout_width="7dp"
-                android:layout_height="7dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="7dp"
-                android:layout_marginStart="65dp"
-                android:background="@color/green"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:fontFamily="sans-serif"
-                android:text="Программирование"
-                android:textSize="12sp"/>
+        <ImageView
+            android:layout_width="7dp"
+            android:layout_height="7dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="7dp"
+            android:layout_marginStart="65dp"
+            android:background="@color/red"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:fontFamily="sans-serif"
-                android:text="97"
-                android:textSize="12sp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:orientation="horizontal">
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:text="Купить"
+            android:textSize="12sp"/>
 
-            <ImageView
-                android:layout_width="7dp"
-                android:layout_height="7dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="7dp"
-                android:layout_marginStart="65dp"
-                android:background="@color/red"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:fontFamily="sans-serif"
-                android:text="Купить"
-                android:textSize="12sp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:fontFamily="sans-serif"
-                android:text="15"
-                android:textSize="12sp"/>
-        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif"
+            android:text="15"
+            android:textSize="12sp"/>
     </LinearLayout>
 
 
@@ -291,79 +301,75 @@
         android:layout_marginTop="13dp"
         android:background="@color/gray_6"/>
 
-    <!-- Группа 2 -->
+
+    <!-- Заголовок раздела -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center_vertical"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:text="Прочее"
+        android:textColor="@color/gray_6"
+        android:textSize="14sp"/>
+
+
+    <!-- Настройки -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:orientation="vertical">
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp">
 
-        <!-- Заголовок раздела -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_gravity="center_vertical"
+            android:layout_marginEnd="31dp"
+            android:src="@drawable/ic_settings_black_24dp"
+            android:tint="@color/gray_7"/>
+
+        <TextView
+            android:id="@+id/menu_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/sidebar_item"
             android:fontFamily="sans-serif-medium"
-            android:gravity="center_vertical"
-            android:text="Прочее"
-            android:textColor="@color/gray_6"
+            android:text="Настройки"
+            android:textColor="@color/gray_9"
             android:textSize="14sp"/>
-
-
-        <!-- Настройки -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="31dp"
-                android:src="@drawable/ic_settings_black_24dp"
-                android:tint="@color/gray_7"/>
-
-            <TextView
-                android:id="@+id/menu_setting"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/sidebar_item"
-                android:fontFamily="sans-serif-medium"
-                android:text="Настройки"
-                android:textColor="@color/gray_9"
-                android:textSize="14sp"/>
-        </LinearLayout>
-
-
-        <!-- Оценить приложение! -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="31dp"
-                android:src="@drawable/ic_star_black_24dp"
-                android:tint="@color/gray_7"/>
-
-            <TextView
-                android:id="@+id/menu_review"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/sidebar_item"
-                android:fontFamily="sans-serif-medium"
-                android:text="Оценить приложение"
-                android:textColor="@color/gray_9"
-                android:textSize="14sp"/>
-        </LinearLayout>
     </LinearLayout>
 
 
+    <!-- Оценить приложение! -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="31dp"
+            android:src="@drawable/ic_star_black_24dp"
+            android:tint="@color/gray_7"/>
+
+        <TextView
+            android:id="@+id/menu_review"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/sidebar_item"
+            android:fontFamily="sans-serif-medium"
+            android:text="Оценить приложение"
+            android:textColor="@color/gray_9"
+            android:textSize="14sp"/>
+    </LinearLayout>
 </LinearLayout>

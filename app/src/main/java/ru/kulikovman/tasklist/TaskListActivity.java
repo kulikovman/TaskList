@@ -470,12 +470,12 @@ public class TaskListActivity extends AppCompatActivity
     }
 
     public void menuItemClick(View view) {
-
+        Log.d(LOG, "Запущен menuItemClick в TaskListActivity");
     }
 
     @Override
     public void onDialogFinish(DialogFragment dialog) {
-        Log.d("log", "Запущен onDialogFinish в TaskListActivity");
+        Log.d(LOG, "Запущен onDialogFinish в TaskListActivity");
 
         // Сбрасываем выделение и позицию
         mAdapter.resetSelection();
