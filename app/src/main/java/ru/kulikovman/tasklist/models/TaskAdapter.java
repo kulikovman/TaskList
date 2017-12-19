@@ -40,10 +40,6 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
         mContext = context;
     }
 
-    public void setResults(OrderedRealmCollection<Task> results) {
-        mResults = results;
-    }
-
     @Override
     public long getItemId(int index) {
         //noinspection ConstantConditions

@@ -11,7 +11,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.NavUtils;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,7 +30,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+
+import java.util.Calendar;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
@@ -90,10 +90,10 @@ public class TaskListActivity extends AppCompatActivity
 
         // Инициализируем вью элементы бокового меню
         View header = navigationView.getHeaderView(0);
-        TextView menuGroup = header.findViewById(R.id.menu_group);
+        //TextView menuGroup = header.findViewById(R.id.menu_group);
 
         // Создаем и запускаем список
-        setUpRecyclerView();
+        setUpRecyclerView(getUnfinishedTasks());
 
         // Создаем и запускаем боковое меню
         initSidebar();
@@ -128,12 +128,11 @@ public class TaskListActivity extends AppCompatActivity
         mRealm.close();
     }
 
-    private void setUpRecyclerView() {
-        mAdapter = new TaskAdapter(this, loadUnfinishedTasks());
+    private void setUpRecyclerView(OrderedRealmCollection<Task> list) {
+        mAdapter = new TaskAdapter(this, list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         // Слушатель для адаптера списка
         mAdapter.setOnItemClickListener(this);
@@ -142,9 +141,40 @@ public class TaskListActivity extends AppCompatActivity
         initSwipe();
     }
 
-    private OrderedRealmCollection<Task> loadUnfinishedTasks() {
+    private OrderedRealmCollection<Task> getUnfinishedTasks() {
         return mRealm.where(Task.class)
                 .equalTo(Task.DONE, false)
+                .findAll()
+                .sort(new String[]{Task.TARGET_DATE, Task.PRIORITY, Task.TITLE},
+                        new Sort[]{Sort.ASCENDING, Sort.ASCENDING, Sort.ASCENDING});
+    }
+
+    private OrderedRealmCollection<Task> getIncomeTasks() {
+        return mRealm.where(Task.class)
+                .equalTo(Task.DONE, false)
+                .equalTo(Task.GROUP_ID, 0)
+                .findAll()
+                .sort(new String[]{Task.TARGET_DATE, Task.PRIORITY, Task.TITLE},
+                        new Sort[]{Sort.ASCENDING, Sort.ASCENDING, Sort.ASCENDING});
+    }
+
+    private OrderedRealmCollection<Task> getTodayTasks() {
+        Calendar currentDate = Helper.getTodayCalendarWithoutTime();
+        return mRealm.where(Task.class)
+                .equalTo(Task.DONE, false)
+                .lessThanOrEqualTo(Task.TARGET_DATE, currentDate.getTimeInMillis())
+                .findAll()
+                .sort(new String[]{Task.TARGET_DATE, Task.PRIORITY, Task.TITLE},
+                        new Sort[]{Sort.ASCENDING, Sort.ASCENDING, Sort.ASCENDING});
+    }
+
+    private OrderedRealmCollection<Task> getMonthTasks() {
+        Calendar currentDate = Helper.getTodayCalendarWithoutTime();
+        currentDate.add(Calendar.MONTH, 1);
+
+        return mRealm.where(Task.class)
+                .equalTo(Task.DONE, false)
+                .lessThanOrEqualTo(Task.TARGET_DATE, currentDate.getTimeInMillis())
                 .findAll()
                 .sort(new String[]{Task.TARGET_DATE, Task.PRIORITY, Task.TITLE},
                         new Sort[]{Sort.ASCENDING, Sort.ASCENDING, Sort.ASCENDING});
@@ -471,6 +501,42 @@ public class TaskListActivity extends AppCompatActivity
 
     public void menuItemClick(View view) {
         Log.d(LOG, "Запущен menuItemClick в TaskListActivity");
+
+        int id = view.getId();
+
+        // Действие при нажатии элемента бокового меню
+        switch (id) {
+            case R.id.menu_task_all:
+                setUpRecyclerView(getUnfinishedTasks());
+                break;
+            case R.id.menu_tasks_income:
+                setUpRecyclerView(getIncomeTasks());
+                break;
+            case R.id.menu_tasks_today:
+                setUpRecyclerView(getTodayTasks());
+                break;
+            case R.id.menu_tasks_month:
+                setUpRecyclerView(getMonthTasks());
+                break;
+            case R.id.menu_tasks_finished:
+                Intent finishedListActivity = new Intent(this, FinishedListActivity.class);
+                startActivity(finishedListActivity);
+                break;
+            case R.id.menu_group:
+                Intent groupListActivity = new Intent(this, GroupListActivity.class);
+                startActivity(groupListActivity);
+                break;
+            case R.id.menu_setting:
+                break;
+            case R.id.menu_review:
+                break;
+        }
+
+        // Закрываем меню, если открыто
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        }
     }
 
     @Override

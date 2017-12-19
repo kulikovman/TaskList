@@ -6,9 +6,9 @@
               android:layout_height="wrap_content"
               android:orientation="vertical"
               android:background="@drawable/item_background"
-              android:paddingBottom="20dp"
               android:paddingTop="2dp">
 
+    <!-- Верхний уровень -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -57,6 +57,8 @@
 
     </LinearLayout>
 
+
+    <!-- Средний уровень -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -83,4 +85,12 @@
             android:textSize="16sp"/>
 
     </LinearLayout>
+
+    <!-- Разделитель -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="19dp"
+        android:background="@color/gray_3"/>
+
 </LinearLayout>
