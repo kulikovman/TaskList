@@ -332,8 +332,6 @@ public class TaskListActivity extends AppCompatActivity
         } else if (id == R.id.nav_finished_task) {
             Intent intent = new Intent(this, FinishedListActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_fghdfhg) {
-
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

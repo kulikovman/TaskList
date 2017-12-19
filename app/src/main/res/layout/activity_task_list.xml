@@ -21,6 +21,10 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_task_list"
-        app:menu="@menu/activity_task_list_drawer"/>
+        app:menu="@menu/activity_task_list_drawer">
+
+        <include layout="@layout/navigation_drawer_menu"/>
+
+    </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>
