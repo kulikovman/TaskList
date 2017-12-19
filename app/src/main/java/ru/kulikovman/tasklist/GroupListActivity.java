@@ -86,7 +86,6 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         // Слушатель для адаптера списка
         mAdapter.setOnItemClickListener(this);
