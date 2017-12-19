@@ -80,15 +80,22 @@ public class TaskListActivity extends AppCompatActivity
         Realm.init(this);
         mRealm = Realm.getDefaultInstance();
 
-        // Инициализируем вью элементы
+        // Инициализируем базовые вью элементы
         mRecyclerView = findViewById(R.id.task_recycler_view);
         mTaskField = findViewById(R.id.task_field);
         mTaskOptionsPanel = findViewById(R.id.task_options_panel);
         mSetRepeatButton = findViewById(R.id.task_set_repeat_button);
         mSetReminderButton = findViewById(R.id.task_set_reminder_button);
 
+        // Инициализируем вью элементы бокового меню
+        View header = navigationView.getHeaderView(0);
+        //mNumberOfTasks = (TextView) header.findViewById(R.id.number_of_tasks);
+
         // Создаем и запускаем список
         setUpRecyclerView();
+
+        // Создаем и запускаем боковое меню
+        initSidebar();
 
         // Смена фокуса поля ввода
         mTaskField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -140,6 +147,10 @@ public class TaskListActivity extends AppCompatActivity
                 .findAll()
                 .sort(new String[]{Task.TARGET_DATE, Task.PRIORITY, Task.TITLE},
                         new Sort[]{Sort.ASCENDING, Sort.ASCENDING, Sort.ASCENDING});
+    }
+
+    private void initSidebar() {
+
     }
 
     private void initSwipe() {
