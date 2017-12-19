@@ -9,8 +9,11 @@
 
     <!-- Задачи -->
     <LinearLayout
+        android:id="@+id/menu_task_all"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:background="@drawable/sidebar_item"
+        android:onClick="menuItemClick"
         android:orientation="horizontal"
         android:paddingEnd="16dp"
         android:paddingStart="16dp">
@@ -24,12 +27,10 @@
             android:tint="@color/gray_7"/>
 
         <TextView
-            android:id="@+id/menu_task_all"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:background="@drawable/sidebar_item"
             android:fontFamily="sans-serif-medium"
             android:text="Все задачи"
             android:textColor="@color/gray_9"
@@ -47,24 +48,26 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/menu_tasks_income"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        android:background="@drawable/sidebar_item"
+        android:onClick="menuItemClick"
         android:orientation="horizontal"
+        android:paddingBottom="5dp"
         android:paddingEnd="16dp"
-        android:paddingStart="16dp">
+        android:paddingStart="16dp"
+        android:paddingTop="5dp">
 
         <TextView
-            android:id="@+id/menu_tasks_income"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="65dp"
             android:layout_weight="1"
-            android:background="@drawable/sidebar_item"
             android:fontFamily="sans-serif"
             android:text="Входящие"
-            android:textSize="12sp"/>
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/menu_tasks_income_counter"
@@ -73,28 +76,30 @@
             android:layout_gravity="center_vertical"
             android:fontFamily="sans-serif"
             android:text="12"
-            android:textSize="12sp"/>
+            android:textSize="13sp"/>
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/menu_tasks_today"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        android:background="@drawable/sidebar_item"
+        android:onClick="menuItemClick"
         android:orientation="horizontal"
+        android:paddingBottom="5dp"
         android:paddingEnd="16dp"
-        android:paddingStart="16dp">
+        android:paddingStart="16dp"
+        android:paddingTop="5dp">
 
         <TextView
-            android:id="@+id/menu_tasks_today"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="65dp"
             android:layout_weight="1"
-            android:background="@drawable/sidebar_item"
             android:fontFamily="sans-serif"
             android:text="На сегодня"
-            android:textSize="12sp"/>
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/menu_tasks_today_counter"
@@ -103,28 +108,30 @@
             android:layout_gravity="center_vertical"
             android:fontFamily="sans-serif"
             android:text="3"
-            android:textSize="12sp"/>
+            android:textSize="13sp"/>
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/menu_tasks_month"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        android:background="@drawable/sidebar_item"
+        android:onClick="menuItemClick"
         android:orientation="horizontal"
+        android:paddingBottom="5dp"
         android:paddingEnd="16dp"
-        android:paddingStart="16dp">
+        android:paddingStart="16dp"
+        android:paddingTop="5dp">
 
         <TextView
-            android:id="@+id/menu_tasks_month"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="65dp"
             android:layout_weight="1"
-            android:background="@drawable/sidebar_item"
             android:fontFamily="sans-serif"
             android:text="На месяц"
-            android:textSize="12sp"/>
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/menu_tasks_month_counter"
@@ -133,32 +140,35 @@
             android:layout_gravity="center_vertical"
             android:fontFamily="sans-serif"
             android:text="18"
-            android:textSize="12sp"/>
+            android:textSize="13sp"/>
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/menu_tasks_finished"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        android:background="@drawable/sidebar_item"
+        android:onClick="menuItemClick"
         android:orientation="horizontal"
+        android:paddingBottom="5dp"
         android:paddingEnd="16dp"
-        android:paddingStart="16dp">
+        android:paddingStart="16dp"
+        android:paddingTop="5dp">
 
         <TextView
-            android:id="@+id/menu_tasks_finished"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="65dp"
-            android:background="@drawable/sidebar_item"
             android:fontFamily="sans-serif"
             android:text="Завершенные"
-            android:textSize="12sp"/>
+            android:textSize="13sp"/>
     </LinearLayout>
 
 
     <!-- Группы -->
     <LinearLayout
+        android:id="@+id/menu_group"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@drawable/sidebar_item"
@@ -176,7 +186,6 @@
             android:tint="@color/gray_7"/>
 
         <TextView
-            android:id="@+id/menu_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -186,18 +195,20 @@
             android:textSize="14sp"/>
     </LinearLayout>
 
+    <!-- Список групп
     <android.support.v7.widget.RecyclerView
         android:id="@+id/menu_group_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"/> -->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
         android:orientation="horizontal"
+        android:paddingBottom="5dp"
         android:paddingEnd="16dp"
-        android:paddingStart="16dp">
+        android:paddingStart="16dp"
+        android:paddingTop="5dp">
 
         <ImageView
             android:layout_width="7dp"
@@ -214,7 +225,7 @@
             android:layout_weight="1"
             android:fontFamily="sans-serif"
             android:text="Личные дела"
-            android:textSize="12sp"/>
+            android:textSize="13sp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -222,16 +233,17 @@
             android:layout_gravity="center_vertical"
             android:fontFamily="sans-serif"
             android:text="31"
-            android:textSize="12sp"/>
+            android:textSize="13sp"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
         android:orientation="horizontal"
+        android:paddingBottom="5dp"
         android:paddingEnd="16dp"
-        android:paddingStart="16dp">
+        android:paddingStart="16dp"
+        android:paddingTop="5dp">
 
         <ImageView
             android:layout_width="7dp"
@@ -248,7 +260,7 @@
             android:layout_weight="1"
             android:fontFamily="sans-serif"
             android:text="Программирование"
-            android:textSize="12sp"/>
+            android:textSize="13sp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -256,16 +268,17 @@
             android:layout_gravity="center_vertical"
             android:fontFamily="sans-serif"
             android:text="97"
-            android:textSize="12sp"/>
+            android:textSize="13sp"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
         android:orientation="horizontal"
+        android:paddingBottom="5dp"
         android:paddingEnd="16dp"
-        android:paddingStart="16dp">
+        android:paddingStart="16dp"
+        android:paddingTop="5dp">
 
         <ImageView
             android:layout_width="7dp"
@@ -282,7 +295,7 @@
             android:layout_weight="1"
             android:fontFamily="sans-serif"
             android:text="Купить"
-            android:textSize="12sp"/>
+            android:textSize="13sp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -290,7 +303,7 @@
             android:layout_gravity="center_vertical"
             android:fontFamily="sans-serif"
             android:text="15"
-            android:textSize="12sp"/>
+            android:textSize="13sp"/>
     </LinearLayout>
 
 
@@ -318,8 +331,11 @@
 
     <!-- Настройки -->
     <LinearLayout
+        android:id="@+id/menu_setting"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:background="@drawable/sidebar_item"
+        android:onClick="menuItemClick"
         android:orientation="horizontal"
         android:paddingEnd="16dp"
         android:paddingStart="16dp">
@@ -333,11 +349,9 @@
             android:tint="@color/gray_7"/>
 
         <TextView
-            android:id="@+id/menu_setting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:background="@drawable/sidebar_item"
             android:fontFamily="sans-serif-medium"
             android:text="Настройки"
             android:textColor="@color/gray_9"
@@ -347,8 +361,11 @@
 
     <!-- Оценить приложение! -->
     <LinearLayout
+        android:id="@+id/menu_review"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:background="@drawable/sidebar_item"
+        android:onClick="menuItemClick"
         android:orientation="horizontal"
         android:paddingEnd="16dp"
         android:paddingStart="16dp">
@@ -362,11 +379,9 @@
             android:tint="@color/gray_7"/>
 
         <TextView
-            android:id="@+id/menu_review"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:background="@drawable/sidebar_item"
             android:fontFamily="sans-serif-medium"
             android:text="Оценить приложение"
             android:textColor="@color/gray_9"
