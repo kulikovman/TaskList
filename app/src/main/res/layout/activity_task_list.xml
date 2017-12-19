@@ -20,8 +20,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_task_list"
-        app:menu="@menu/activity_task_list_drawer">
+        app:headerLayout="@layout/nav_header_task_list">
 
         <include layout="@layout/navigation_drawer_menu"/>
 
