@@ -80,10 +80,10 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             @Override
-            public void onDrawerOpened(View drawerView) {
-                Log.d(LOG, "Запущен onDrawerOpened в onCreate / TaskListActivity");
+            public void onDrawerStateChanged(int newState) {
+                super.onDrawerStateChanged(newState);
+                Log.d(LOG, "Запущен onDrawerStateChanged в onCreate / TaskListActivity");
                 initTaskCounters();
-                super.onDrawerOpened(drawerView);
             }
         };
         drawer.addDrawerListener(toggle);
