@@ -9,7 +9,7 @@
 
     <!-- Задачи -->
     <LinearLayout
-        android:id="@+id/menu_task_all"
+        android:id="@+id/menu_all_task"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@drawable/sidebar_item"
@@ -37,7 +37,7 @@
             android:textSize="14sp"/>
 
         <TextView
-            android:id="@+id/menu_tasks_all_counter"
+            android:id="@+id/menu_all_tasks_counter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
