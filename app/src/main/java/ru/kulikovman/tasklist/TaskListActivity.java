@@ -83,7 +83,6 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
             public void onDrawerOpened(View drawerView) {
                 Log.d(LOG, "Запущен onDrawerOpened в onCreate / TaskListActivity");
                 initTaskCounters();
-
                 super.onDrawerOpened(drawerView);
             }
         };
@@ -91,21 +90,11 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         toggle.syncState();
 
         // Инициализируем счетчики бокового меню
-        //NavigationView navigationView = findViewById(R.id.nav_view);
-        //View header = navigationView.getHeaderView(0);
-
-        LayoutInflater layoutInflater = getLayoutInflater();
-        View view = layoutInflater.inflate(R.layout.navigation_drawer_menu, null);
-        mAllTasksCounter = view.findViewById(R.id.menu_all_tasks_counter);
-        mIncomeTasksCounter = view.findViewById(R.id.menu_tasks_income_counter);
-        mTodayTaskCounter = view.findViewById(R.id.menu_tasks_today_counter);
-        mMonthTaskCounter = view.findViewById(R.id.menu_tasks_month_counter);
-
-        if (mAllTasksCounter == null) {
-            Log.d(LOG, "mAllTasksCounter == null");
-        } else {
-            Log.d(LOG, "mAllTasksCounter = " + mAllTasksCounter.getText().toString());
-        }
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        mAllTasksCounter = navigationView.findViewById(R.id.menu_all_tasks_counter);
+        mIncomeTasksCounter = navigationView.findViewById(R.id.menu_tasks_income_counter);
+        mTodayTaskCounter = navigationView.findViewById(R.id.menu_tasks_today_counter);
+        mMonthTaskCounter = navigationView.findViewById(R.id.menu_tasks_month_counter);
 
         // Инициализируем базовые вью элементы
         mRecyclerView = findViewById(R.id.task_recycler_view);
@@ -118,7 +107,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         setUpRecyclerView(getUnfinishedTasks());
 
         // Создаем и запускаем боковое меню
-        initSidebar();
+        //initSidebar();
 
         // Смена фокуса поля ввода
         mTaskField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -141,19 +130,14 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         // Получаем количество задач разных категорий
         RealmResults<Task> allTasks = mRealm.where(Task.class).equalTo(Task.DONE, false).findAll();
         RealmResults<Task> incomeTasks = allTasks.where().equalTo(Task.GROUP_ID, 0).findAll();
-        RealmResults<Task> todayTasks = allTasks.where().lessThanOrEqualTo(Task.TARGET_DATE, todayDate.getTimeInMillis()).findAll();
         RealmResults<Task> monthTasks = allTasks.where().lessThanOrEqualTo(Task.TARGET_DATE, monthDate.getTimeInMillis()).findAll();
+        RealmResults<Task> todayTasks = monthTasks.where().lessThanOrEqualTo(Task.TARGET_DATE, todayDate.getTimeInMillis()).findAll();
 
         // Устанавливаем значения в счетчики
-
-        String count = String.valueOf(allTasks.size());
-
-        mAllTasksCounter.setText("555");
-        //mIncomeTasksCounter.setText(String.valueOf(incomeTasks.size()));
-        //mTodayTaskCounter.setText(String.valueOf(todayTasks.size()));
-        //mMonthTaskCounter.setText(String.valueOf(monthTasks.size()));
-
-        Log.d(LOG, "Завершен initTaskCounters в TaskListActivity");
+        mAllTasksCounter.setText(String.valueOf(allTasks.size()));
+        mIncomeTasksCounter.setText(String.valueOf(incomeTasks.size()));
+        mTodayTaskCounter.setText(String.valueOf(todayTasks.size()));
+        mMonthTaskCounter.setText(String.valueOf(monthTasks.size()));
     }
 
     @Override
