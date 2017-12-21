@@ -100,6 +100,17 @@ public class Helper {
         return calendar;
     }
 
+    public static Calendar getAfterMonthCalendarWithoutTime() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        calendar.add(Calendar.MONTH, 1);
+
+        return calendar;
+    }
+
     public static int convertDpToPx(Context context, int valueInDp) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, valueInDp,
                 context.getResources().getDisplayMetrics());

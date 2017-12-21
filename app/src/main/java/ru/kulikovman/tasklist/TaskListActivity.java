@@ -38,6 +38,7 @@ import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import io.realm.Sort;
+import ru.kulikovman.tasklist.adapters.MenuAdapter;
 import ru.kulikovman.tasklist.dialogs.DateDialog;
 import ru.kulikovman.tasklist.dialogs.EditTaskDialog;
 import ru.kulikovman.tasklist.dialogs.GroupDialog;
@@ -48,11 +49,12 @@ import ru.kulikovman.tasklist.models.Task;
 import ru.kulikovman.tasklist.adapters.TaskAdapter;
 
 public class TaskListActivity extends AppCompatActivity implements TaskAdapter.OnItemClickListener,
-        CallbackDialogFragment.CallbackDialogListener {
+        MenuAdapter.OnItemClickListener, CallbackDialogFragment.CallbackDialogListener {
 
     private Realm mRealm;
-    public RecyclerView mRecyclerView;
-    private TaskAdapter mAdapter;
+    public RecyclerView mTaskRecyclerView, mMenuRecyclerView;
+    private TaskAdapter mTaskAdapter;
+    private MenuAdapter mMenuAdapter;
     private String LOG = "log";
 
     private Task mTask;
@@ -88,25 +90,24 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        // Инициализируем счетчики бокового меню
+        // Инициализируем вью бокового меню
         NavigationView navigationView = findViewById(R.id.nav_view);
+        mMenuRecyclerView = navigationView.findViewById(R.id.menu_group_recycler_view);
         mAllTasksCounter = navigationView.findViewById(R.id.menu_all_tasks_counter);
         mIncomeTasksCounter = navigationView.findViewById(R.id.menu_tasks_income_counter);
         mTodayTaskCounter = navigationView.findViewById(R.id.menu_tasks_today_counter);
         mMonthTaskCounter = navigationView.findViewById(R.id.menu_tasks_month_counter);
 
         // Инициализируем базовые вью элементы
-        mRecyclerView = findViewById(R.id.task_recycler_view);
+        mTaskRecyclerView = findViewById(R.id.task_recycler_view);
         mTaskField = findViewById(R.id.task_field);
         mTaskOptionsPanel = findViewById(R.id.task_options_panel);
         mSetRepeatButton = findViewById(R.id.task_set_repeat_button);
         mSetReminderButton = findViewById(R.id.task_set_reminder_button);
 
         // Создаем и запускаем списки
-        setUpRecyclerView(getUnfinishedTasks());
-
-        // Создаем и запускаем боковое меню
-        //initSidebar();
+        setUpTaskRecyclerView(getUnfinishedTasks());
+        setUpMenuRecyclerView();
 
         // Смена фокуса поля ввода
         mTaskField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -122,9 +123,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
     private void updateTaskCounters() {
         // Получаем даты на сегодня и на плюс месяц
         Calendar todayDate = Helper.getTodayCalendarWithoutTime();
-        Calendar monthDate = new GregorianCalendar();
-        monthDate.setTimeInMillis(todayDate.getTimeInMillis());
-        monthDate.add(Calendar.MONTH, 1);
+        Calendar monthDate = Helper.getAfterMonthCalendarWithoutTime();
 
         // Получаем количество задач разных категорий
         RealmResults<Task> allTasks = mRealm.where(Task.class).equalTo(Task.DONE, false).findAll();
@@ -154,22 +153,36 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mRecyclerView.setAdapter(null);
+        mTaskRecyclerView.setAdapter(null);
         mRealm.close();
     }
 
-    private void setUpRecyclerView(OrderedRealmCollection<Task> list) {
-        mAdapter = new TaskAdapter(this, list);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setHasFixedSize(true);
-
-        // Слушатель для адаптера списка
-        mAdapter.setOnItemClickListener(this);
+    private void setUpTaskRecyclerView(OrderedRealmCollection<Task> list) {
+        // Создание списка
+        mTaskAdapter = new TaskAdapter(this, list);
+        mTaskRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mTaskRecyclerView.setAdapter(mTaskAdapter);
+        mTaskRecyclerView.setHasFixedSize(true);
+        mTaskAdapter.setOnItemClickListener(this);
 
         // Обработчик свайпов
         initSwipe();
     }
+
+    private void setUpMenuRecyclerView() {
+        // Непустые группы отсортированные по количеству задач
+        RealmResults<Group> groups = mRealm.where(Group.class)
+                .notEqualTo(Group.COUNT_TASK, 0).findAll()
+                .sort(Group.COUNT_TASK, Sort.DESCENDING);
+
+        // Создание списка
+        mMenuAdapter = new MenuAdapter(this, groups);
+        mMenuRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mMenuRecyclerView.setAdapter(mMenuAdapter);
+        mMenuRecyclerView.setHasFixedSize(true);
+        mMenuAdapter.setOnItemClickListener(this);
+    }
+
 
     private OrderedRealmCollection<Task> getUnfinishedTasks() {
         return mRealm.where(Task.class)
@@ -247,7 +260,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 // Получаем позицию и задачу
                 mPosition = viewHolder.getAdapterPosition();
-                mTask = mAdapter.getTaskByPosition(mPosition);
+                mTask = mTaskAdapter.getTaskByPosition(mPosition);
 
                 // Открываем транзакцию
                 mRealm.beginTransaction();
@@ -352,9 +365,9 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
             }
         };
 
-        // Присоединяем всю эту конструкцию к нашему mRecyclerView
+        // Присоединяем всю эту конструкцию к нашему mTaskRecyclerView
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
-        itemTouchHelper.attachToRecyclerView(mRecyclerView);
+        itemTouchHelper.attachToRecyclerView(mTaskRecyclerView);
     }
 
     @Override
@@ -440,12 +453,12 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
             mTaskField.setText(null);
 
             // Получаем задачу или null
-            mTask = mAdapter.getTaskById(task.getId());
+            mTask = mTaskAdapter.getTaskById(task.getId());
 
             if (mTask != null) {
                 // Получаем позицию и скролим к задаче
-                mPosition = mAdapter.getPosition(mTask.getId());
-                mRecyclerView.scrollToPosition(mPosition);
+                mPosition = mTaskAdapter.getPosition(mTask.getId());
+                mTaskRecyclerView.scrollToPosition(mPosition);
             }
         }
     }
@@ -466,7 +479,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
 
     private void resetItemSelection() {
         if (mPosition != RecyclerView.NO_POSITION) {
-            mAdapter.resetSelection();
+            mTaskAdapter.resetSelection();
             mTaskOptionsPanel.setVisibility(View.INVISIBLE);
             mPosition = RecyclerView.NO_POSITION;
             mTask = null;
@@ -474,7 +487,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
     }
 
     private void selectItem(int position) {
-        mAdapter.selectItem(position);
+        mTaskAdapter.selectItem(position);
         mPosition = position;
 
         // Показываем панель инструментов
@@ -537,16 +550,16 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         // Действие при нажатии элемента бокового меню
         switch (id) {
             case R.id.menu_all_task:
-                setUpRecyclerView(getUnfinishedTasks());
+                setUpTaskRecyclerView(getUnfinishedTasks());
                 break;
             case R.id.menu_tasks_income:
-                setUpRecyclerView(getIncomeTasks());
+                setUpTaskRecyclerView(getIncomeTasks());
                 break;
             case R.id.menu_tasks_today:
-                setUpRecyclerView(getTodayTasks());
+                setUpTaskRecyclerView(getTodayTasks());
                 break;
             case R.id.menu_tasks_month:
-                setUpRecyclerView(getMonthTasks());
+                setUpTaskRecyclerView(getMonthTasks());
                 break;
             case R.id.menu_tasks_finished:
                 Intent finishedListActivity = new Intent(this, FinishedListActivity.class);
@@ -574,20 +587,25 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         Log.d(LOG, "Запущен onDialogFinish в TaskListActivity");
 
         // Сбрасываем выделение и позицию
-        mAdapter.resetSelection();
+        mTaskAdapter.resetSelection();
         mPosition = RecyclerView.NO_POSITION;
 
         // Получаем задачу или null
-        mTask = mAdapter.getTaskById(mTask.getId());
+        mTask = mTaskAdapter.getTaskById(mTask.getId());
 
         if (mTask != null) {
             // Получаем позицию, скролим к задаче и выделяем ее
-            mPosition = mAdapter.getPosition(mTask.getId());
-            mRecyclerView.scrollToPosition(mPosition);
+            mPosition = mTaskAdapter.getPosition(mTask.getId());
+            mTaskRecyclerView.scrollToPosition(mPosition);
             selectItem(mPosition);
         } else {
             // Скрываем панель инструментов
             mTaskOptionsPanel.setVisibility(View.INVISIBLE);
         }
+    }
+
+    @Override
+    public void onGroupMenuClick(long groupId) {
+        // Обработать нажатие на группы в меню
     }
 }

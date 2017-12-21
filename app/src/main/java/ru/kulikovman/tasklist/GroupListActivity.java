@@ -215,7 +215,7 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
             }
         };
 
-        // Присоединяем всю эту конструкцию к нашему mRecyclerView
+        // Присоединяем всю эту конструкцию к нашему mTaskRecyclerView
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
     }

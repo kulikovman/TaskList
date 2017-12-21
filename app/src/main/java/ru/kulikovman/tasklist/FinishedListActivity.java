@@ -187,7 +187,7 @@ public class FinishedListActivity extends AppCompatActivity {
             }
         };
 
-        // Присоединяем всю эту конструкцию к нашему mRecyclerView
+        // Присоединяем всю эту конструкцию к нашему mTaskRecyclerView
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
     }
