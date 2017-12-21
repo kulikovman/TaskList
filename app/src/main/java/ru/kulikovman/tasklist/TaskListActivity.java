@@ -181,7 +181,6 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         mMenuRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mMenuRecyclerView.setAdapter(mMenuAdapter);
         mMenuRecyclerView.setHasFixedSize(true);
-        mMenuRecyclerView.setNestedScrollingEnabled(false);
         mMenuAdapter.setOnItemClickListener(this);
     }
 
