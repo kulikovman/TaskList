@@ -80,7 +80,16 @@ public class MenuAdapter extends RealmRecyclerViewAdapter<Group, MenuAdapter.Gro
             defaultStateItem();
 
             // Устанавливаем название группы и количество задач
-            mGroupName.setText(group.getName());
+            String groupName = group.getName();
+
+            if (groupName.length() > 26) {
+                groupName = groupName.substring(0, 26).trim() + "…";
+            }
+
+            mGroupName.setText(groupName);
+
+
+            // Устанавливаем количество задач
             mGroupCounter.setText(String.valueOf(group.getCountTask()));
 
             // Получаем цвет и закрашиваем ярлычок

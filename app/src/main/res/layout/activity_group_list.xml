@@ -79,7 +79,7 @@
         android:layout_marginStart="15dp"
         android:background="@drawable/task_field_style"
         android:elevation="1dp"
-        android:maxLength="50"
+        android:maxLength="100"
         android:hint="@string/group_name_hint"
         android:inputType="textMultiLine|textCapSentences"
         android:minHeight="50dp"

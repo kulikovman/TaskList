@@ -10,7 +10,7 @@
     <!-- Основное содержимое -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -27,6 +27,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:paddingTop="17dp"
+            android:paddingBottom="17dp"
             android:text="Название группы"
             android:textColor="@color/gray_7"
             android:textSize="16sp"/>
