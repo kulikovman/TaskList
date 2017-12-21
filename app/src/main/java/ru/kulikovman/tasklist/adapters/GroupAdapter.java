@@ -92,19 +92,16 @@ public class GroupAdapter extends RealmRecyclerViewAdapter<Group, GroupAdapter.G
     }
 
     public class GroupHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView mGroupName, mGroupDescription, mCountTask;
+        private TextView mGroupName, mTaskCounter;
         private ImageView mGroupColor;
-        private ImageButton mGroupOpen;
 
         public GroupHolder(View view) {
             super(view);
 
             // Инициализируем вью элемента списка
             mGroupName = view.findViewById(R.id.item_group_name);
-            mGroupDescription = view.findViewById(R.id.item_group_description);
             mGroupColor = view.findViewById(R.id.item_group_color);
-            mCountTask = view.findViewById(R.id.item_group_counter);
-            mGroupOpen = view.findViewById(R.id.item_group_open_button);
+            mTaskCounter = view.findViewById(R.id.item_group_counter);
 
             // Слушатель нажатий по элементу
             view.setOnClickListener(this);
@@ -129,15 +126,10 @@ public class GroupAdapter extends RealmRecyclerViewAdapter<Group, GroupAdapter.G
             // Устанавливаем название группы
             mGroupName.setText(group.getName());
 
-            // Устанавливаем описание группы
-            mGroupDescription.setText(group.getDescription());
-
             // Количество задач в группе
             int countTask = group.getCountTask();
             if (countTask > 0) {
-                mCountTask.setText(String.valueOf(countTask));
-            } else {
-                mGroupOpen.setVisibility(View.INVISIBLE);
+                mTaskCounter.setText(String.valueOf(countTask));
             }
 
             // Получаем цвет и закрашиваем ярлычок
@@ -153,14 +145,10 @@ public class GroupAdapter extends RealmRecyclerViewAdapter<Group, GroupAdapter.G
         private void defaultStateItem() {
             // Обнуляем все поля
             mGroupName.setText(null);
-            mGroupDescription.setText(null);
-            mCountTask.setText(null);
+            mTaskCounter.setText(null);
 
             // Цвет ярлычка по умолчанию
             mGroupColor.setBackgroundResource(R.color.gray_2);
-
-            // Кнопка видимая
-            mGroupOpen.setVisibility(View.VISIBLE);
         }
     }
 
