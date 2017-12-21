@@ -159,6 +159,8 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
     protected void onDestroy() {
         super.onDestroy();
         mTaskRecyclerView.setAdapter(null);
+        mRealmHelper = null;
+
         mRealm.close();
     }
 
