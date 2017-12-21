@@ -1,10 +1,6 @@
 package ru.kulikovman.tasklist;
 
 
-import android.content.Context;
-
-import java.util.Calendar;
-
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -16,20 +12,17 @@ public class RealmHelper {
     private static RealmHelper sRealmHelper;
     private Realm mRealm;
 
-    private Context mContext;
-
     private RealmResults<Task> mTaskResult;
     private RealmResults<Group> mGroupResult;
 
-    public static RealmHelper get(Context context) {
+    public static RealmHelper get() {
         if (sRealmHelper == null) {
-            sRealmHelper = new RealmHelper(context);
+            sRealmHelper = new RealmHelper();
         }
         return sRealmHelper;
     }
 
-    private RealmHelper(Context context) {
-        mContext = context.getApplicationContext();
+    private RealmHelper() {
         mRealm = Realm.getDefaultInstance();
     }
 
@@ -43,10 +36,5 @@ public class RealmHelper {
     }
 
 
-    public static Calendar convertLongToCalendar(long date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(date);
 
-        return calendar;
-    }
 }

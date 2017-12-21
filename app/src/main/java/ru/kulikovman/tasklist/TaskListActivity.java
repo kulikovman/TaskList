@@ -77,7 +77,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         // Подключаем базу данных
         Realm.init(this);
         mRealm = Realm.getDefaultInstance();
-        mRealmHelper = RealmHelper.get(this);
+        mRealmHelper = RealmHelper.get();
 
         // Боковое меню
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -134,6 +134,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         RealmResults<Task> incomeTasks = allTasks.where().equalTo(Task.GROUP_ID, 0).findAll();
         RealmResults<Task> monthTasks = allTasks.where().lessThanOrEqualTo(Task.TARGET_DATE, monthDate.getTimeInMillis()).findAll();
         RealmResults<Task> todayTasks = monthTasks.where().lessThanOrEqualTo(Task.TARGET_DATE, todayDate.getTimeInMillis()).findAll();
+
 
         // Устанавливаем значения в счетчики
         mAllTasksCounter.setText(String.valueOf(allTasks.size()));
