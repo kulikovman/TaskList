@@ -57,6 +57,8 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
     private MenuAdapter mMenuAdapter;
     private String LOG = "log";
 
+    private RealmHelper mRealmHelper;
+
     private Task mTask;
     private int mPosition = -1;
 
@@ -75,6 +77,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         // Подключаем базу данных
         Realm.init(this);
         mRealm = Realm.getDefaultInstance();
+        mRealmHelper = RealmHelper.get(this);
 
         // Боковое меню
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -577,6 +580,10 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         }
 
         // Закрываем меню, если открыто
+        closeDrawer();
+    }
+
+    private void closeDrawer() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -608,5 +615,9 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
     @Override
     public void onGroupMenuClick(long groupId) {
         // Обработать нажатие на группы в меню
+        setUpTaskRecyclerView(mRealmHelper.getTasksByGroup(groupId));
+
+        // Закрываем меню, если открыто
+        closeDrawer();
     }
 }
