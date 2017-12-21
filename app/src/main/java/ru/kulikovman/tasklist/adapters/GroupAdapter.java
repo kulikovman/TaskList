@@ -101,7 +101,7 @@ public class GroupAdapter extends RealmRecyclerViewAdapter<Group, GroupAdapter.G
             mGroupName = view.findViewById(R.id.item_group_name);
             mGroupDescription = view.findViewById(R.id.item_group_description);
             mGroupColor = view.findViewById(R.id.item_group_color);
-            mCountTask = view.findViewById(R.id.item_group_count_task);
+            mCountTask = view.findViewById(R.id.item_group_counter);
 
             // Слушатель нажатий по элементу
             view.setOnClickListener(this);

@@ -8,6 +8,7 @@
               android:orientation="vertical">
 
 
+    <!-- Основное содержимое -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -27,13 +28,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="20dp"
             android:text="Название группы"
             android:textColor="@color/gray_7"
             android:textSize="16sp"/>
 
         <TextView
-            android:id="@+id/item_group_count_task"
+            android:id="@+id/item_group_counter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="15"
@@ -41,7 +42,7 @@
             android:textSize="16sp"/>
 
         <ImageButton
-            android:id="@+id/task_edit_title_button"
+            android:id="@+id/item_group_open_button"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:background="@drawable/button_options"
