@@ -1,4 +1,4 @@
-package ru.kulikovman.tasklist.models;
+package ru.kulikovman.tasklist.adapters;
 
 
 import android.content.Context;
@@ -12,8 +12,9 @@ import android.widget.TextView;
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmRecyclerViewAdapter;
 import ru.kulikovman.tasklist.R;
+import ru.kulikovman.tasklist.models.Group;
 
-public class MenuAdapter extends RealmRecyclerViewAdapter<Group, MenuAdapter.GroupHolder> {
+public class GroupAdapter extends RealmRecyclerViewAdapter<Group, GroupAdapter.GroupHolder> {
     private OrderedRealmCollection<Group> mResults;
     private Context mContext;
 
@@ -22,7 +23,7 @@ public class MenuAdapter extends RealmRecyclerViewAdapter<Group, MenuAdapter.Gro
     private int mSelectedPosition = -1;
     private Group mGroup;
 
-    public MenuAdapter(Context context, OrderedRealmCollection<Group> results) {
+    public GroupAdapter(Context context, OrderedRealmCollection<Group> results) {
         super(results, true);
         // Only set this if the model class has a primary key that is also a integer or long.
         // In that case, {@code getItemId(int)} must also be overridden to return the key.

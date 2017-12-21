@@ -11,7 +11,6 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -19,7 +18,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import io.realm.OrderedRealmCollection;
@@ -31,7 +29,7 @@ import ru.kulikovman.tasklist.dialogs.EditGroupDialog;
 import ru.kulikovman.tasklist.messages.GroupHasTasks;
 import ru.kulikovman.tasklist.messages.GroupIsExist;
 import ru.kulikovman.tasklist.models.Group;
-import ru.kulikovman.tasklist.models.GroupAdapter;
+import ru.kulikovman.tasklist.adapters.GroupAdapter;
 
 public class GroupListActivity extends AppCompatActivity implements GroupAdapter.OnItemClickListener,
         CallbackDialogFragment.CallbackDialogListener {

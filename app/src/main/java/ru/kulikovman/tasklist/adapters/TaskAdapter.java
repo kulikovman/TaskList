@@ -1,10 +1,9 @@
-package ru.kulikovman.tasklist.models;
+package ru.kulikovman.tasklist.adapters;
 
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,7 @@ import io.realm.OrderedRealmCollection;
 import io.realm.RealmRecyclerViewAdapter;
 import ru.kulikovman.tasklist.Helper;
 import ru.kulikovman.tasklist.R;
+import ru.kulikovman.tasklist.models.Task;
 
 public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.TaskHolder> {
     private OrderedRealmCollection<Task> mResults;

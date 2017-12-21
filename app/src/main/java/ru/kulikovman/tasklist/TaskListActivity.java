@@ -45,7 +45,7 @@ import ru.kulikovman.tasklist.dialogs.PriorityDialog;
 import ru.kulikovman.tasklist.dialogs.RepeatDialog;
 import ru.kulikovman.tasklist.models.Group;
 import ru.kulikovman.tasklist.models.Task;
-import ru.kulikovman.tasklist.models.TaskAdapter;
+import ru.kulikovman.tasklist.adapters.TaskAdapter;
 
 public class TaskListActivity extends AppCompatActivity implements TaskAdapter.OnItemClickListener,
         CallbackDialogFragment.CallbackDialogListener {

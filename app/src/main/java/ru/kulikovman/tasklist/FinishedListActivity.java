@@ -21,7 +21,7 @@ import io.realm.Realm;
 import io.realm.Sort;
 import ru.kulikovman.tasklist.models.Group;
 import ru.kulikovman.tasklist.models.Task;
-import ru.kulikovman.tasklist.models.TaskAdapter;
+import ru.kulikovman.tasklist.adapters.TaskAdapter;
 
 public class FinishedListActivity extends AppCompatActivity {
 
