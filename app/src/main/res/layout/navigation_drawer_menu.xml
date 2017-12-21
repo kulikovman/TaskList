@@ -3,9 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/menu_top_margin"
-    android:scrollbars="none"
-    android:nestedScrollingEnabled="false">
+    android:layout_marginTop="@dimen/menu_margin_top"
+    android:nestedScrollingEnabled="false"
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,19 +16,19 @@
         <LinearLayout
             android:id="@+id/menu_all_task"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/menu_main_item_height"
             android:background="@drawable/sidebar_item"
             android:onClick="menuItemClick"
             android:orientation="horizontal"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp">
+            android:paddingEnd="@dimen/menu_right_space"
+            android:paddingStart="@dimen/menu_left_space">
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="@dimen/menu_icon_size"
+                android:layout_height="@dimen/menu_icon_size"
                 android:layout_gravity="center_vertical"
-                android:layout_marginEnd="31dp"
-                android:src="@drawable/ic_palette_black_24dp"
+                android:layout_marginEnd="@dimen/menu_space_after_icon"
+                android:src="@drawable/ic_event_black_24dp"
                 android:tint="@color/gray_6"/>
 
             <TextView
@@ -39,7 +39,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="Все задачи"
                 android:textColor="@color/gray_9"
-                android:textSize="14sp"/>
+                android:textSize="@dimen/menu_item_text_size"/>
 
             <TextView
                 android:id="@+id/menu_all_tasks_counter"
@@ -59,20 +59,20 @@
             android:background="@drawable/sidebar_item"
             android:onClick="menuItemClick"
             android:orientation="horizontal"
-            android:paddingBottom="5dp"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp"
-            android:paddingTop="5dp">
+            android:paddingBottom="@dimen/menu_sub_item_padding_bottom"
+            android:paddingEnd="@dimen/menu_right_space"
+            android:paddingStart="@dimen/menu_left_space"
+            android:paddingTop="@dimen/menu_sub_item_padding_top">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="57dp"
+                android:layout_marginStart="@dimen/menu_sub_item_margin_start"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:text="Входящие"
-                android:textSize="13sp"/>
+                android:textSize="@dimen/menu_sub_item_text_size"/>
 
             <TextView
                 android:id="@+id/menu_tasks_income_counter"
@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="sans-serif"
-                android:textSize="13sp"/>
+                android:textSize="@dimen/menu_sub_item_text_size"/>
         </LinearLayout>
 
         <!-- На сегодня -->
@@ -91,20 +91,20 @@
             android:background="@drawable/sidebar_item"
             android:onClick="menuItemClick"
             android:orientation="horizontal"
-            android:paddingBottom="5dp"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp"
-            android:paddingTop="5dp">
+            android:paddingBottom="@dimen/menu_sub_item_padding_bottom"
+            android:paddingEnd="@dimen/menu_right_space"
+            android:paddingStart="@dimen/menu_left_space"
+            android:paddingTop="@dimen/menu_sub_item_padding_top">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="57dp"
+                android:layout_marginStart="@dimen/menu_sub_item_margin_start"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:text="На сегодня"
-                android:textSize="13sp"/>
+                android:textSize="@dimen/menu_sub_item_text_size"/>
 
             <TextView
                 android:id="@+id/menu_tasks_today_counter"
@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="sans-serif"
-                android:textSize="13sp"/>
+                android:textSize="@dimen/menu_sub_item_text_size"/>
         </LinearLayout>
 
         <!-- На месяц -->
@@ -123,20 +123,20 @@
             android:background="@drawable/sidebar_item"
             android:onClick="menuItemClick"
             android:orientation="horizontal"
-            android:paddingBottom="5dp"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp"
-            android:paddingTop="5dp">
+            android:paddingBottom="@dimen/menu_sub_item_padding_bottom"
+            android:paddingEnd="@dimen/menu_right_space"
+            android:paddingStart="@dimen/menu_left_space"
+            android:paddingTop="@dimen/menu_sub_item_padding_top">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="57dp"
+                android:layout_marginStart="@dimen/menu_sub_item_margin_start"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:text="На месяц"
-                android:textSize="13sp"/>
+                android:textSize="@dimen/menu_sub_item_text_size"/>
 
             <TextView
                 android:id="@+id/menu_tasks_month_counter"
@@ -144,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="sans-serif"
-                android:textSize="13sp"/>
+                android:textSize="@dimen/menu_sub_item_text_size"/>
         </LinearLayout>
 
         <!-- Завершенные -->
@@ -155,19 +155,19 @@
             android:background="@drawable/sidebar_item"
             android:onClick="menuItemClick"
             android:orientation="horizontal"
-            android:paddingBottom="5dp"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp"
-            android:paddingTop="5dp">
+            android:paddingBottom="@dimen/menu_sub_item_padding_bottom"
+            android:paddingEnd="@dimen/menu_right_space"
+            android:paddingStart="@dimen/menu_left_space"
+            android:paddingTop="@dimen/menu_sub_item_padding_top">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="57dp"
+                android:layout_marginStart="@dimen/menu_sub_item_margin_start"
                 android:fontFamily="sans-serif"
                 android:text="Завершенные"
-                android:textSize="13sp"/>
+                android:textSize="@dimen/menu_sub_item_text_size"/>
         </LinearLayout>
 
 
@@ -175,18 +175,18 @@
         <LinearLayout
             android:id="@+id/menu_group"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/menu_main_item_height"
             android:background="@drawable/sidebar_item"
             android:onClick="menuItemClick"
             android:orientation="horizontal"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp">
+            android:paddingEnd="@dimen/menu_right_space"
+            android:paddingStart="@dimen/menu_left_space">
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="@dimen/menu_icon_size"
+                android:layout_height="@dimen/menu_icon_size"
                 android:layout_gravity="center_vertical"
-                android:layout_marginEnd="31dp"
+                android:layout_marginEnd="@dimen/menu_space_after_icon"
                 android:src="@drawable/ic_dns_black_24dp"
                 android:tint="@color/gray_6"/>
 
@@ -197,17 +197,14 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="Группы"
                 android:textColor="@color/gray_9"
-                android:textSize="14sp"/>
+                android:textSize="@dimen/menu_item_text_size"/>
         </LinearLayout>
 
         <!-- Список групп -->
         <android.support.v7.widget.RecyclerView
             android:id="@+id/menu_group_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbarThumbVertical="@color/transparent"
-            android:scrollbarTrackVertical="@color/transparent"
-            android:scrollbars="none"/>
+            android:layout_height="wrap_content"/>
 
 
         <!-- Разделитель -->
@@ -221,33 +218,33 @@
         <!-- Заголовок раздела -->
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/menu_main_item_height"
             android:layout_gravity="center_vertical"
             android:fontFamily="sans-serif-medium"
             android:gravity="center_vertical"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp"
+            android:paddingEnd="@dimen/menu_right_space"
+            android:paddingStart="@dimen/menu_left_space"
             android:text="Прочее"
             android:textColor="@color/gray_6"
-            android:textSize="14sp"/>
+            android:textSize="@dimen/menu_item_text_size"/>
 
 
         <!-- Настройки -->
         <LinearLayout
             android:id="@+id/menu_setting"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/menu_main_item_height"
             android:background="@drawable/sidebar_item"
             android:onClick="menuItemClick"
             android:orientation="horizontal"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp">
+            android:paddingEnd="@dimen/menu_right_space"
+            android:paddingStart="@dimen/menu_left_space">
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="@dimen/menu_icon_size"
+                android:layout_height="@dimen/menu_icon_size"
                 android:layout_gravity="center_vertical"
-                android:layout_marginEnd="31dp"
+                android:layout_marginEnd="@dimen/menu_space_after_icon"
                 android:src="@drawable/ic_settings_black_24dp"
                 android:tint="@color/gray_6"/>
 
@@ -258,7 +255,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="Настройки"
                 android:textColor="@color/gray_9"
-                android:textSize="14sp"/>
+                android:textSize="@dimen/menu_item_text_size"/>
         </LinearLayout>
 
 
@@ -266,18 +263,18 @@
         <LinearLayout
             android:id="@+id/menu_review"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/menu_main_item_height"
             android:background="@drawable/sidebar_item"
             android:onClick="menuItemClick"
             android:orientation="horizontal"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp">
+            android:paddingEnd="@dimen/menu_right_space"
+            android:paddingStart="@dimen/menu_left_space">
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="@dimen/menu_icon_size"
+                android:layout_height="@dimen/menu_icon_size"
                 android:layout_gravity="center_vertical"
-                android:layout_marginEnd="31dp"
+                android:layout_marginEnd="@dimen/menu_space_after_icon"
                 android:src="@drawable/ic_star_black_24dp"
                 android:tint="@color/gray_6"/>
 
@@ -288,7 +285,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="Оценить приложение"
                 android:textColor="@color/gray_9"
-                android:textSize="14sp"/>
+                android:textSize="@dimen/menu_item_text_size"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

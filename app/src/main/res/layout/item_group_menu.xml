@@ -5,10 +5,10 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:background="@drawable/sidebar_item"
-    android:paddingBottom="5dp"
-    android:paddingEnd="16dp"
-    android:paddingStart="16dp"
-    android:paddingTop="5dp">
+    android:paddingBottom="@dimen/menu_sub_item_padding_bottom"
+    android:paddingEnd="@dimen/menu_right_space"
+    android:paddingStart="@dimen/menu_left_space"
+    android:paddingTop="@dimen/menu_sub_item_padding_top">
 
     <ImageView
         android:id="@+id/menu_group_color"
@@ -16,7 +16,7 @@
         android:layout_height="7dp"
         android:layout_gravity="center_vertical"
         android:layout_marginEnd="7dp"
-        android:layout_marginStart="57dp"
+        android:layout_marginStart="@dimen/menu_sub_item_margin_start"
         android:background="@color/gray_4"/>
 
     <TextView
@@ -27,7 +27,7 @@
         android:layout_weight="1"
         android:fontFamily="sans-serif"
         android:text="Программирование"
-        android:textSize="13sp"/>
+        android:textSize="@dimen/menu_sub_item_text_size"/>
 
     <TextView
         android:id="@+id/menu_group_counter"
@@ -36,7 +36,7 @@
         android:layout_gravity="center_vertical"
         android:fontFamily="sans-serif"
         android:text="14"
-        android:textSize="13sp"/>
+        android:textSize="@dimen/menu_sub_item_text_size"/>
 </LinearLayout>
 
 

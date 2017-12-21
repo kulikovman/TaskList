@@ -6,6 +6,16 @@
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
-    <!-- Мои размеры -->
-    <dimen name="menu_top_margin">112dp</dimen>
+    <!-- Размеры бокового меню -->
+    <dimen name="menu_margin_top">112dp</dimen> <!-- высота верхней плашки -->
+    <dimen name="menu_left_space">16dp</dimen> <!-- отступ слева -->
+    <dimen name="menu_right_space">16dp</dimen> <!-- отступ справа -->
+    <dimen name="menu_sub_item_padding_top">5dp</dimen>
+    <dimen name="menu_sub_item_padding_bottom">5dp</dimen>
+    <dimen name="menu_sub_item_margin_start">57dp</dimen> <!-- отступ слева для подпунктов -->
+    <dimen name="menu_icon_size">25dp</dimen>
+    <dimen name="menu_space_after_icon">31dp</dimen> <!-- отступ после иконки -->
+    <dimen name="menu_main_item_height">48dp</dimen> <!-- высота основных пунктов меню -->
+    <dimen name="menu_item_text_size">14sp</dimen>
+    <dimen name="menu_sub_item_text_size">13sp</dimen>
 </resources>
