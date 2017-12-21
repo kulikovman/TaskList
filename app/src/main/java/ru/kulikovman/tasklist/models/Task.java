@@ -104,6 +104,14 @@ public class Task extends RealmObject {
         mReminder = reminder;
     }
 
+    public long getGroupId() {
+        return mGroupId;
+    }
+
+    public void setGroupId(long groupId) {
+        mGroupId = groupId;
+    }
+
     public Group getGroup() {
         return mGroup;
     }

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -82,12 +83,13 @@ public class GroupDialog extends CallbackDialogFragment {
                             // Открываем транзакцию
                             mRealm.beginTransaction();
 
-                            // Понижаем счетчик и удаляем группу из задачи
-                            Group group = mTask.getGroup();
-                            if (group != null) {
-                                group.decreaseCountTask();
-                                mTask.setGroup(null);
+                            // Понижаем счетчик группы
+                            if (mTask.getGroup() != null) {
+                                mTask.getGroup().decreaseCountTask();
                             }
+
+                            // Удаляем группу из задачи
+                            mTask.setGroup(null);
 
                             // Назначаем группу и повышаем в ней счетчик
                             if (which < names.length - 1) {

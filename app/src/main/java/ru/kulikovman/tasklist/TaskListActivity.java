@@ -32,12 +32,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.Map;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
 import io.realm.RealmResults;
-import io.realm.Sort;
 import ru.kulikovman.tasklist.adapters.MenuAdapter;
 import ru.kulikovman.tasklist.dialogs.DateDialog;
 import ru.kulikovman.tasklist.dialogs.EditTaskDialog;
@@ -65,7 +64,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
     private EditText mTaskField;
     private LinearLayout mTaskOptionsPanel;
     private ImageButton mSetRepeatButton, mSetReminderButton;
-    private TextView mAllTasksCounter, mIncomeTasksCounter, mTodayTaskCounter, mMonthTaskCounter;
+    private TextView mUnfinishedTasks, mIncomeTasks, mTodayTasks, mMonthTasks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,10 +96,10 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         // Инициализируем вью бокового меню
         NavigationView navigationView = findViewById(R.id.nav_view);
         mMenuRecyclerView = navigationView.findViewById(R.id.menu_group_recycler_view);
-        mAllTasksCounter = navigationView.findViewById(R.id.menu_all_tasks_counter);
-        mIncomeTasksCounter = navigationView.findViewById(R.id.menu_tasks_income_counter);
-        mTodayTaskCounter = navigationView.findViewById(R.id.menu_tasks_today_counter);
-        mMonthTaskCounter = navigationView.findViewById(R.id.menu_tasks_month_counter);
+        mUnfinishedTasks = navigationView.findViewById(R.id.menu_all_tasks_counter);
+        mIncomeTasks = navigationView.findViewById(R.id.menu_tasks_income_counter);
+        mTodayTasks = navigationView.findViewById(R.id.menu_tasks_today_counter);
+        mMonthTasks = navigationView.findViewById(R.id.menu_tasks_month_counter);
 
         // Инициализируем базовые вью элементы
         mTaskRecyclerView = findViewById(R.id.task_recycler_view);
@@ -110,7 +109,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         mSetReminderButton = findViewById(R.id.task_set_reminder_button);
 
         // Создаем и запускаем списки
-        setUpTaskRecyclerView(getUnfinishedTasks());
+        setUpTaskRecyclerView(mRealmHelper.getUnfinishedTasks());
         setUpMenuRecyclerView();
 
         // Смена фокуса поля ввода
@@ -125,34 +124,14 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
     }
 
     private void updateTaskCounters() {
-        // Получаем даты на сегодня и на плюс месяц
-        Calendar todayDate = Helper.getTodayCalendarWithoutTime();
-        Calendar monthDate = Helper.getAfterMonthCalendarWithoutTime();
+        // Получаем количиство задач разных типов
+        Map<String, Integer> counters = mRealmHelper.getTaskCounters();
 
-        // Получаем количество задач разных категорий
-        RealmResults<Task> allTasks = mRealm.where(Task.class).equalTo(Task.DONE, false).findAll();
-        RealmResults<Task> incomeTasks = allTasks.where().equalTo(Task.GROUP_ID, 0).findAll();
-        RealmResults<Task> monthTasks = allTasks.where().lessThanOrEqualTo(Task.TARGET_DATE, monthDate.getTimeInMillis()).findAll();
-        RealmResults<Task> todayTasks = monthTasks.where().lessThanOrEqualTo(Task.TARGET_DATE, todayDate.getTimeInMillis()).findAll();
-
-
-        // Устанавливаем значения в счетчики
-        mAllTasksCounter.setText(String.valueOf(allTasks.size()));
-        mIncomeTasksCounter.setText(String.valueOf(incomeTasks.size()));
-        mTodayTaskCounter.setText(String.valueOf(todayTasks.size()));
-        mMonthTaskCounter.setText(String.valueOf(monthTasks.size()));
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(LOG, "Запущен onResume в TaskListActivity");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(LOG, "Запущен onPause в TaskListActivity");
+        // Устанавливаем значения в меню
+        mUnfinishedTasks.setText(String.valueOf(counters.get("unfinishedTasks")));
+        mIncomeTasks.setText(String.valueOf(counters.get("incomeTasks")));
+        mTodayTasks.setText(String.valueOf(counters.get("todayTasks")));
+        mMonthTasks.setText(String.valueOf(counters.get("monthTasks")));
     }
 
     @Override
@@ -165,7 +144,6 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
     }
 
     private void setUpTaskRecyclerView(OrderedRealmCollection<Task> list) {
-        // Создание списка
         mTaskAdapter = new TaskAdapter(this, list);
         mTaskRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mTaskRecyclerView.setAdapter(mTaskAdapter);
@@ -177,61 +155,11 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
     }
 
     private void setUpMenuRecyclerView() {
-        // Непустые группы отсортированные по количеству задач
-        RealmResults<Group> groups = mRealm.where(Group.class)
-                .notEqualTo(Group.COUNT_TASK, 0).findAll()
-                .sort(Group.COUNT_TASK, Sort.DESCENDING);
-
-        // Создание списка
-        mMenuAdapter = new MenuAdapter(this, groups);
+        mMenuAdapter = new MenuAdapter(this, mRealmHelper.getNotEmptyGroups());
         mMenuRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mMenuRecyclerView.setAdapter(mMenuAdapter);
         mMenuRecyclerView.setHasFixedSize(true);
         mMenuAdapter.setOnItemClickListener(this);
-    }
-
-
-    private OrderedRealmCollection<Task> getUnfinishedTasks() {
-        return mRealm.where(Task.class)
-                .equalTo(Task.DONE, false)
-                .findAll()
-                .sort(new String[]{Task.TARGET_DATE, Task.PRIORITY, Task.TITLE},
-                        new Sort[]{Sort.ASCENDING, Sort.ASCENDING, Sort.ASCENDING});
-    }
-
-    private OrderedRealmCollection<Task> getIncomeTasks() {
-        return mRealm.where(Task.class)
-                .equalTo(Task.DONE, false)
-                .equalTo(Task.GROUP_ID, 0)
-                .findAll()
-                .sort(new String[]{Task.TARGET_DATE, Task.PRIORITY, Task.TITLE},
-                        new Sort[]{Sort.ASCENDING, Sort.ASCENDING, Sort.ASCENDING});
-    }
-
-    private OrderedRealmCollection<Task> getTodayTasks() {
-        Calendar currentDate = Helper.getTodayCalendarWithoutTime();
-        return mRealm.where(Task.class)
-                .equalTo(Task.DONE, false)
-                .lessThanOrEqualTo(Task.TARGET_DATE, currentDate.getTimeInMillis())
-                .findAll()
-                .sort(new String[]{Task.TARGET_DATE, Task.PRIORITY, Task.TITLE},
-                        new Sort[]{Sort.ASCENDING, Sort.ASCENDING, Sort.ASCENDING});
-    }
-
-    private OrderedRealmCollection<Task> getMonthTasks() {
-        Calendar currentDate = Helper.getTodayCalendarWithoutTime();
-        currentDate.add(Calendar.MONTH, 1);
-
-        return mRealm.where(Task.class)
-                .equalTo(Task.DONE, false)
-                .lessThanOrEqualTo(Task.TARGET_DATE, currentDate.getTimeInMillis())
-                .findAll()
-                .sort(new String[]{Task.TARGET_DATE, Task.PRIORITY, Task.TITLE},
-                        new Sort[]{Sort.ASCENDING, Sort.ASCENDING, Sort.ASCENDING});
-    }
-
-    private void initSidebar() {
-
     }
 
     private void initSwipe() {
@@ -409,28 +337,6 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         return super.onOptionsItemSelected(item);
     }
 
-    /*@SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_all_task) {
-            *//*NavUtils.navigateUpFromSameTask(this);
-            return true;*//*
-        } else if (id == R.id.nav_group_list) {
-            Intent intent = new Intent(this, GroupListActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_finished_task) {
-            Intent intent = new Intent(this, FinishedListActivity.class);
-            startActivity(intent);
-        }
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }*/
-
     @Override
     public void onItemClick(int position, Task task) {
         // Прячем клавиатуру
@@ -557,16 +463,16 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         // Действие при нажатии элемента бокового меню
         switch (id) {
             case R.id.menu_all_task:
-                setUpTaskRecyclerView(getUnfinishedTasks());
+                setUpTaskRecyclerView(mRealmHelper.getUnfinishedTasks());
                 break;
             case R.id.menu_tasks_income:
-                setUpTaskRecyclerView(getIncomeTasks());
+                setUpTaskRecyclerView(mRealmHelper.getIncomeTasks());
                 break;
             case R.id.menu_tasks_today:
-                setUpTaskRecyclerView(getTodayTasks());
+                setUpTaskRecyclerView(mRealmHelper.getTodayTasks());
                 break;
             case R.id.menu_tasks_month:
-                setUpTaskRecyclerView(getMonthTasks());
+                setUpTaskRecyclerView(mRealmHelper.getMonthTasks());
                 break;
             case R.id.menu_tasks_finished:
                 Intent finishedListActivity = new Intent(this, FinishedListActivity.class);
