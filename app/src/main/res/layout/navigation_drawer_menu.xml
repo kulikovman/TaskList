@@ -197,49 +197,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <!-- Образец для тестирования
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="5dp"
-        android:paddingEnd="16dp"
-        android:paddingStart="16dp"
-        android:paddingTop="5dp">
-
-        <ImageView
-            android:layout_width="7dp"
-            android:layout_height="7dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="7dp"
-            android:layout_marginStart="57dp"
-            android:background="@color/blue"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:fontFamily="sans-serif"
-            android:text="Личные дела"
-            android:textSize="13sp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:fontFamily="sans-serif"
-            android:text="31"
-            android:textSize="13sp"/>
-    </LinearLayout> -->
-
 
     <!-- Разделитель -->
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="13dp"
-        android:background="@color/gray_6"/>
+        android:background="@color/gray_3"/>
 
 
     <!-- Заголовок раздела -->

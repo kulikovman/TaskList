@@ -3,10 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/sidebar_item"
     android:paddingBottom="5dp"
-    android:paddingStart="16dp"
     android:paddingEnd="16dp"
-    android:orientation="horizontal">
+    android:paddingStart="16dp"
+    android:paddingTop="5dp">
 
     <ImageView
         android:id="@+id/menu_group_color"
@@ -14,7 +16,7 @@
         android:layout_height="7dp"
         android:layout_gravity="center_vertical"
         android:layout_marginEnd="7dp"
-        android:layout_marginStart="65dp"
+        android:layout_marginStart="57dp"
         android:background="@color/gray_4"/>
 
     <TextView
@@ -25,7 +27,7 @@
         android:layout_weight="1"
         android:fontFamily="sans-serif"
         android:text="Программирование"
-        android:textSize="12sp"/>
+        android:textSize="13sp"/>
 
     <TextView
         android:id="@+id/menu_group_counter"
@@ -33,10 +35,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:fontFamily="sans-serif"
-        android:text="97"
-        android:textSize="12sp"/>
+        android:text="14"
+        android:textSize="13sp"/>
 </LinearLayout>
-
-
 
 

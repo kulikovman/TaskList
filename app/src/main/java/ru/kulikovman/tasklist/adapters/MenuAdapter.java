@@ -23,8 +23,6 @@ public class MenuAdapter extends RealmRecyclerViewAdapter<Group, MenuAdapter.Gro
 
     public MenuAdapter(Context context, OrderedRealmCollection<Group> results) {
         super(results, true);
-        // Only set this if the model class has a primary key that is also a integer or long.
-        // In that case, {@code getItemId(int)} must also be overridden to return the key.
         setHasStableIds(true);
 
         mResults = results;
