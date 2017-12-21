@@ -123,23 +123,11 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         Log.d(LOG, "Завершен onCreate в TaskListActivity");
     }
 
-    private void updateTaskCounters() {
-        // Получаем количиство задач разных типов
-        Map<String, Integer> counters = mRealmHelper.getTaskCounters();
-
-        // Устанавливаем значения в меню
-        mUnfinishedTasks.setText(String.valueOf(counters.get("unfinishedTasks")));
-        mIncomeTasks.setText(String.valueOf(counters.get("incomeTasks")));
-        mTodayTasks.setText(String.valueOf(counters.get("todayTasks")));
-        mMonthTasks.setText(String.valueOf(counters.get("monthTasks")));
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mTaskRecyclerView.setAdapter(null);
         mRealmHelper = null;
-
         mRealm.close();
     }
 
@@ -160,6 +148,17 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         mMenuRecyclerView.setAdapter(mMenuAdapter);
         mMenuRecyclerView.setHasFixedSize(true);
         mMenuAdapter.setOnItemClickListener(this);
+    }
+
+    private void updateTaskCounters() {
+        // Получаем количиство задач разных типов
+        Map<String, Integer> counters = mRealmHelper.getTaskCounters();
+
+        // Устанавливаем значения в меню
+        mUnfinishedTasks.setText(String.valueOf(counters.get("unfinishedTasks")));
+        mIncomeTasks.setText(String.valueOf(counters.get("incomeTasks")));
+        mTodayTasks.setText(String.valueOf(counters.get("todayTasks")));
+        mMonthTasks.setText(String.valueOf(counters.get("monthTasks")));
     }
 
     private void initSwipe() {

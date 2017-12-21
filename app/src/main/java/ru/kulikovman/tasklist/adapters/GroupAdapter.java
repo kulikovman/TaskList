@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import io.realm.OrderedRealmCollection;
@@ -92,7 +92,7 @@ public class GroupAdapter extends RealmRecyclerViewAdapter<Group, GroupAdapter.G
 
     public class GroupHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView mGroupName, mGroupDescription, mCountTask;
-        private ImageButton mGroupColor;
+        private ImageView mGroupColor;
 
         public GroupHolder(View view) {
             super(view);
