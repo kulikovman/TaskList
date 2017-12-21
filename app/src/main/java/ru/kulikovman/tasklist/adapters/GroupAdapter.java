@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -93,6 +94,7 @@ public class GroupAdapter extends RealmRecyclerViewAdapter<Group, GroupAdapter.G
     public class GroupHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView mGroupName, mGroupDescription, mCountTask;
         private ImageView mGroupColor;
+        private ImageButton mGroupOpen;
 
         public GroupHolder(View view) {
             super(view);
@@ -102,6 +104,7 @@ public class GroupAdapter extends RealmRecyclerViewAdapter<Group, GroupAdapter.G
             mGroupDescription = view.findViewById(R.id.item_group_description);
             mGroupColor = view.findViewById(R.id.item_group_color);
             mCountTask = view.findViewById(R.id.item_group_counter);
+            mGroupOpen = view.findViewById(R.id.item_group_open_button);
 
             // Слушатель нажатий по элементу
             view.setOnClickListener(this);
@@ -133,6 +136,8 @@ public class GroupAdapter extends RealmRecyclerViewAdapter<Group, GroupAdapter.G
             int countTask = group.getCountTask();
             if (countTask > 0) {
                 mCountTask.setText(String.valueOf(countTask));
+            } else {
+                mGroupOpen.setVisibility(View.INVISIBLE);
             }
 
             // Получаем цвет и закрашиваем ярлычок
@@ -153,6 +158,9 @@ public class GroupAdapter extends RealmRecyclerViewAdapter<Group, GroupAdapter.G
 
             // Цвет ярлычка по умолчанию
             mGroupColor.setBackgroundResource(R.color.gray_2);
+
+            // Кнопка видимая
+            mGroupOpen.setVisibility(View.VISIBLE);
         }
     }
 
