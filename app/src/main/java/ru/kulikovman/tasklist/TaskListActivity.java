@@ -16,7 +16,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -83,7 +82,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
             public void onDrawerStateChanged(int newState) {
                 super.onDrawerStateChanged(newState);
                 Log.d(LOG, "Запущен onDrawerStateChanged в onCreate / TaskListActivity");
-                initTaskCounters();
+                updateTaskCounters();
             }
         };
         drawer.addDrawerListener(toggle);
@@ -103,7 +102,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         mSetRepeatButton = findViewById(R.id.task_set_repeat_button);
         mSetReminderButton = findViewById(R.id.task_set_reminder_button);
 
-        // Создаем и запускаем список
+        // Создаем и запускаем списки
         setUpRecyclerView(getUnfinishedTasks());
 
         // Создаем и запускаем боковое меню
@@ -120,7 +119,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         Log.d(LOG, "Завершен onCreate в TaskListActivity");
     }
 
-    private void initTaskCounters() {
+    private void updateTaskCounters() {
         // Получаем даты на сегодня и на плюс месяц
         Calendar todayDate = Helper.getTodayCalendarWithoutTime();
         Calendar monthDate = new GregorianCalendar();
