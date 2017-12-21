@@ -279,11 +279,6 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
                 editGroupDialog.setArguments(args);
                 editGroupDialog.show(getSupportFragmentManager(), "editGroupDialog");
                 break;
-            case R.id.group_set_description:
-                DialogFragment descriptionDialog = new DescriptionDialog();
-                descriptionDialog.setArguments(args);
-                descriptionDialog.show(getSupportFragmentManager(), "descriptionDialog");
-                break;
             case R.id.group_set_color:
                 DialogFragment colorDialog = new ColorDialog();
                 colorDialog.setArguments(args);
