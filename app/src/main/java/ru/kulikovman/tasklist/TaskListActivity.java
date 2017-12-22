@@ -488,7 +488,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
                 break;
         }
 
-        // Закрываем меню, если открыто
+        // Закрываем меню и скрываем панель инструментов
         closeDrawer();
     }
 
@@ -497,6 +497,9 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
+
+        // Скрываем панель инструментов
+        mTaskOptionsPanel.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -526,7 +529,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         // Обработать нажатие на группы в меню
         setUpTaskRecyclerView(mRealmHelper.getTasksByGroup(groupId));
 
-        // Закрываем меню, если открыто
+        // Закрываем меню и скрываем панель инструментов
         closeDrawer();
     }
 
