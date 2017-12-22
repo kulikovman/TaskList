@@ -10,17 +10,18 @@
         android:id="@+id/edit_text_field"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/edit_space_after_text"
+        android:layout_marginStart="@dimen/edit_margin_start"
         android:layout_weight="1"
-        android:maxLength="100"
-        android:layout_marginStart="20dp"
-        android:inputType="textMultiLine|textCapSentences"/>
+        android:inputType="textMultiLine|textCapSentences"
+        android:maxLength="100"/>
 
     <ImageButton
         android:id="@+id/clear_text_button"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="14dp"
+        android:layout_width="@dimen/edit_clear_icon_size"
+        android:layout_height="@dimen/edit_clear_icon_size"
         android:layout_gravity="center_vertical"
+        android:layout_marginEnd="@dimen/edit_margin_end"
         android:background="@drawable/button_options"
         android:tint="@color/icon_options_color"
         app:srcCompat="@drawable/ic_clear_black_24dp"/>
