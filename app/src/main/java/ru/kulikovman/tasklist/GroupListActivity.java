@@ -24,7 +24,6 @@ import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
 import io.realm.Sort;
 import ru.kulikovman.tasklist.dialogs.ColorDialog;
-import ru.kulikovman.tasklist.dialogs.DescriptionDialog;
 import ru.kulikovman.tasklist.dialogs.EditGroupDialog;
 import ru.kulikovman.tasklist.messages.GroupHasTasks;
 import ru.kulikovman.tasklist.messages.GroupIsExist;
@@ -95,7 +94,7 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
     private OrderedRealmCollection<Group> loadGroupList() {
         return mRealm.where(Group.class)
                 .findAll()
-                .sort(new String[]{Group.COUNT_TASK, Group.NAME},
+                .sort(new String[]{Group.TASK_COUNTER, Group.NAME},
                         new Sort[]{Sort.DESCENDING, Sort.ASCENDING});
     }
 
@@ -136,7 +135,7 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
                 
                 // Удаление группы
                 if (direction == ItemTouchHelper.RIGHT) {
-                    if (mGroup.getCountTask() > 0) {
+                    if (mGroup.getTaskCounter() > 0) {
                         // Сохраняем id группы для передачи в диалог
                         Bundle args = new Bundle();
                         args.putLong("groupId", mGroup.getId());

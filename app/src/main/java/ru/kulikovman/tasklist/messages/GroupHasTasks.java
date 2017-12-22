@@ -9,9 +9,8 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
+import io.realm.OrderedRealmCollectionSnapshot;
 import io.realm.Realm;
-import io.realm.RealmList;
-import io.realm.RealmResults;
 import ru.kulikovman.tasklist.R;
 import ru.kulikovman.tasklist.models.Group;
 import ru.kulikovman.tasklist.models.Task;
@@ -36,9 +35,18 @@ public class GroupHasTasks extends DialogFragment {
                 .setPositiveButton(R.string.delete_group_save_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Удаляем только группу
+                        // Открываем транзакцию
                         mRealm.beginTransaction();
+
+                        // Удаление упоминание группы в задачах
+                        for (Task task : mGroup.getTaskList().createSnapshot()) {
+                            task.setGroup(null);
+                        }
+
+                        // Удаляем группу
                         mGroup.deleteFromRealm();
+
+                        // Закрываем транзакцию
                         mRealm.commitTransaction();
                     }
                 })
@@ -48,13 +56,8 @@ public class GroupHasTasks extends DialogFragment {
                         // Открываем транзакцию
                         mRealm.beginTransaction();
 
-                        // Удаляем задачи связанные с группой
-                        RealmResults<Task> tasks = mRealm.where(Task.class)
-                                .equalTo(Task.DONE, false)
-                                .equalTo(Task.GROUP_ID, mGroup.getId())
-                                .findAll();
-
-                        tasks.deleteAllFromRealm();
+                        // Удаляем связанные задачи
+                        mGroup.getTaskList().deleteAllFromRealm();
 
                         // Удаляем группу
                         mGroup.deleteFromRealm();

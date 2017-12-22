@@ -237,7 +237,7 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
             mTaskWarning.setVisibility(View.INVISIBLE);
             setMarginStartForView(mTaskWarning, 32);
 
-            // Цвет даты по умолчанию
+            // Цвет даты и описания задачи по умолчанию
             mTaskDate.setTextColor(mContext.getResources().getColor(R.color.gray_4));
         }
 

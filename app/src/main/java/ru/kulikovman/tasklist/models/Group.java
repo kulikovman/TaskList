@@ -1,6 +1,7 @@
 package ru.kulikovman.tasklist.models;
 
 
+import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -8,29 +9,21 @@ import io.realm.annotations.PrimaryKey;
 public class Group extends RealmObject {
     public static final String ID = "mId";
     public static final String NAME = "mName";
-    public static final String DESCRIPTION = "mDescription";
     public static final String COLOR = "mColor";
-    public static final String COUNT_TASK = "mCountTask";
+    public static final String TASK_COUNTER = "mTaskCounter";
+    public static final String TASK_LIST = "mTaskList";
 
     @PrimaryKey
     private long mId;
 
     private String mName;
-    private String mDescription;
     private String mColor;
-    private int mCountTask;
+    private RealmList<Task> mTaskList;
+    private int mTaskCounter;
 
-    public Group(long id, String name, String description, String color) {
+    public Group(long id, String name, String color) {
         mId = id;
         mName = name;
-        mDescription = description;
-        mColor = color;
-    }
-
-    public Group(String name, String description, String color) {
-        mId = System.currentTimeMillis();
-        mName = name;
-        mDescription = description;
         mColor = color;
     }
 
@@ -46,14 +39,6 @@ public class Group extends RealmObject {
     }
 
     public Group() {
-    }
-
-    public int getCountTask() {
-        return mCountTask;
-    }
-
-    public void setCountTask(int countTask) {
-        mCountTask = countTask;
     }
 
     public long getId() {
@@ -80,21 +65,50 @@ public class Group extends RealmObject {
         mColor = color;
     }
 
-    public String getDescription() {
-        return mDescription;
+    public RealmList<Task> getTaskList() {
+        return mTaskList;
     }
 
-    public void setDescription(String description) {
-        mDescription = description;
+    public void setTaskList(RealmList<Task> taskList) {
+        mTaskList = taskList;
+    }
+
+    public int getTaskCounter() {
+        return mTaskCounter;
+    }
+
+    public void setTaskCounter(int taskCounter) {
+        mTaskCounter = taskCounter;
     }
 
 
     // Вспомогательные методы
     public void increaseCountTask() {
-        mCountTask++;
+        mTaskCounter++;
     }
 
     public void decreaseCountTask() {
-        mCountTask--;
+        mTaskCounter--;
+    }
+
+    public void addTask(Task task) {
+        mTaskList.add(task);
+        mTaskCounter = mTaskList.size();
+    }
+
+    public void removeTask(Task task) {
+        if (mTaskList.contains(task)) {
+            mTaskList.remove(task);
+            mTaskCounter = mTaskList.size();
+        }
+    }
+
+    public void deleteAllTasks(Realm realm) {
+        realm.beginTransaction();
+        mTaskList.deleteAllFromRealm();
+        realm.commitTransaction();
+
+        mTaskList = null;
+        mTaskCounter = 0;
     }
 }

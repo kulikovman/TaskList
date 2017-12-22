@@ -14,6 +14,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
@@ -48,7 +49,7 @@ import ru.kulikovman.tasklist.models.Task;
 import ru.kulikovman.tasklist.adapters.TaskAdapter;
 
 public class TaskListActivity extends AppCompatActivity implements TaskAdapter.OnItemClickListener,
-        MenuAdapter.OnItemClickListener, CallbackDialogFragment.CallbackDialogListener {
+        MenuAdapter.OnItemClickListener, CallbackDialogFragment.CallbackDialogListener, SearchView.OnQueryTextListener {
 
     private Realm mRealm;
     public RecyclerView mTaskRecyclerView, mMenuRecyclerView;
@@ -527,5 +528,15 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
 
         // Закрываем меню, если открыто
         closeDrawer();
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
     }
 }

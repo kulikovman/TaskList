@@ -90,7 +90,7 @@ public class MenuAdapter extends RealmRecyclerViewAdapter<Group, MenuAdapter.Gro
 
 
             // Устанавливаем количество задач
-            mGroupCounter.setText(String.valueOf(group.getCountTask()));
+            mGroupCounter.setText(String.valueOf(group.getTaskCounter()));
 
             // Получаем цвет и закрашиваем ярлычок
             String color = group.getColor();

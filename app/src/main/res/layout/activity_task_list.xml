@@ -22,6 +22,7 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_task_list">
 
+        <!-- Кастомное меню -->
         <include layout="@layout/navigation_drawer_menu"/>
 
     </android.support.design.widget.NavigationView>

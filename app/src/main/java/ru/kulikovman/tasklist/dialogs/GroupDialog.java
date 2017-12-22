@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -46,7 +45,7 @@ public class GroupDialog extends CallbackDialogFragment {
         mRealm = Realm.getDefaultInstance();
         mTask = mRealm.where(Task.class).equalTo(Task.ID, taskId).findFirst();
         mGroups = mRealm.where(Group.class).findAll()
-                .sort(new String[]{Group.COUNT_TASK, Group.NAME},
+                .sort(new String[]{Group.TASK_COUNTER, Group.NAME},
                         new Sort[]{Sort.DESCENDING, Sort.ASCENDING});
 
         // Проверяем наличие групп
@@ -83,7 +82,22 @@ public class GroupDialog extends CallbackDialogFragment {
                             // Открываем транзакцию
                             mRealm.beginTransaction();
 
-                            // Понижаем счетчик группы
+                            // Удаляем задачу из группы
+                            if (mTask.getGroup() != null) {
+                                mTask.getGroup().removeTask(mTask);
+                            }
+
+                            // Удаляем группу из задачи
+                            mTask.setGroup(null);
+
+                            // Назначаем новую группу
+                            if (which < names.length - 1) {
+                                mTask.setGroup(mGroups.get(which));
+                                mTask.getGroup().addTask(mTask);
+                            }
+
+                            // Старый вариант реализации
+                            /*// Понижаем счетчик группы
                             if (mTask.getGroup() != null) {
                                 mTask.getGroup().decreaseCountTask();
                             }
@@ -95,7 +109,7 @@ public class GroupDialog extends CallbackDialogFragment {
                             if (which < names.length - 1) {
                                 mTask.setGroup(mGroups.get(which));
                                 mTask.getGroup().increaseCountTask();
-                            }
+                            }*/
 
                             // Закрываем транзакцию
                             mRealm.commitTransaction();

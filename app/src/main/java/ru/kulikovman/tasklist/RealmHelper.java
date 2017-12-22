@@ -1,9 +1,7 @@
 package ru.kulikovman.tasklist;
 
 
-import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import io.realm.OrderedRealmCollection;
@@ -59,20 +57,22 @@ public class RealmHelper {
     }
 
     OrderedRealmCollection<Task> getTodayTasks() {
-        Calendar currentDate = Helper.getTodayCalendarWithoutTime();
+        long todayDate = Helper.getTodayCalendarWithoutTime().getTimeInMillis();
         return mRealm.where(Task.class)
                 .equalTo(Task.DONE, false)
-                .lessThanOrEqualTo(Task.TARGET_DATE, currentDate.getTimeInMillis())
+                .lessThanOrEqualTo(Task.TARGET_DATE, todayDate)
                 .findAll()
                 .sort(new String[]{Task.TARGET_DATE, Task.PRIORITY, Task.TITLE},
                         new Sort[]{Sort.ASCENDING, Sort.ASCENDING, Sort.ASCENDING});
     }
 
     OrderedRealmCollection<Task> getMonthTasks() {
-        Calendar afterMonthDate = Helper.getAfterMonthCalendarWithoutTime();
+        long monthDate = Helper.getAfterMonthCalendarWithoutTime().getTimeInMillis();
         return mRealm.where(Task.class)
                 .equalTo(Task.DONE, false)
-                .lessThanOrEqualTo(Task.TARGET_DATE, afterMonthDate.getTimeInMillis())
+                .lessThanOrEqualTo(Task.TARGET_DATE, monthDate)
+                .or()
+                .equalTo(Task.TARGET_DATE, Long.MAX_VALUE)
                 .findAll()
                 .sort(new String[]{Task.TARGET_DATE, Task.PRIORITY, Task.TITLE},
                         new Sort[]{Sort.ASCENDING, Sort.ASCENDING, Sort.ASCENDING});
@@ -80,9 +80,9 @@ public class RealmHelper {
 
     OrderedRealmCollection<Group> getNotEmptyGroups() {
         return mRealm.where(Group.class)
-                .notEqualTo(Group.COUNT_TASK, 0)
+                .notEqualTo(Group.TASK_COUNTER, 0)
                 .findAll()
-                .sort(new String[]{Group.COUNT_TASK, Group.NAME},
+                .sort(new String[]{Group.TASK_COUNTER, Group.NAME},
                         new Sort[]{Sort.DESCENDING, Sort.ASCENDING});
     }
 

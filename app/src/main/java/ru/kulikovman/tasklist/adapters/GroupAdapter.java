@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -127,7 +126,7 @@ public class GroupAdapter extends RealmRecyclerViewAdapter<Group, GroupAdapter.G
             mGroupName.setText(group.getName());
 
             // Количество задач в группе
-            int countTask = group.getCountTask();
+            int countTask = group.getTaskCounter();
             if (countTask > 0) {
                 mTaskCounter.setText(String.valueOf(countTask));
             }
