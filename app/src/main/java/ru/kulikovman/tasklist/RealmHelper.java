@@ -15,9 +15,6 @@ public class RealmHelper {
     private static RealmHelper sRealmHelper;
     private Realm mRealm;
 
-    private RealmResults<Task> mTaskResult;
-    private RealmResults<Group> mGroupResult;
-
     public static RealmHelper get() {
         if (sRealmHelper == null) {
             sRealmHelper = new RealmHelper();
@@ -35,7 +32,7 @@ public class RealmHelper {
                 .equalTo(Task.DONE, false)
                 .findAll()
                 .sort(new String[]{Task.TARGET_DATE, Task.PRIORITY, Task.TITLE},
-                        new Sort[]{Sort.ASCENDING, Sort.ASCENDING, Sort.ASCENDING});
+                        new Sort[]{Sort.ASCENDING, Sort.DESCENDING, Sort.ASCENDING});
     }
 
     OrderedRealmCollection<Task> getTasksByGroup(long groupId) {
@@ -44,7 +41,7 @@ public class RealmHelper {
                 .equalTo(Task.GROUP_ID, groupId)
                 .findAll()
                 .sort(new String[]{Task.TARGET_DATE, Task.PRIORITY, Task.TITLE},
-                        new Sort[]{Sort.ASCENDING, Sort.ASCENDING, Sort.ASCENDING});
+                        new Sort[]{Sort.ASCENDING, Sort.DESCENDING, Sort.ASCENDING});
     }
 
     OrderedRealmCollection<Task> getIncomeTasks() {
@@ -53,7 +50,7 @@ public class RealmHelper {
                 .equalTo(Task.GROUP_ID, 0)
                 .findAll()
                 .sort(new String[]{Task.TARGET_DATE, Task.PRIORITY, Task.TITLE},
-                        new Sort[]{Sort.ASCENDING, Sort.ASCENDING, Sort.ASCENDING});
+                        new Sort[]{Sort.ASCENDING, Sort.DESCENDING, Sort.ASCENDING});
     }
 
     OrderedRealmCollection<Task> getTodayTasks() {
@@ -63,7 +60,7 @@ public class RealmHelper {
                 .lessThanOrEqualTo(Task.TARGET_DATE, todayDate)
                 .findAll()
                 .sort(new String[]{Task.TARGET_DATE, Task.PRIORITY, Task.TITLE},
-                        new Sort[]{Sort.ASCENDING, Sort.ASCENDING, Sort.ASCENDING});
+                        new Sort[]{Sort.ASCENDING, Sort.DESCENDING, Sort.ASCENDING});
     }
 
     OrderedRealmCollection<Task> getMonthTasks() {
@@ -75,7 +72,7 @@ public class RealmHelper {
                 .equalTo(Task.TARGET_DATE, Long.MAX_VALUE)
                 .findAll()
                 .sort(new String[]{Task.TARGET_DATE, Task.PRIORITY, Task.TITLE},
-                        new Sort[]{Sort.ASCENDING, Sort.ASCENDING, Sort.ASCENDING});
+                        new Sort[]{Sort.ASCENDING, Sort.DESCENDING, Sort.ASCENDING});
     }
 
     OrderedRealmCollection<Group> getNotEmptyGroups() {
