@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".TaskListActivity"
             android:label="@string/title_activity_main"
@@ -17,22 +16,20 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity
             android:name=".GroupListActivity"
             android:label="@string/title_activity_group_list"
             android:parentActivityName=".TaskListActivity"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".FinishedListActivity"
             android:label="@string/title_activity_finished_list"
             android:parentActivityName=".TaskListActivity"
             android:screenOrientation="portrait"/>
-
     </application>
 
 </manifest>

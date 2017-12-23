@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.support.v4.app.DialogFragment;
@@ -49,7 +50,7 @@ import ru.kulikovman.tasklist.models.Task;
 import ru.kulikovman.tasklist.adapters.TaskAdapter;
 
 public class TaskListActivity extends AppCompatActivity implements TaskAdapter.OnItemClickListener,
-        MenuAdapter.OnItemClickListener, CallbackDialogFragment.CallbackDialogListener, SearchView.OnQueryTextListener {
+        MenuAdapter.OnItemClickListener, CallbackDialogFragment.CallbackDialogListener {
 
     private Realm mRealm;
     public RecyclerView mTaskRecyclerView, mMenuRecyclerView;
@@ -482,9 +483,11 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
                 Intent groupListActivity = new Intent(this, GroupListActivity.class);
                 startActivity(groupListActivity);
                 break;
-            case R.id.menu_setting:
-                break;
             case R.id.menu_review:
+                // Переадресация на страницу приложения в маркете
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("market://details?id=ru.kulikovman.tasklist"));
+                startActivity(intent);
                 break;
         }
 
@@ -531,15 +534,5 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
 
         // Закрываем меню и скрываем панель инструментов
         closeDrawer();
-    }
-
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        return false;
     }
 }
