@@ -172,14 +172,14 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
             // Устанавливаем приоритет
             int priority = task.getPriority();
 
-            if (priority != 2) {
-                if (priority == 0) {
+            if (priority != 0) {
+                if (priority == 2) {
                     mTaskPriority.setText(R.string.priority_emergency);
                 } else if (priority == 1) {
                     mTaskPriority.setText(R.string.priority_high);
-                } else if (priority == 3) {
+                } else if (priority == -1) {
                     mTaskPriority.setText(R.string.priority_low);
-                } else if (priority == 4) {
+                } else if (priority == -2) {
                     mTaskPriority.setText(R.string.priority_lowest);
                 }
             }

@@ -51,19 +51,19 @@ public class PriorityDialog extends CallbackDialogFragment {
 
                         switch (which) {
                             case 0: // Чрезвычайный
-                                mTask.setPriority(0);
+                                mTask.setPriority(2);
                                 break;
                             case 1: // Высокий
                                 mTask.setPriority(1);
                                 break;
                             case 2: // Обычный
-                                mTask.setPriority(2);
+                                mTask.setPriority(0);
                                 break;
                             case 3: // Низкий
-                                mTask.setPriority(3);
+                                mTask.setPriority(-1);
                                 break;
                             case 4: // Самый низкий
-                                mTask.setPriority(4);
+                                mTask.setPriority(-2);
                                 break;
                         }
 
