@@ -33,7 +33,6 @@ public class Task extends RealmObject {
         mId = System.currentTimeMillis();
         mTitle = title;
         mTargetDate = Long.MAX_VALUE;
-        mPriority = 2;
         mDone = false;
     }
 
