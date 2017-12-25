@@ -54,7 +54,7 @@ public class RealmHelper {
     }
 
     OrderedRealmCollection<Task> getTodayTasks() {
-        long todayDate = Helper.getTodayCalendarWithoutTime().getTimeInMillis();
+        long todayDate = DateHelper.getTodayCalendarWithoutTime().getTimeInMillis();
         return mRealm.where(Task.class)
                 .equalTo(Task.DONE, false)
                 .lessThanOrEqualTo(Task.TARGET_DATE, todayDate)
@@ -64,7 +64,7 @@ public class RealmHelper {
     }
 
     OrderedRealmCollection<Task> getMonthTasks() {
-        long monthDate = Helper.getAfterMonthCalendarWithoutTime().getTimeInMillis();
+        long monthDate = DateHelper.getAfterMonthCalendarWithoutTime().getTimeInMillis();
         return mRealm.where(Task.class)
                 .equalTo(Task.DONE, false)
                 .lessThanOrEqualTo(Task.TARGET_DATE, monthDate)
@@ -87,8 +87,8 @@ public class RealmHelper {
         Map<String, Integer> counters = new HashMap<>();
 
         // Получаем даты на сегодня и плюс месяц
-        long todayDate = Helper.getTodayCalendarWithoutTime().getTimeInMillis();
-        long monthDate = Helper.getAfterMonthCalendarWithoutTime().getTimeInMillis();
+        long todayDate = DateHelper.getTodayCalendarWithoutTime().getTimeInMillis();
+        long monthDate = DateHelper.getAfterMonthCalendarWithoutTime().getTimeInMillis();
 
         // Получаем количество незавершенных задач
         RealmResults<Task> unfinishedTasks = mRealm.where(Task.class)
@@ -102,5 +102,14 @@ public class RealmHelper {
         counters.put("monthTasks", unfinishedTasks.where().lessThanOrEqualTo(Task.TARGET_DATE, monthDate).findAll().size());
 
         return counters;
+    }
+
+    RealmResults<Task> getNotificationTasks() {
+        long todayDate = DateHelper.getTodayCalendarWithoutTime().getTimeInMillis();
+        return mRealm.where(Task.class)
+                .equalTo(Task.DONE, false)
+                .equalTo(Task.REMINDER, true)
+                .lessThanOrEqualTo(Task.TARGET_DATE, todayDate)
+                .findAll();
     }
 }

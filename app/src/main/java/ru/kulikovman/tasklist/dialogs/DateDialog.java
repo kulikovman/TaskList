@@ -8,13 +8,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 
 import java.util.Calendar;
 
 import io.realm.Realm;
 import ru.kulikovman.tasklist.CallbackDialogFragment;
-import ru.kulikovman.tasklist.Helper;
+import ru.kulikovman.tasklist.DateHelper;
 import ru.kulikovman.tasklist.R;
 import ru.kulikovman.tasklist.models.Task;
 
@@ -56,7 +55,7 @@ public class DateDialog extends CallbackDialogFragment {
                         mRealm.beginTransaction();
 
                         // Получаем текущую дату
-                        Calendar calendar = Helper.getTodayCalendarWithoutTime();
+                        Calendar calendar = DateHelper.getTodayCalendarWithoutTime();
 
                         switch (which) {
                             case 0: // На сегодня

@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-public class Helper {
+public class DateHelper {
     private static DateFormat mLongDateFormat;
     private static DateFormat mShortDateFormat;
 

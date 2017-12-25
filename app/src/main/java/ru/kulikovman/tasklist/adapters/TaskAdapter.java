@@ -17,7 +17,7 @@ import java.util.GregorianCalendar;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmRecyclerViewAdapter;
-import ru.kulikovman.tasklist.Helper;
+import ru.kulikovman.tasklist.DateHelper;
 import ru.kulikovman.tasklist.R;
 import ru.kulikovman.tasklist.models.Task;
 
@@ -153,14 +153,14 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
 
                 // Сравниваем года и записываем дату в нужном формате
                 if (targetYear == currentYear) {
-                    mTaskDate.setText(Helper.convertLongToShortTextDate(targetDate));
+                    mTaskDate.setText(DateHelper.convertLongToShortTextDate(targetDate));
                 } else {
-                    mTaskDate.setText(Helper.convertLongToLongTextDate(targetDate));
+                    mTaskDate.setText(DateHelper.convertLongToLongTextDate(targetDate));
                 }
 
                 // Считаем количество дней до задачи
-                Calendar taskDate = Helper.convertLongToCalendar(task.getTargetDate());
-                Calendar todayDate = Helper.getTodayCalendarWithoutTime();
+                Calendar taskDate = DateHelper.convertLongToCalendar(task.getTargetDate());
+                Calendar todayDate = DateHelper.getTodayCalendarWithoutTime();
                 int daysBeforeTaskDate = (int) ((taskDate.getTimeInMillis() - todayDate.getTimeInMillis()) / 1000 / 60 / 60 / 24);
 
                 // Если задача просрочена, то выделяем дату
@@ -243,7 +243,7 @@ public class TaskAdapter extends RealmRecyclerViewAdapter<Task, TaskAdapter.Task
 
         private void setMarginStartForView(View view, int value) {
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
-            params.setMarginStart(Helper.convertDpToPx(mContext, value));
+            params.setMarginStart(DateHelper.convertDpToPx(mContext, value));
             view.setLayoutParams(params);
         }
     }

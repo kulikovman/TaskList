@@ -2,6 +2,7 @@ package ru.kulikovman.tasklist;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Observable;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -11,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
+import android.os.PersistableBundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,7 +35,10 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Map;
 
 import io.realm.OrderedRealmCollection;
@@ -67,6 +72,9 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
     private LinearLayout mTaskOptionsPanel;
     private ImageButton mSetRepeatButton, mSetReminderButton;
     private TextView mUnfinishedTasks, mIncomeTasks, mTodayTasks, mMonthTasks;
+
+    private Observable<Task> mObservableCache;
+    private List<Task> mTaskList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,8 +130,23 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
             }
         });
 
+        //mUnfinishedTasks
         Log.d(LOG, "Завершен onCreate в TaskListActivity");
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("key", (Serializable) mObservableCache);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState, PersistableBundle persistentState) {
+        super.onRestoreInstanceState(savedInstanceState, persistentState);
+        mObservableCache = (Observable<Task>) savedInstanceState.get("key");
+    }
+
+
 
     @Override
     protected void onDestroy() {
@@ -148,7 +171,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         mMenuAdapter = new MenuAdapter(this, mRealmHelper.getNotEmptyGroups());
         mMenuRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mMenuRecyclerView.setAdapter(mMenuAdapter);
-        mMenuRecyclerView.setHasFixedSize(true);
+        mMenuRecyclerView.setHasFixedSize(false);
         mMenuAdapter.setOnItemClickListener(this);
     }
 
