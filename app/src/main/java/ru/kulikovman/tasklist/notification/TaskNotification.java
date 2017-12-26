@@ -1,6 +1,5 @@
 package ru.kulikovman.tasklist.notification;
 
-import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -10,7 +9,6 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 
 import ru.kulikovman.tasklist.R;
@@ -22,11 +20,11 @@ import ru.kulikovman.tasklist.R;
  * This class makes heavy use of the {@link NotificationCompat.Builder} helper
  * class to create notifications in a backward-compatible way.
  */
-public class NewMessageNotification {
+public class TaskNotification {
     /**
      * The unique identifier for this type of notification.
      */
-    private static final String NOTIFICATION_TAG = "NewMessage";
+    private static final String NOTIFICATION_TAG = "taskNotification";
 
     /**
      * Shows the notification, or updates a previously shown notification of
@@ -43,22 +41,21 @@ public class NewMessageNotification {
      *
      * @see #cancel(Context)
      */
-    public static void notify(final Context context,
-                              final String exampleString, final int number) {
+    public static void notify(final Context context, final String exampleString, final int number) {
         final Resources res = context.getResources();
 
         // This image is used as the notification's large icon (thumbnail).
         // TODO: Remove this if your notification has no relevant thumbnail.
-        final Bitmap picture = BitmapFactory.decodeResource(res, R.drawable.example_picture);
+        final Bitmap picture = BitmapFactory.decodeResource(res, R.drawable.ic_launcher_round);
 
 
         final String ticker = exampleString;
         final String title = res.getString(
-                R.string.new_message_notification_title_template, exampleString);
+                R.string.task_notification_title, exampleString);
         final String text = res.getString(
-                R.string.new_message_notification_placeholder_text_template, exampleString);
+                R.string.task_notification_message, exampleString);
 
-        final NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
+        final Notification.Builder builder = new Notification.Builder(context)
 
                 // Set appropriate defaults for the notification light, sound,
                 // and vibration.
@@ -74,7 +71,7 @@ public class NewMessageNotification {
 
                 // Use a default priority (recognized on devices running Android
                 // 4.1 or later)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setPriority(Notification.PRIORITY_DEFAULT)
 
                 // Provide a large icon, shown with the notification in the
                 // notification drawer on devices running Android 3.0 or later.
@@ -107,10 +104,10 @@ public class NewMessageNotification {
 
                 // Show expanded text content on devices running Android 4.1 or
                 // later.
-                .setStyle(new NotificationCompat.BigTextStyle()
+                .setStyle(new Notification.BigTextStyle()
                         .bigText(text)
                         .setBigContentTitle(title)
-                        .setSummaryText("Dummy summary text"))
+                        .setSummaryText("Всего задач на сегодня:"))
 
                 // Example additional actions for this notification. These will
                 // only show on devices running Android 4.1 or later, so you
@@ -138,29 +135,20 @@ public class NewMessageNotification {
         notify(context, builder.build());
     }
 
-    @TargetApi(Build.VERSION_CODES.ECLAIR)
     private static void notify(final Context context, final Notification notification) {
-        final NotificationManager nm = (NotificationManager) context
-                .getSystemService(Context.NOTIFICATION_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR) {
-            nm.notify(NOTIFICATION_TAG, 0, notification);
-        } else {
-            nm.notify(NOTIFICATION_TAG.hashCode(), notification);
-        }
+        final NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        assert nm != null;
+        nm.notify(NOTIFICATION_TAG, 0, notification);
+
     }
 
     /**
      * Cancels any notifications of this type previously shown using
      * {@link #notify(Context, String, int)}.
      */
-    @TargetApi(Build.VERSION_CODES.ECLAIR)
     public static void cancel(final Context context) {
-        final NotificationManager nm = (NotificationManager) context
-                .getSystemService(Context.NOTIFICATION_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR) {
-            nm.cancel(NOTIFICATION_TAG, 0);
-        } else {
-            nm.cancel(NOTIFICATION_TAG.hashCode());
-        }
+        final NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        assert nm != null;
+        nm.cancel(NOTIFICATION_TAG, 0);
     }
 }

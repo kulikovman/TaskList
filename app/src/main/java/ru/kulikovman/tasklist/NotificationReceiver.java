@@ -11,6 +11,8 @@ import android.util.Log;
 
 import io.realm.RealmResults;
 import ru.kulikovman.tasklist.models.Task;
+import ru.kulikovman.tasklist.notification.TaskNotification;
+import ru.kulikovman.tasklist.notification.TaskNotificationList;
 
 
 public class NotificationReceiver extends BroadcastReceiver {
@@ -35,7 +37,14 @@ public class NotificationReceiver extends BroadcastReceiver {
                 message = "Нажмите, для просмотра";
             }
 
-            // Инициализация уведомления
+            //TaskNotification taskNotification = new TaskNotification();
+            TaskNotificationList.notify(context, "Пример текста", 125);
+
+
+
+
+
+            /*// Инициализация уведомления
             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
             Intent finishIntent = new Intent(context, TaskListActivity.class);
@@ -51,40 +60,8 @@ public class NotificationReceiver extends BroadcastReceiver {
                     .setAutoCancel(true)
                     .setDefaults(Notification.DEFAULT_ALL);
 
-            notificationManager.notify(100, builder.build());
+            notificationManager.notify(100, builder.build());*/
 
-
-
-
-
-
-            /*NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-            // Создание уведомления
-            Notification.Builder builder = new Notification.Builder(context);
-
-            Intent finishIntent = new Intent(context, TaskListActivity.class);
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, finishIntent, PendingIntent.FLAG_CANCEL_CURRENT);
-            builder.setContentIntent(pendingIntent)
-                    .setSmallIcon(R.drawable.ic_event_black_24dp)
-                    .setTicker("Задача на сегодня")
-                    .setAutoCancel(true)
-                    .setContentTitle(title)
-                    .setContentText(message);
-
-            Notification notification = builder.build();
-            notification.defaults = Notification.DEFAULT_ALL;
-
-            // Запуск уведомления
-            notificationManager.notify(125, notification);*/
         }
-
-        /*// Ставим следующее напоминание
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-        if (alarmManager != null) {
-            alarmManager.set(AlarmManager.RTC_WAKEUP,
-                    System.currentTimeMillis() + AlarmManager.INTERVAL_DAY, pendingIntent);
-        }*/
     }
 }

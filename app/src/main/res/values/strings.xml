@@ -106,10 +106,27 @@
     <string name="group_description_hint">Описание группы…</string>
 
 
-    <!-- Шаблон массива строк -->
-    <string-array name="array">
-        <item>Зеленый</item>
-    </string-array>
+    <!-- Напоминание о задачах -->
+    <string name="task_notification_title">Список задач: напоминание</string>
+    <string name="task_notification_message">You said %1$s and lorem ipsum
+        dolor sit amet, consectetur adipiscing elit. Etiam non enim magna. Morbi dictum, velit vel
+        semper venenatis, magna odio volutpat velit, at ullamcorper nulla lacus sed turpis.
+        Pellentesque vitae metus elit, nec tincidunt tellus. Integer sed nisl sem, ullamcorper
+        ornare lacus. Duis ac mauris sed massa congue volutpat. Donec sed erat sit amet turpis
+        viverra rhoncus sit amet nec magna. Donec lacinia ligula at libero volutpat volutpat nec nec
+        tortor.
+    </string>
+    <string name="task_notification_task_counter_title">Всего задач на сегодня:</string>
+
+
+
+
+
+
+
+
+
+
 
 
     <!-- Ниже находятся старые строки -->
@@ -139,6 +156,15 @@
     <string name="font_family_condensed">sans-serif-condensed</string>
     <string name="font_family_black">sans-serif-black</string>
     <string name="font_family_thin">sans-serif-thin</string>
+
+
+
+
+
+
+
+
+
 
 
     <!-- ПОКА НЕ УДАЛЯТЬ!!! -->
@@ -214,10 +240,15 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
 
-    <string name="new_message_notification_title_template">New message: %1$s</string>
+
+
+    <string name="action_share">Share</string>
+    <string name="action_reply">Reply</string>
+
+    <string name="task_list_notification_title_template">Task list: %1$s</string>
 
     <!-- TODO: remove this placeholder text -->
-    <string name="new_message_notification_placeholder_text_template">You said %1$s and lorem ipsum
+    <string name="task_list_notification_placeholder_text_template">You said %1$s and lorem ipsum
         dolor sit amet, consectetur adipiscing elit. Etiam non enim magna. Morbi dictum, velit vel
         semper venenatis, magna odio volutpat velit, at ullamcorper nulla lacus sed turpis.
         Pellentesque vitae metus elit, nec tincidunt tellus. Integer sed nisl sem, ullamcorper
@@ -225,9 +256,6 @@
         viverra rhoncus sit amet nec magna. Donec lacinia ligula at libero volutpat volutpat nec nec
         tortor.
     </string>
-
-    <string name="action_share">Share</string>
-    <string name="action_reply">Reply</string>
 
 
 </resources>

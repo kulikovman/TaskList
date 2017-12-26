@@ -137,14 +137,16 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
     private void initNotify() {
         // Устанавливаем время напоминания
         Calendar notifyTime = DateHelper.getTodayCalendarWithoutTime();
-        notifyTime.set(Calendar.HOUR_OF_DAY, 1);
-        notifyTime.set(Calendar.MINUTE, 2);
+        notifyTime.set(Calendar.HOUR_OF_DAY, 11);
+        notifyTime.set(Calendar.MINUTE, 1);
 
         // Создаем напоминание
         Intent intent = new Intent(this, NotificationReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 10452, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, notifyTime.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        if (alarmManager != null) {
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, notifyTime.getTimeInMillis(), AlarmManager.INTERVAL_HALF_HOUR, pendingIntent);
+        }
 
         Log.d("log", "Время уведомления: " + notifyTime.getTime());
     }
