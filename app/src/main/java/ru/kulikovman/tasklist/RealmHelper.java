@@ -69,6 +69,7 @@ public class RealmHelper {
                 .equalTo(Task.DONE, false)
                 .lessThanOrEqualTo(Task.TARGET_DATE, monthDate)
                 .or()
+                .equalTo(Task.DONE, false)
                 .equalTo(Task.TARGET_DATE, Long.MAX_VALUE)
                 .findAll()
                 .sort(new String[]{Task.TARGET_DATE, Task.PRIORITY, Task.TITLE},

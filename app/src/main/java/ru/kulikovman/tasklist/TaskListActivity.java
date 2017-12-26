@@ -111,7 +111,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         mSetReminderButton = findViewById(R.id.task_set_reminder_button);
 
         // Создаем и запускаем списки
-        setUpTaskRecyclerView(mRealmHelper.getUnfinishedTasks());
+        setUpTaskRecyclerView(mRealmHelper.getMonthTasks());
         setUpMenuRecyclerView();
 
         // Напоминание
