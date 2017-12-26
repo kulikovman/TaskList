@@ -114,6 +114,9 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         setUpTaskRecyclerView(mRealmHelper.getMonthTasks());
         setUpMenuRecyclerView();
 
+        // Заголовок списка
+        setTitle(R.string.list_title_month_tasks);
+
         // Напоминание
         initNotify();
 
@@ -482,15 +485,19 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         switch (id) {
             case R.id.menu_all_task:
                 setUpTaskRecyclerView(mRealmHelper.getUnfinishedTasks());
+                setTitle(R.string.list_title_all_tasks);
                 break;
             case R.id.menu_tasks_income:
                 setUpTaskRecyclerView(mRealmHelper.getIncomeTasks());
+                setTitle(R.string.list_title_income_tasks);
                 break;
             case R.id.menu_tasks_today:
                 setUpTaskRecyclerView(mRealmHelper.getTodayTasks());
+                setTitle(R.string.list_title_today_tasks);
                 break;
             case R.id.menu_tasks_month:
                 setUpTaskRecyclerView(mRealmHelper.getMonthTasks());
+                setTitle(R.string.list_title_month_tasks);
                 break;
             case R.id.menu_tasks_finished:
                 Intent finishedListActivity = new Intent(this, FinishedListActivity.class);
@@ -545,9 +552,12 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
     }
 
     @Override
-    public void onGroupMenuClick(long groupId) {
-        // Обработать нажатие на группы в меню
+    public void onGroupMenuClick(long groupId, String groupName) {
+        // Подключаем список задач из связанной группы
         setUpTaskRecyclerView(mRealmHelper.getTasksByGroup(groupId));
+
+        // Название группы в заголовок
+        setTitle(groupName);
 
         // Закрываем меню и скрываем панель инструментов
         closeDrawer();
