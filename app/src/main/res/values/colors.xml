@@ -38,6 +38,7 @@
     <color name="delete_task_button">#ff8080</color>
     <color name="done_task_button">#6fe455</color>
     <color name="red_date">#ff8080</color>
+    <color name="notification_icon_background">#ff8080</color>
 
     <color name="colorOptionsIcons">#5ebcff</color>
     <color name="taskBackground">#8fbeff</color>
