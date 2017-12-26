@@ -1,8 +1,9 @@
 package ru.kulikovman.tasklist;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Observable;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -12,12 +13,10 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
-import android.os.PersistableBundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
@@ -35,15 +34,11 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Map;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
-import io.realm.RealmResults;
 import ru.kulikovman.tasklist.adapters.MenuAdapter;
 import ru.kulikovman.tasklist.dialogs.DateDialog;
 import ru.kulikovman.tasklist.dialogs.EditTaskDialog;
@@ -72,9 +67,6 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
     private LinearLayout mTaskOptionsPanel;
     private ImageButton mSetRepeatButton, mSetReminderButton;
     private TextView mUnfinishedTasks, mIncomeTasks, mTodayTasks, mMonthTasks;
-
-    private Observable<Task> mObservableCache;
-    private List<Task> mTaskList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +114,9 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         setUpTaskRecyclerView(mRealmHelper.getUnfinishedTasks());
         setUpMenuRecyclerView();
 
+        // Напоминание
+        initNotify();
+
         // Смена фокуса поля ввода
         mTaskField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -129,24 +124,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
                 resetItemSelection();
             }
         });
-
-        //mUnfinishedTasks
-        Log.d(LOG, "Завершен onCreate в TaskListActivity");
     }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putSerializable("key", (Serializable) mObservableCache);
-    }
-
-    @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onRestoreInstanceState(savedInstanceState, persistentState);
-        mObservableCache = (Observable<Task>) savedInstanceState.get("key");
-    }
-
-
 
     @Override
     protected void onDestroy() {
@@ -154,6 +132,21 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         mTaskRecyclerView.setAdapter(null);
         mRealmHelper = null;
         mRealm.close();
+    }
+
+    private void initNotify() {
+        // Устанавливаем время напоминания
+        Calendar notifyTime = DateHelper.getTodayCalendarWithoutTime();
+        notifyTime.set(Calendar.HOUR_OF_DAY, 1);
+        notifyTime.set(Calendar.MINUTE, 2);
+
+        // Создаем напоминание
+        Intent intent = new Intent(this, NotificationReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 10452, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, notifyTime.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+
+        Log.d("log", "Время уведомления: " + notifyTime.getTime());
     }
 
     private void setUpTaskRecyclerView(OrderedRealmCollection<Task> list) {

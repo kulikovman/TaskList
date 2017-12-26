@@ -13,13 +13,11 @@ import io.realm.RealmResults;
 import ru.kulikovman.tasklist.models.Task;
 
 
-public class TaskNotification extends BroadcastReceiver {
-    private NotificationManager mNotificationManager;
-    private final int NOTIFICATION_ID = 1;
+public class NotificationReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d("log", "Запущен onReceive в TaskNotification");
+        Log.d("log", "Запущен onReceive в NotificationReceiver");
 
         // Получаем список задач на сегодня с напоминаниями
         RealmResults<Task> tasksList = RealmHelper.get().getNotificationTasks();
@@ -38,7 +36,29 @@ public class TaskNotification extends BroadcastReceiver {
             }
 
             // Инициализация уведомления
-            mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+            Intent finishIntent = new Intent(context, TaskListActivity.class);
+            finishIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 100, finishIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+            Notification.Builder builder = new Notification.Builder(context);
+            builder.setContentIntent(pendingIntent)
+                    .setSmallIcon(R.drawable.ic_event_black_24dp)
+                    .setContentTitle(title)
+                    .setContentText(message)
+                    .setAutoCancel(true)
+                    .setDefaults(Notification.DEFAULT_ALL);
+
+            notificationManager.notify(100, builder.build());
+
+
+
+
+
+
+            /*NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
             // Создание уведомления
             Notification.Builder builder = new Notification.Builder(context);
@@ -56,15 +76,15 @@ public class TaskNotification extends BroadcastReceiver {
             notification.defaults = Notification.DEFAULT_ALL;
 
             // Запуск уведомления
-            mNotificationManager.notify(NOTIFICATION_ID, notification);
+            notificationManager.notify(125, notification);*/
         }
 
-        // Ставим следующее напоминание
+        /*// Ставим следующее напоминание
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         if (alarmManager != null) {
             alarmManager.set(AlarmManager.RTC_WAKEUP,
                     System.currentTimeMillis() + AlarmManager.INTERVAL_DAY, pendingIntent);
-        }
+        }*/
     }
 }

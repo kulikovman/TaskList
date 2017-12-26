@@ -30,6 +30,13 @@
             android:label="@string/title_activity_finished_list"
             android:parentActivityName=".TaskListActivity"
             android:screenOrientation="portrait"/>
+
+        <receiver
+            android:name=".NotificationReceiver"
+            android:enabled="true"
+            android:exported="true">
+        </receiver>
+
     </application>
 
 </manifest>
