@@ -1,4 +1,4 @@
-package ru.kulikovman.tasklist;
+package ru.kulikovman.tasklist.notification;
 
 import android.annotation.TargetApi;
 import android.app.Notification;
@@ -12,6 +12,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
+
+import ru.kulikovman.tasklist.R;
 
 /**
  * Helper class for showing and canceling new message
