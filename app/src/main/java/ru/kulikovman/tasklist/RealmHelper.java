@@ -83,7 +83,7 @@ public class RealmHelper {
                         new Sort[]{Sort.DESCENDING, Sort.ASCENDING});
     }
 
-    public Map<String, Integer> getTaskCounters() {
+    Map<String, Integer> getTaskCounters() {
         Map<String, Integer> counters = new HashMap<>();
 
         // Получаем даты на сегодня и плюс месяц
@@ -102,14 +102,5 @@ public class RealmHelper {
         counters.put("monthTasks", unfinishedTasks.where().lessThanOrEqualTo(Task.TARGET_DATE, monthDate).findAll().size());
 
         return counters;
-    }
-
-    RealmResults<Task> getNotificationTasks() {
-        long todayDate = DateHelper.getTodayCalendarWithoutTime().getTimeInMillis();
-        return mRealm.where(Task.class)
-                .equalTo(Task.DONE, false)
-                .equalTo(Task.REMINDER, true)
-                .lessThanOrEqualTo(Task.TARGET_DATE, todayDate)
-                .findAll();
     }
 }
