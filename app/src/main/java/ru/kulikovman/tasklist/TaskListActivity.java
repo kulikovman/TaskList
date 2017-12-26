@@ -139,10 +139,16 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
 
     private void initNotify() {
         // Устанавливаем время напоминания
+        long currentTime = System.currentTimeMillis();
+
         Calendar notifyTime = DateHelper.getTodayCalendarWithoutTime();
         notifyTime.set(Calendar.HOUR_OF_DAY, 11);
         notifyTime.set(Calendar.MINUTE, 0);
         notifyTime.set(Calendar.SECOND, 0);
+
+        if (notifyTime.getTimeInMillis() < currentTime) {
+            notifyTime.add(Calendar.DAY_OF_YEAR, 1);
+        }
 
         // Создаем напоминание
         Intent intent = new Intent(this, NotificationReceiver.class);

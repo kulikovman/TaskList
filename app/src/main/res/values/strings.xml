@@ -114,7 +114,7 @@
 
     <!-- Напоминания о задачах -->
     <string name="task_notification_title">Список задач: напоминание</string>
-    <string name="task_notification_message">У вас есть %1$s <b>на сегодня</b>. Нажмите это
+    <string name="task_notification_message">У вас есть %1$s на сегодня. Нажмите это
         сообщение, чтобы открыть список задач.</string> <!-- 35 символов в строке (сокращенный вид напоминания) -->
     <string name="task_notification_counter_title">Всего задач на сегодня:</string>
     <plurals name="task_notification_important_tasks">
