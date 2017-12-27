@@ -61,6 +61,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
     private RealmHelper mRealmHelper;
 
     private Task mTask;
+    private Group mGroup;
     private int mPosition = -1;
 
     private EditText mTaskField;
@@ -111,7 +112,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         mSetReminderButton = findViewById(R.id.task_set_reminder_button);
 
         // Создаем и запускаем списки
-        setUpTaskRecyclerView(mRealmHelper.getMonthTasks());
+        setUpTaskRecyclerView(mRealmHelper.getMonthTasks(), true);
         setUpMenuRecyclerView();
 
         // Заголовок списка
@@ -159,7 +160,12 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         Log.d("log", "Время уведомления: " + notifyTime.getTime());
     }
 
-    private void setUpTaskRecyclerView(OrderedRealmCollection<Task> list) {
+    private void setUpTaskRecyclerView(OrderedRealmCollection<Task> list, boolean resetGroup) {
+        // Сброс группы
+        if (resetGroup) {
+            mGroup = null;
+        }
+
         mTaskAdapter = new TaskAdapter(this, list);
         mTaskRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mTaskRecyclerView.setAdapter(mTaskAdapter);
@@ -382,17 +388,27 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         String taskTitle = mTaskField.getText().toString().trim();
 
         if (taskTitle.length() > 0) {
-            // Создаем задачу и добавляем в базу
+            // Создаем задачу
             Task task = new Task(taskTitle);
 
+            // Открываем транзакцию
             mRealm.beginTransaction();
+
+            // Добавляем задачу в базу и получаем обратно (чтобы стала управляемой)
             mRealm.insert(task);
+            task = mRealmHelper.getTaskById(task.getId());
+
+            // Назначаем группу, если открыт список групп
+            if (mGroup != null) {
+                task.setGroup(mGroup);
+                mGroup.addTask(task);
+            }
+
+            // Закрываем транзакцию
             mRealm.commitTransaction();
 
-            // Очищаем поле
+            // Очищаем поле и ищем задачу в текущем списке
             mTaskField.setText(null);
-
-            // Получаем задачу или null
             mTask = mTaskAdapter.getTaskById(task.getId());
 
             if (mTask != null) {
@@ -490,19 +506,19 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         // Действие при нажатии элемента бокового меню
         switch (id) {
             case R.id.menu_all_task:
-                setUpTaskRecyclerView(mRealmHelper.getUnfinishedTasks());
+                setUpTaskRecyclerView(mRealmHelper.getUnfinishedTasks(), true);
                 setTitle(R.string.list_title_all_tasks);
                 break;
             case R.id.menu_tasks_income:
-                setUpTaskRecyclerView(mRealmHelper.getIncomeTasks());
+                setUpTaskRecyclerView(mRealmHelper.getIncomeTasks(), true);
                 setTitle(R.string.list_title_income_tasks);
                 break;
             case R.id.menu_tasks_today:
-                setUpTaskRecyclerView(mRealmHelper.getTodayTasks());
+                setUpTaskRecyclerView(mRealmHelper.getTodayTasks(), true);
                 setTitle(R.string.list_title_today_tasks);
                 break;
             case R.id.menu_tasks_month:
-                setUpTaskRecyclerView(mRealmHelper.getMonthTasks());
+                setUpTaskRecyclerView(mRealmHelper.getMonthTasks(), true);
                 setTitle(R.string.list_title_month_tasks);
                 break;
             case R.id.menu_tasks_finished:
@@ -558,12 +574,15 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
     }
 
     @Override
-    public void onGroupMenuClick(long groupId, String groupName) {
+    public void onGroupMenuClick(Group group) {
+        // Сохраняем группу
+        mGroup = group;
+
         // Подключаем список задач из связанной группы
-        setUpTaskRecyclerView(mRealmHelper.getTasksByGroup(groupId));
+        setUpTaskRecyclerView(mRealmHelper.getTasksByGroup(group.getId()), false);
 
         // Название группы в заголовок
-        setTitle(groupName);
+        setTitle(group.getName());
 
         // Закрываем меню и скрываем панель инструментов
         closeDrawer();

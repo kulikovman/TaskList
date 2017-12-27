@@ -71,7 +71,7 @@ public class MenuAdapter extends RealmRecyclerViewAdapter<Group, MenuAdapter.Gro
 
             // Код для проброса слушателя
             if (mOnItemClickListener != null) {
-                mOnItemClickListener.onGroupMenuClick(mGroup.getId(), mGroup.getName());
+                mOnItemClickListener.onGroupMenuClick(mGroup);
             }
         }
 
@@ -114,7 +114,7 @@ public class MenuAdapter extends RealmRecyclerViewAdapter<Group, MenuAdapter.Gro
 
     // Интерфейс для проброса слушателя наружу
     public interface OnItemClickListener {
-        void onGroupMenuClick(long groupId, String groupName);
+        void onGroupMenuClick(Group group);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {

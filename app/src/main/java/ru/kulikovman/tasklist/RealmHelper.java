@@ -104,4 +104,10 @@ public class RealmHelper {
 
         return counters;
     }
+
+    Task getTaskById(long taskId) {
+        return mRealm.where(Task.class)
+                .equalTo(Task.ID, taskId)
+                .findFirst();
+    }
 }
