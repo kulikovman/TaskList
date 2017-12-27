@@ -93,13 +93,13 @@ public class Group extends RealmObject {
 
     public void addTask(Task task) {
         mTaskList.add(task);
-        mTaskCounter = mTaskList.size();
+        mTaskCounter++;
     }
 
     public void removeTask(Task task) {
         if (mTaskList.contains(task)) {
             mTaskList.remove(task);
-            mTaskCounter = mTaskList.size();
+            mTaskCounter--;
         }
     }
 

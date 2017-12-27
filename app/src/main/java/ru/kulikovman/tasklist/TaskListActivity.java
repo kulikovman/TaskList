@@ -91,6 +91,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
                 Log.d(LOG, "Запущен onDrawerStateChanged в onCreate / TaskListActivity");
                 updateTaskCounters();
                 mMenuAdapter.notifyDataSetChanged();
+                hideKeyboard();
             }
         };
         drawer.addDrawerListener(toggle);
@@ -234,17 +235,18 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
                 // Открываем транзакцию
                 mRealm.beginTransaction();
 
-                // Понижаем счетчик задач в связанной группе
-                Group group = mTask.getGroup();
-                if (group != null) {
-                    group.decreaseCountTask();
+                // Понижаем счетчик в группе задачи
+                if (mTask.getGroup() != null) {
+                    mTask.getGroup().decreaseCountTask();
+                    Log.d(LOG, "Понизили счетчик");
                 }
 
-                // Завершаем или удаляем
                 if (direction == ItemTouchHelper.RIGHT) {
+                    // Удаляем задачу
                     mTask.deleteFromRealm();
                     Log.d(LOG, "Задача удалена");
                 } else {
+                    // Завершаем задачу
                     mTask.setCompletionDate(System.currentTimeMillis());
                     mTask.setDone(true);
                     Log.d(LOG, "Задача завершена");
@@ -402,7 +404,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
             // Назначаем группу, если открыт список групп
             if (mGroup != null) {
                 task.setGroup(mGroup);
-                mGroup.addTask(task);
+                mGroup.addTask(task); // тут стопудово какая-то ошибка...
             }
 
             // Закрываем транзакцию

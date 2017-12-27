@@ -94,15 +94,14 @@ public class FinishedListActivity extends AppCompatActivity {
                     task.deleteFromRealm();
                     Log.d(LOG, "Задача удалена");
                 } else {
+                    // Если есть группа, то повышаем счетчик
+                    if (task.getGroup() != null) {
+                        task.getGroup().increaseCountTask();
+                    }
+
                     // Восстанавливаем задачу
                     task.setCompletionDate(0);
                     task.setDone(false);
-
-                    // Если есть группа, то повышаем счетчик
-                    Group group = task.getGroup();
-                    if (group != null) {
-                        group.increaseCountTask();
-                    }
                     Log.d(LOG, "Задача восстановлена");
                 }
 
