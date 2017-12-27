@@ -147,9 +147,10 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         notifyTime.set(Calendar.MINUTE, 0);
         notifyTime.set(Calendar.SECOND, 0);
 
-        if (notifyTime.getTimeInMillis() < currentTime) {
+        // Перенос на день ,если время прошло
+        /*if (notifyTime.getTimeInMillis() < currentTime) {
             notifyTime.add(Calendar.DAY_OF_YEAR, 1);
-        }
+        }*/
 
         // Создаем напоминание
         Intent intent = new Intent(this, NotificationReceiver.class);
@@ -394,7 +395,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
             // Открываем транзакцию
             mRealm.beginTransaction();
 
-            // Добавляем задачу в базу и получаем обратно (чтобы стала управляемой)
+            // Добавляем в базу и получаем обратно (чтобы стала управляемой)
             mRealm.insert(task);
             task = mRealmHelper.getTaskById(task.getId());
 
