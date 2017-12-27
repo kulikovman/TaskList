@@ -1,6 +1,8 @@
 package ru.kulikovman.tasklist;
 
 
+import android.util.Log;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -84,23 +86,24 @@ public class RealmHelper {
                         new Sort[]{Sort.DESCENDING, Sort.ASCENDING});
     }
 
-    Map<String, Integer> getTaskCounters() {
-        Map<String, Integer> counters = new HashMap<>();
+    Map<String, Long> getTaskCounters() {
+        Map<String, Long> counters = new HashMap<>();
 
         // Получаем даты на сегодня и плюс месяц
         long todayDate = DateHelper.getTodayCalendarWithoutTime().getTimeInMillis();
         long monthDate = DateHelper.getAfterMonthCalendarWithoutTime().getTimeInMillis();
 
         // Получаем количество незавершенных задач
-        RealmResults<Task> unfinishedTasks = mRealm.where(Task.class)
-                .equalTo(Task.DONE, false)
-                .findAll();
+        long unfinishedTasks = mRealm.where(Task.class).equalTo(Task.DONE, false).count();
+        long incomeTasks = mRealm.where(Task.class).equalTo(Task.DONE, false).equalTo(Task.GROUP_ID, 0).count();
+        long todayTasks = mRealm.where(Task.class).equalTo(Task.DONE, false).lessThanOrEqualTo(Task.TARGET_DATE, todayDate).count();
+        long monthTasks = mRealm.where(Task.class).equalTo(Task.DONE, false).lessThanOrEqualTo(Task.TARGET_DATE, monthDate).count();
 
         // Сохраняем количество
-        counters.put("unfinishedTasks", unfinishedTasks.size());
-        counters.put("incomeTasks", unfinishedTasks.where().equalTo(Task.GROUP_ID, 0).findAll().size());
-        counters.put("todayTasks", unfinishedTasks.where().lessThanOrEqualTo(Task.TARGET_DATE, todayDate).findAll().size());
-        counters.put("monthTasks", unfinishedTasks.where().lessThanOrEqualTo(Task.TARGET_DATE, monthDate).findAll().size());
+        counters.put("unfinishedTasks", unfinishedTasks);
+        counters.put("incomeTasks", incomeTasks);
+        counters.put("todayTasks", todayTasks);
+        counters.put("monthTasks", monthTasks);
 
         return counters;
     }

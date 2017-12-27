@@ -12,11 +12,8 @@ import ru.kulikovman.tasklist.models.Task;
 import ru.kulikovman.tasklist.notification.TaskNotification;
 
 public class NotificationReceiver extends BroadcastReceiver {
-
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d("log", "Запущен onReceive в NotificationReceiver");
-
         // Получаем нужные списки задач
         OrderedRealmCollection<Task> todayTasks = RealmHelper.get().getTodayTasks();
         RealmResults<Task> reminderTasks = todayTasks.where().equalTo(Task.REMINDER, true).findAll();

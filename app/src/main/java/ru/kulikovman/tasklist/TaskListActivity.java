@@ -140,7 +140,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
 
     private void initNotify() {
         // Устанавливаем время напоминания
-        long currentTime = System.currentTimeMillis();
+        //long currentTime = System.currentTimeMillis();
 
         Calendar notifyTime = DateHelper.getTodayCalendarWithoutTime();
         notifyTime.set(Calendar.HOUR_OF_DAY, 11);
@@ -187,7 +187,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
 
     private void updateTaskCounters() {
         // Получаем количиство задач разных типов
-        Map<String, Integer> counters = mRealmHelper.getTaskCounters();
+        Map<String, Long> counters = mRealmHelper.getTaskCounters();
 
         // Устанавливаем значения в меню
         mUnfinishedTasks.setText(String.valueOf(counters.get("unfinishedTasks")));
