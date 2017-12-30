@@ -21,9 +21,9 @@
 
     <!-- Диалоги редактирования -->
     <dimen name="edit_margin_start">20dp</dimen>
-    <dimen name="edit_margin_end">25dp</dimen>
-    <dimen name="edit_clear_icon_size">10dp</dimen>
-    <dimen name="edit_space_after_text">15dp</dimen> <!-- отступ между полем и иконкой -->
+    <dimen name="edit_margin_end">15dp</dimen>
+    <dimen name="edit_clear_icon_size">35dp</dimen>
+    <dimen name="edit_space_after_text">5dp</dimen> <!-- отступ между полем и иконкой -->
 
 
 </resources>
