@@ -351,12 +351,13 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         }
     }
 
-    @Override
+    // Код меню в экшен-баре (не удалять!)
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.task_list, menu);
         return true;
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
