@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
         <!-- Все задачи -->
         <LinearLayout
             android:id="@+id/menu_all_task"
@@ -51,6 +52,7 @@
 
         </LinearLayout>
 
+
         <!-- Входящие -->
         <LinearLayout
             android:id="@+id/menu_tasks_income"
@@ -82,6 +84,7 @@
                 android:fontFamily="sans-serif"
                 android:textSize="@dimen/menu_sub_item_text_size"/>
         </LinearLayout>
+
 
         <!-- На сегодня -->
         <LinearLayout
@@ -115,6 +118,40 @@
                 android:textSize="@dimen/menu_sub_item_text_size"/>
         </LinearLayout>
 
+
+        <!-- На неделю -->
+        <LinearLayout
+            android:id="@+id/menu_tasks_week"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sidebar_item"
+            android:onClick="menuItemClick"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/menu_sub_item_padding_bottom"
+            android:paddingEnd="@dimen/menu_right_space"
+            android:paddingStart="@dimen/menu_left_space"
+            android:paddingTop="@dimen/menu_sub_item_padding_top">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/menu_sub_item_margin_start"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
+                android:text="На неделю"
+                android:textSize="@dimen/menu_sub_item_text_size"/>
+
+            <TextView
+                android:id="@+id/menu_tasks_week_counter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="sans-serif"
+                android:textSize="@dimen/menu_sub_item_text_size"/>
+        </LinearLayout>
+
+
         <!-- На месяц -->
         <LinearLayout
             android:id="@+id/menu_tasks_month"
@@ -146,6 +183,7 @@
                 android:fontFamily="sans-serif"
                 android:textSize="@dimen/menu_sub_item_text_size"/>
         </LinearLayout>
+
 
         <!-- Завершенные -->
         <LinearLayout
@@ -199,6 +237,7 @@
                 android:textColor="@color/gray_9"
                 android:textSize="@dimen/menu_item_text_size"/>
         </LinearLayout>
+
 
         <!-- Список групп -->
         <android.support.v7.widget.RecyclerView
