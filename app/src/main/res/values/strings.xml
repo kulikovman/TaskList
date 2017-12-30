@@ -138,7 +138,7 @@
 
     <!-- Напоминания о задачах -->
     <string name="task_notification_title">Список задач: напоминание</string>
-    <string name="task_notification_message">У вас есть %1$s на сегодня. Нажмите это
+    <string name="task_notification_message">У вас %1$s на сегодня.\nНажмите это
         сообщение, чтобы открыть список задач.</string> <!-- 35 символов в строке (сокращенный вид напоминания) -->
     <string name="task_notification_counter_title">Всего задач на сегодня:</string>
     <plurals name="task_notification_important_tasks">
@@ -150,7 +150,7 @@
 
 
     <!-- Другие полезные строки -->
-    <string name="three_dots">…</string>
+    <string name="three_dots" translatable="false">…</string>
 
 
     <!-- Непонятные строки используемые при создании бокового меню -->
@@ -159,12 +159,12 @@
 
 
     <!-- Доступные шрифты -->
-    <string name="font_family_light">sans-serif-light</string>
-    <string name="font_family_medium">sans-serif-medium</string>
-    <string name="font_family_regular">sans-serif</string>
-    <string name="font_family_condensed">sans-serif-condensed</string>
-    <string name="font_family_black">sans-serif-black</string>
-    <string name="font_family_thin">sans-serif-thin</string>
+    <string name="font_family_light" translatable="false">sans-serif-light</string>
+    <string name="font_family_medium" translatable="false">sans-serif-medium</string>
+    <string name="font_family_regular" translatable="false">sans-serif</string>
+    <string name="font_family_condensed" translatable="false">sans-serif-condensed</string>
+    <string name="font_family_black" translatable="false">sans-serif-black</string>
+    <string name="font_family_thin" translatable="false">sans-serif-thin</string>
 
 
 
