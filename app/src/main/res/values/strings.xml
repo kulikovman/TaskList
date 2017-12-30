@@ -13,6 +13,21 @@
     <string name="list_title_month_tasks">Задачи на месяц</string>
 
 
+    <!-- Пункты меню -->
+    <string name="menu_all_tasks">Все задачи</string>
+    <string name="menu_income_tasks">Входящие</string>
+    <string name="menu_today_tasks">На сегодня</string>
+    <string name="menu_week_tasks">На неделю</string>
+    <string name="menu_month_tasks">На месяц</string>
+    <string name="menu_finished_tasks">Завершенные</string>
+    <string name="menu_groups">Группы</string>
+    <string name="menu_title_other">Прочее</string>
+    <string name="menu_settings">Настройки</string>
+    <string name="menu_review">Оценить приложение</string>
+
+
+
+
     <!-- Диалоги для задач -->
     <!-- Выбор даты задачи -->
     <string name="date_title">Дата выполнения</string>
@@ -138,14 +153,7 @@
     <!-- (все нужное перенести наверх) -->
 
 
-    <!-- Имена пунктов главного бокового меню -->
-    <string name="menu_unsorted_tasks">Не отсортированные</string>
-    <string name="menu_today_tasks">Сегодня</string>
-    <string name="menu_month_tasks">На месяц</string>
-    <string name="menu_tasks_without_date">Без даты</string>
-    <string name="menu_all_tasks">Все задачи</string>
-    <string name="menu_finished_tasks">Завершенные</string>
-    <string name="menu_edit_groups">Редактировать группы</string>
+
 
     <string name="three_dots">…</string>
 

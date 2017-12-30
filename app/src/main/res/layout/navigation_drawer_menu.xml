@@ -38,7 +38,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-medium"
-                android:text="Все задачи"
+                android:text="@string/menu_all_tasks"
                 android:textColor="@color/gray_9"
                 android:textSize="@dimen/menu_item_text_size"/>
 
@@ -73,7 +73,7 @@
                 android:layout_marginStart="@dimen/menu_sub_item_margin_start"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
-                android:text="Входящие"
+                android:text="@string/menu_income_tasks"
                 android:textSize="@dimen/menu_sub_item_text_size"/>
 
             <TextView
@@ -106,7 +106,7 @@
                 android:layout_marginStart="@dimen/menu_sub_item_margin_start"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
-                android:text="На сегодня"
+                android:text="@string/menu_today_tasks"
                 android:textSize="@dimen/menu_sub_item_text_size"/>
 
             <TextView
@@ -139,7 +139,7 @@
                 android:layout_marginStart="@dimen/menu_sub_item_margin_start"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
-                android:text="На неделю"
+                android:text="@string/menu_week_tasks"
                 android:textSize="@dimen/menu_sub_item_text_size"/>
 
             <TextView
@@ -172,7 +172,7 @@
                 android:layout_marginStart="@dimen/menu_sub_item_margin_start"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
-                android:text="На месяц"
+                android:text="@string/menu_month_tasks"
                 android:textSize="@dimen/menu_sub_item_text_size"/>
 
             <TextView
@@ -204,7 +204,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/menu_sub_item_margin_start"
                 android:fontFamily="sans-serif"
-                android:text="Завершенные"
+                android:text="@string/menu_finished_tasks"
                 android:textSize="@dimen/menu_sub_item_text_size"/>
         </LinearLayout>
 
@@ -233,7 +233,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="sans-serif-medium"
-                android:text="Группы"
+                android:text="@string/menu_groups"
                 android:textColor="@color/gray_9"
                 android:textSize="@dimen/menu_item_text_size"/>
         </LinearLayout>
@@ -263,7 +263,7 @@
             android:gravity="center_vertical"
             android:paddingEnd="@dimen/menu_right_space"
             android:paddingStart="@dimen/menu_left_space"
-            android:text="Прочее"
+            android:text="@string/menu_title_other"
             android:textColor="@color/gray_6"
             android:textSize="@dimen/menu_item_text_size"/>
 
@@ -292,7 +292,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="sans-serif-medium"
-                android:text="Настройки"
+                android:text="@string/menu_settings"
                 android:textColor="@color/gray_9"
                 android:textSize="@dimen/menu_item_text_size"/>
         </LinearLayout>  -->
@@ -322,7 +322,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="sans-serif-medium"
-                android:text="Оценить приложение"
+                android:text="@string/menu_review"
                 android:textColor="@color/gray_9"
                 android:textSize="@dimen/menu_item_text_size"/>
         </LinearLayout>
