@@ -91,18 +91,21 @@ public class RealmHelper {
 
         // Получаем даты на сегодня и плюс месяц
         long todayDate = DateHelper.getTodayCalendarWithoutTime().getTimeInMillis();
+        long weekDate = DateHelper.getAfterWeekCalendarWithoutTime().getTimeInMillis();
         long monthDate = DateHelper.getAfterMonthCalendarWithoutTime().getTimeInMillis();
 
         // Получаем количество незавершенных задач
         long unfinishedTasks = mRealm.where(Task.class).equalTo(Task.DONE, false).count();
         long incomeTasks = mRealm.where(Task.class).equalTo(Task.DONE, false).equalTo(Task.GROUP_ID, 0).count();
         long todayTasks = mRealm.where(Task.class).equalTo(Task.DONE, false).lessThanOrEqualTo(Task.TARGET_DATE, todayDate).count();
+        long weekTasks = mRealm.where(Task.class).equalTo(Task.DONE, false).lessThanOrEqualTo(Task.TARGET_DATE, weekDate).count();
         long monthTasks = mRealm.where(Task.class).equalTo(Task.DONE, false).lessThanOrEqualTo(Task.TARGET_DATE, monthDate).count();
 
         // Сохраняем количество
         counters.put("unfinishedTasks", unfinishedTasks);
         counters.put("incomeTasks", incomeTasks);
         counters.put("todayTasks", todayTasks);
+        counters.put("weekTasks", weekTasks);
         counters.put("monthTasks", monthTasks);
 
         return counters;

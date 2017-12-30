@@ -67,7 +67,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
     private EditText mTaskField;
     private LinearLayout mTaskOptionsPanel;
     private ImageButton mSetRepeatButton, mSetReminderButton;
-    private TextView mUnfinishedTasks, mIncomeTasks, mTodayTasks, mMonthTasks;
+    private TextView mUnfinishedTasks, mIncomeTasks, mTodayTasks, mWeekTasks, mMonthTasks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +103,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         mUnfinishedTasks = navigationView.findViewById(R.id.menu_all_tasks_counter);
         mIncomeTasks = navigationView.findViewById(R.id.menu_tasks_income_counter);
         mTodayTasks = navigationView.findViewById(R.id.menu_tasks_today_counter);
+        mWeekTasks = navigationView.findViewById(R.id.menu_tasks_week_counter);
         mMonthTasks = navigationView.findViewById(R.id.menu_tasks_month_counter);
 
         // Инициализируем базовые вью элементы
@@ -194,6 +195,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         mUnfinishedTasks.setText(String.valueOf(counters.get("unfinishedTasks")));
         mIncomeTasks.setText(String.valueOf(counters.get("incomeTasks")));
         mTodayTasks.setText(String.valueOf(counters.get("todayTasks")));
+        mWeekTasks.setText(String.valueOf(counters.get("weekTasks")));
         mMonthTasks.setText(String.valueOf(counters.get("monthTasks")));
     }
 
@@ -505,6 +507,10 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
             case R.id.menu_tasks_today:
                 setUpTaskRecyclerView(mRealmHelper.getTodayTasks(), true);
                 setTitle(R.string.list_title_today_tasks);
+                break;
+            case R.id.menu_tasks_week:
+                setUpTaskRecyclerView(mRealmHelper.getMonthTasks(), true);
+                setTitle(R.string.list_title_month_tasks);
                 break;
             case R.id.menu_tasks_month:
                 setUpTaskRecyclerView(mRealmHelper.getMonthTasks(), true);
