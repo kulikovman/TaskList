@@ -5,6 +5,7 @@
     <string name="title_activity_group_list">Группы</string>
     <string name="title_activity_finished_list">Завершенные задачи</string>
 
+
     <!-- Заголовки списков -->
     <string name="list_title_all_tasks">Все задачи</string>
     <string name="list_title_income_tasks">Входящие задачи</string>
@@ -13,7 +14,7 @@
     <string name="list_title_month_tasks">Задачи на месяц</string>
 
 
-    <!-- Пункты меню -->
+    <!-- Пункты бокового меню -->
     <string name="menu_all_tasks">Все задачи</string>
     <string name="menu_income_tasks">Входящие</string>
     <string name="menu_today_tasks">На сегодня</string>
@@ -26,6 +27,9 @@
     <string name="menu_review">Оценить приложение</string>
 
 
+    <!-- Название пунктов обычного меню -->
+    <string name="ab_menu_info">Информация</string>
+    <string name="ab_menu_settings">Настройки</string>
 
 
     <!-- Диалоги для задач -->
@@ -37,6 +41,7 @@
         <item>Выбрать дату</item>
         <item>Без даты</item>
     </string-array>
+
 
     <!-- Выбор приоритета задачи -->
     <string name="priority_title">Приоритет</string>
@@ -53,6 +58,7 @@
         <item>@string/priority_lowest</item>
     </string-array>
 
+
     <!-- Выбор повтора задачи -->
     <string name="repeat_title">Повторение</string>
     <string name="repeat_day">Ежедневно</string>
@@ -67,11 +73,13 @@
         <item>Не повторять</item>
     </string-array>
 
+
     <!-- Выбор группы задачи -->
     <string name="group_title">Группа</string>
     <string name="group_not">Без группы</string>
     <string name="group_message">Вы пока не создали ни одной группы. Перейдите в раздел "группы" для их создания.</string>
     <string name="group_open_button">Группы</string>
+
 
     <!-- Создание группы -->
     <string name="create_group_title">Название группы</string>
@@ -94,13 +102,16 @@
         <item>Без цвета</item>
     </string-array>
 
+
     <!-- Создание описание группы -->
     <string name="description_title">Описание группы</string>
     <string name="description_save_button">Сохранить</string>
 
+
     <!-- Редактирование описания задачи -->
     <string name="edit_task_title">Описание задачи</string>
     <string name="edit_task_save_button">Сохранить</string>
+
 
     <!-- Редактирование названия группы -->
     <string name="edit_group_title">Название группы</string>
@@ -112,17 +123,14 @@
     <string name="message_group_is_exist">Группа с таким названием уже существует.</string>
     <string name="exist_group_ok_button">Сохранить</string>
 
+
     <!-- Удаление группы -->
     <string name="message_group_has_tasks">В этой группе есть задачи. Что вы хотите с ними сделать?</string>
     <string name="delete_group_save_button">Сохранить</string>
     <string name="delete_group_delete_button">Удалить</string>
 
 
-    <!-- Название пунктов меню -->
-    <string name="menu_info">Информация</string>
-
-
-    <!-- Другие разные строки -->
+    <!-- Подсказки для полей ввода -->
     <string name="task_title_hint">Описание задачи…</string>
     <string name="group_name_hint">Название группы…</string>
     <string name="group_description_hint">Описание группы…</string>
@@ -141,26 +149,14 @@
     </plurals>
 
 
-
-
-
-
-
-
-
-
-    <!-- Ниже находятся старые строки -->
-    <!-- (все нужное перенести наверх) -->
-
-
-
-
+    <!-- Другие полезные строки -->
     <string name="three_dots">…</string>
 
 
+    <!-- Непонятные строки используемые при создании бокового меню -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_settings">Settings</string>
+
 
     <!-- Доступные шрифты -->
     <string name="font_family_light">sans-serif-light</string>
@@ -174,101 +170,6 @@
 
 
 
-
-
-
-
-
-
-    <!-- ПОКА НЕ УДАЛЯТЬ!!! -->
-    <!-- Это то что получилось после добавления шаблона страницы настроек -->
-    <!-- хороший пример использования массивов со значениями -->
-
-    <!-- Example General settings -->
-    <string name="pref_header_general">General</string>
-
-    <string name="pref_title_social_recommendations">Enable social recommendations</string>
-    <string name="pref_description_social_recommendations">Recommendations for people to contact
-        based on your message history
-    </string>
-
-    <string name="pref_title_display_name">Display name</string>
-    <string name="pref_default_display_name">John Smith</string>
-
-    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
-    <string-array name="pref_example_list_titles">
-        <item>Always</item>
-        <item>When possible</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_example_list_values">
-        <item>1</item>
-        <item>0</item>
-        <item>-1</item>
-    </string-array>
-
-    <!-- Example settings for Data & Sync -->
-    <string name="pref_header_data_sync">Data &amp; sync</string>
-
-    <string name="pref_title_sync_frequency">Sync frequency</string>
-    <string-array name="pref_sync_frequency_titles">
-        <item>15 minutes</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
-        <item>3 hours</item>
-        <item>6 hours</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_sync_frequency_values">
-        <item>15</item>
-        <item>30</item>
-        <item>60</item>
-        <item>180</item>
-        <item>360</item>
-        <item>-1</item>
-    </string-array>
-
-    <string-array name="list_preference_entries">
-        <item>Entry 1</item>
-        <item>Entry 2</item>
-        <item>Entry 3</item>
-    </string-array>
-    <string-array name="list_preference_entry_values">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-
-    <string-array name="multi_select_list_preference_default_value"/>
-
-    <string name="pref_title_system_sync_settings">System sync settings</string>
-
-    <!-- Example settings for Notifications -->
-    <string name="pref_header_notifications">Notifications</string>
-
-    <string name="pref_title_new_message_notifications">New message notifications</string>
-
-    <string name="pref_title_ringtone">Ringtone</string>
-    <string name="pref_ringtone_silent">Silent</string>
-
-    <string name="pref_title_vibrate">Vibrate</string>
-
-
-
-    <string name="action_share">Share</string>
-    <string name="action_reply">Reply</string>
-
-    <string name="task_list_notification_title_template">Task list: %1$s</string>
-
-    <!-- TODO: remove this placeholder text -->
-    <string name="task_list_notification_placeholder_text_template">You said %1$s and lorem ipsum
-        dolor sit amet, consectetur adipiscing elit. Etiam non enim magna. Morbi dictum, velit vel
-        semper venenatis, magna odio volutpat velit, at ullamcorper nulla lacus sed turpis.
-        Pellentesque vitae metus elit, nec tincidunt tellus. Integer sed nisl sem, ullamcorper
-        ornare lacus. Duis ac mauris sed massa congue volutpat. Donec sed erat sit amet turpis
-        viverra rhoncus sit amet nec magna. Donec lacinia ligula at libero volutpat volutpat nec nec
-        tortor.
-    </string>
 
 
 </resources>

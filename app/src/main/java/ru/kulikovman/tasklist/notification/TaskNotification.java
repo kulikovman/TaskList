@@ -52,10 +52,6 @@ public class TaskNotification {
 
     }
 
-    /**
-     * Cancels any notifications of this type previously shown using
-     * {@link #notify(Context, String, int)}.
-     */
     public static void cancel(final Context context) {
         final NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         assert nm != null;
