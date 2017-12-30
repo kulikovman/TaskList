@@ -509,8 +509,8 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
                 setTitle(R.string.list_title_today_tasks);
                 break;
             case R.id.menu_tasks_week:
-                setUpTaskRecyclerView(mRealmHelper.getMonthTasks(), true);
-                setTitle(R.string.list_title_month_tasks);
+                setUpTaskRecyclerView(mRealmHelper.getWeekTasks(), true);
+                setTitle(R.string.list_title_week_tasks);
                 break;
             case R.id.menu_tasks_month:
                 setUpTaskRecyclerView(mRealmHelper.getMonthTasks(), true);

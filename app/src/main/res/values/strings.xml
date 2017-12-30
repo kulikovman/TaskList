@@ -9,6 +9,7 @@
     <string name="list_title_all_tasks">Все задачи</string>
     <string name="list_title_income_tasks">Входящие задачи</string>
     <string name="list_title_today_tasks">Задачи на сегодня</string>
+    <string name="list_title_week_tasks">Задачи на неделю</string>
     <string name="list_title_month_tasks">Задачи на месяц</string>
 
 

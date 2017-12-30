@@ -65,6 +65,19 @@ public class RealmHelper {
                         new Sort[]{Sort.ASCENDING, Sort.DESCENDING, Sort.ASCENDING});
     }
 
+    OrderedRealmCollection<Task> getWeekTasks() {
+        long weekDate = DateHelper.getAfterWeekCalendarWithoutTime().getTimeInMillis();
+        return mRealm.where(Task.class)
+                .equalTo(Task.DONE, false)
+                .lessThanOrEqualTo(Task.TARGET_DATE, weekDate)
+                .or()
+                .equalTo(Task.DONE, false)
+                .equalTo(Task.TARGET_DATE, Long.MAX_VALUE)
+                .findAll()
+                .sort(new String[]{Task.TARGET_DATE, Task.PRIORITY, Task.TITLE},
+                        new Sort[]{Sort.ASCENDING, Sort.DESCENDING, Sort.ASCENDING});
+    }
+
     OrderedRealmCollection<Task> getMonthTasks() {
         long monthDate = DateHelper.getAfterMonthCalendarWithoutTime().getTimeInMillis();
         return mRealm.where(Task.class)
