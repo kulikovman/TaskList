@@ -28,7 +28,6 @@
 
 
     <!-- Название пунктов обычного меню -->
-    <string name="ab_menu_info">Информация</string>
     <string name="ab_menu_settings">Настройки</string>
 
 
@@ -83,12 +82,11 @@
 
     <!-- Создание группы -->
     <string name="create_group_title">Название группы</string>
-    <string name="create_group_ok_button">OK</string>
+    <string name="create_group_ok_button" translatable="false">OK</string>
 
 
     <!-- Диалоги для групп -->
     <!-- Выбор цвета группы -->
-    <string name="color_title">Цвет</string>
     <string-array name="color_array">
         <item>Коричневый</item>
         <item>Красный</item>
@@ -138,8 +136,7 @@
 
     <!-- Напоминания о задачах -->
     <string name="task_notification_title">Список задач: напоминание</string>
-    <string name="task_notification_message">У вас %1$s на сегодня.\nНажмите это
-        сообщение, чтобы открыть список задач.</string> <!-- 35 символов в строке (сокращенный вид напоминания) -->
+    <string name="task_notification_message">У вас %1$s на сегодня. Нажмите это сообщение, чтобы открыть список задач.</string> <!-- 35 символов в строке (сокращенный вид напоминания) -->
     <string name="task_notification_counter_title">Всего задач на сегодня:</string>
     <plurals name="task_notification_important_tasks">
         <item quantity="one">%d важная задача</item> <!-- склонение для 1 -->
@@ -165,11 +162,8 @@
     <string name="font_family_condensed" translatable="false">sans-serif-condensed</string>
     <string name="font_family_black" translatable="false">sans-serif-black</string>
     <string name="font_family_thin" translatable="false">sans-serif-thin</string>
-
-
-
-
-
+    <string name="ab_menu_info">Информация</string>
+    <string name="color_title">Цвет</string>
 
 
 </resources>
