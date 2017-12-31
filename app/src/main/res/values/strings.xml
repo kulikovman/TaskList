@@ -1,54 +1,59 @@
 <resources>
     <!-- Заголовки и названия -->
-    <string name="app_name">Список задач</string>
-    <string name="title_activity_main">Список задач</string>
-    <string name="title_activity_group_list">Группы</string>
-    <string name="title_activity_finished_list">Завершенные задачи</string>
+    <string name="app_name">Task list</string>
+    <string name="title_activity_main">Task list</string>
+    <string name="title_activity_group_list">Groups</string>
+    <string name="title_activity_finished_list">Completed tasks</string>
 
 
     <!-- Заголовки списков -->
-    <string name="list_title_all_tasks">Все задачи</string>
-    <string name="list_title_income_tasks">Входящие задачи</string>
-    <string name="list_title_today_tasks">Задачи на сегодня</string>
-    <string name="list_title_week_tasks">Задачи на неделю</string>
-    <string name="list_title_month_tasks">Задачи на месяц</string>
+    <string name="list_title_all_tasks">All tasks</string>
+    <string name="list_title_income_tasks">Incoming tasks</string>
+    <string name="list_title_today_tasks">Tasks for today</string>
+    <string name="list_title_week_tasks">Tasks for week</string>
+    <string name="list_title_month_tasks">Tasks for month</string>
 
 
     <!-- Пункты бокового меню -->
-    <string name="menu_all_tasks">Все задачи</string>
-    <string name="menu_income_tasks">Входящие</string>
-    <string name="menu_today_tasks">На сегодня</string>
-    <string name="menu_week_tasks">На неделю</string>
-    <string name="menu_month_tasks">На месяц</string>
-    <string name="menu_finished_tasks">Завершенные</string>
-    <string name="menu_groups">Группы</string>
-    <string name="menu_title_other">Прочее</string>
-    <string name="menu_settings">Настройки</string>
-    <string name="menu_review">Оценить приложение</string>
+    <string name="menu_all_tasks">All tasks</string>
+    <string name="menu_income_tasks">Incoming</string>
+    <string name="menu_today_tasks">For today</string>
+    <string name="menu_week_tasks">For week</string>
+    <string name="menu_month_tasks">For month</string>
+    <string name="menu_finished_tasks">Completed</string>
+    <string name="menu_groups">Groups</string>
+    <string name="menu_title_other">Other</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_review">Rate app</string>
 
 
     <!-- Название пунктов обычного меню -->
-    <string name="ab_menu_settings">Настройки</string>
+    <string name="ab_menu_settings">Settings</string>
+    <string name="ab_menu_info">Info</string>
 
 
     <!-- Диалоги для задач -->
     <!-- Выбор даты задачи -->
-    <string name="date_title">Дата выполнения</string>
+    <string name="date_title">Date of completion</string>
+    <string name="date_today">Today</string>
+    <string name="date_tomorrow">Tomorrow</string>
+    <string name="date_chose">Choose the date</string>
+    <string name="date_without">Without date</string>
     <string-array name="date_array">
-        <item>Сегодня</item>
-        <item>Завтра</item>
-        <item>Выбрать дату</item>
-        <item>Без даты</item>
+        <item>@string/date_today</item>
+        <item>@string/date_tomorrow</item>
+        <item>@string/date_chose</item>
+        <item>@string/date_without</item>
     </string-array>
 
 
     <!-- Выбор приоритета задачи -->
-    <string name="priority_title">Приоритет</string>
-    <string name="priority_emergency">Чрезвычайный</string>
-    <string name="priority_high">Высокий</string>
-    <string name="priority_common">Обычный</string>
-    <string name="priority_low">Низкий</string>
-    <string name="priority_lowest">Самый низкий</string>
+    <string name="priority_title">Priority</string>
+    <string name="priority_emergency">Emergency</string>
+    <string name="priority_high">High</string>
+    <string name="priority_common">Common</string>
+    <string name="priority_low">Low</string>
+    <string name="priority_lowest">Lowest</string>
     <string-array name="priority_array">
         <item>@string/priority_emergency</item>
         <item>@string/priority_high</item>
@@ -59,90 +64,100 @@
 
 
     <!-- Выбор повтора задачи -->
-    <string name="repeat_title">Повторение</string>
-    <string name="repeat_day">Ежедневно</string>
-    <string name="repeat_week">Каждую неделю</string>
-    <string name="repeat_month">Раз в месяц</string>
-    <string name="repeat_year">Через год</string>
+    <string name="repeat_title">Repeat</string>
+    <string name="repeat_day">Daily</string>
+    <string name="repeat_week">Every week</string>
+    <string name="repeat_month">Once a month</string>
+    <string name="repeat_year">In a year</string>
+    <string name="repeat_without">Do not repeat</string>
     <string-array name="repeat_array">
         <item>@string/repeat_day</item>
         <item>@string/repeat_week</item>
         <item>@string/repeat_month</item>
         <item>@string/repeat_year</item>
-        <item>Не повторять</item>
+        <item>@string/repeat_without</item>
     </string-array>
 
 
     <!-- Выбор группы задачи -->
-    <string name="group_title">Группа</string>
-    <string name="group_not">Без группы</string>
-    <string name="group_message">Вы пока не создали ни одной группы. Перейдите в раздел "группы" для их создания.</string>
-    <string name="group_open_button">Группы</string>
+    <string name="group_title">Group</string>
+    <string name="group_not">Without group</string>
+    <string name="group_message">You have not created any groups yet. Go to the "groups" section to create them.</string>
+    <string name="group_open_button">Groups</string>
 
 
     <!-- Создание группы -->
-    <string name="create_group_title">Название группы</string>
+    <string name="create_group_title">Group name</string>
     <string name="create_group_ok_button" translatable="false">OK</string>
 
 
     <!-- Диалоги для групп -->
     <!-- Выбор цвета группы -->
+    <string name="color_title">Color</string>
+    <string name="color_brown">Brown</string>
+    <string name="color_red">Red</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_yellow">Yellow</string>
+    <string name="color_green">Green</string>
+    <string name="color_blue">Blue</string>
+    <string name="color_turquoise">Turquoise</string>
+    <string name="color_violet">Violet</string>
+    <string name="color_pink">Pink</string>
+    <string name="color_without">Without color</string>
     <string-array name="color_array">
-        <item>Коричневый</item>
-        <item>Красный</item>
-        <item>Оранжевый</item>
-        <item>Желтый</item>
-        <item>Зеленый</item>
-        <item>Синий</item>
-        <item>Бирюзовый</item>
-        <item>Фиолетовый</item>
-        <item>Розовый</item>
-        <item>Без цвета</item>
+        <item>@string/color_brown</item>
+        <item>@string/color_red</item>
+        <item>@string/color_orange</item>
+        <item>@string/color_yellow</item>
+        <item>@string/color_green</item>
+        <item>@string/color_blue</item>
+        <item>@string/color_turquoise</item>
+        <item>@string/color_violet</item>
+        <item>@string/color_pink</item>
+        <item>@string/color_without</item>
     </string-array>
 
 
-    <!-- Создание описание группы -->
-    <string name="description_title">Описание группы</string>
-    <string name="description_save_button">Сохранить</string>
-
-
     <!-- Редактирование описания задачи -->
-    <string name="edit_task_title">Описание задачи</string>
-    <string name="edit_task_save_button">Сохранить</string>
+    <string name="edit_task_title">Description of task</string>
+    <string name="edit_task_save_button">Save</string>
 
 
     <!-- Редактирование названия группы -->
-    <string name="edit_group_title">Название группы</string>
-    <string name="edit_group_save_button">Сохранить</string>
+    <string name="edit_group_title">Group name</string>
+    <string name="edit_group_save_button">Save</string>
 
 
     <!-- Информационные сообщения -->
     <!-- Группа существует -->
-    <string name="message_group_is_exist">Группа с таким названием уже существует.</string>
-    <string name="exist_group_ok_button">Сохранить</string>
+    <string name="message_group_is_exist">A group with this name already exists.</string>
+    <string name="exist_group_ok_button">Save</string>
 
 
     <!-- Удаление группы -->
-    <string name="message_group_has_tasks">В этой группе есть задачи. Что вы хотите с ними сделать?</string>
-    <string name="delete_group_save_button">Сохранить</string>
-    <string name="delete_group_delete_button">Удалить</string>
+    <string name="message_group_has_tasks">In this group there are tasks. What do you want to do with them?</string>
+    <string name="delete_group_save_button">Save</string>
+    <string name="delete_group_delete_button">Delete</string>
 
 
     <!-- Подсказки для полей ввода -->
-    <string name="task_title_hint">Описание задачи…</string>
-    <string name="group_name_hint">Название группы…</string>
-    <string name="group_description_hint">Описание группы…</string>
+    <string name="task_title_hint">Description of task…</string>
+    <string name="group_name_hint">Group name…</string>
 
 
     <!-- Напоминания о задачах -->
-    <string name="task_notification_title">Список задач: напоминание</string>
-    <string name="task_notification_message">У вас %1$s на сегодня. Нажмите это сообщение, чтобы открыть список задач.</string> <!-- 35 символов в строке (сокращенный вид напоминания) -->
-    <string name="task_notification_counter_title">Всего задач на сегодня:</string>
+    <string name="task_notification_title">Task list: notification</string>
+    <string name="task_notification_message">You have %1$s for today. Click this message to open the task list.</string> <!-- 35 символов в строке (сокращенный вид напоминания) -->
+    <string name="task_notification_counter_title">Total tasks for today:</string>
+    <string name="task_notification_one">%d important task</string>
+    <string name="task_notification_few">%d important tasks</string>
+    <string name="task_notification_many">%d important tasks</string>
+    <string name="task_notification_other">%d important tasks</string>
     <plurals name="task_notification_important_tasks">
-        <item quantity="one">%d важная задача</item> <!-- склонение для 1 -->
-        <item quantity="few">%d важных задачи</item> <!-- склонение для 2, 3, 4 -->
-        <item quantity="many">%d важных задач</item> <!-- склонение от 5 и выше -->
-        <item quantity="other">%d важных задач</item> <!-- на всякий случай -->
+        <item quantity="one">@string/task_notification_one</item> <!-- склонение для 1 -->
+        <item quantity="few">@string/task_notification_few</item> <!-- склонение для 2, 3, 4 -->
+        <item quantity="many">@string/task_notification_many</item> <!-- склонение от 5 и выше -->
+        <item quantity="other">@string/task_notification_other</item> <!-- на всякий случай -->
     </plurals>
 
 
@@ -162,8 +177,7 @@
     <string name="font_family_condensed" translatable="false">sans-serif-condensed</string>
     <string name="font_family_black" translatable="false">sans-serif-black</string>
     <string name="font_family_thin" translatable="false">sans-serif-thin</string>
-    <string name="ab_menu_info">Информация</string>
-    <string name="color_title">Цвет</string>
+
 
 
 </resources>
