@@ -524,12 +524,12 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
                 Intent groupListActivity = new Intent(this, GroupListActivity.class);
                 startActivity(groupListActivity);
                 break;
-            case R.id.menu_review:
+            /*case R.id.menu_review:
                 // Переадресация на страницу приложения в маркете
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse("market://details?id=ru.kulikovman.tasklist"));
                 startActivity(intent);
-                break;
+                break;*/
         }
 
         // Закрываем меню и скрываем панель инструментов

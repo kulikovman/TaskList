@@ -246,15 +246,15 @@
             android:layout_height="wrap_content"/>
 
 
-        <!-- Разделитель -->
+        <!-- Разделитель
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="13dp"
-            android:background="@color/gray_3"/>
+            android:background="@color/gray_3"/>  -->
 
 
-        <!-- Заголовок раздела -->
+        <!-- Заголовок раздела
         <TextView
             android:layout_width="match_parent"
             android:layout_height="@dimen/menu_main_item_height"
@@ -265,7 +265,7 @@
             android:paddingStart="@dimen/menu_left_space"
             android:text="@string/menu_title_other"
             android:textColor="@color/gray_6"
-            android:textSize="@dimen/menu_item_text_size"/>
+            android:textSize="@dimen/menu_item_text_size"/> -->
 
 
         <!-- Настройки
@@ -298,7 +298,7 @@
         </LinearLayout>  -->
 
 
-        <!-- Оценить приложение! -->
+        <!-- Оценить приложение!
         <LinearLayout
             android:id="@+id/menu_review"
             android:layout_width="match_parent"
@@ -325,6 +325,6 @@
                 android:text="@string/menu_review"
                 android:textColor="@color/gray_9"
                 android:textSize="@dimen/menu_item_text_size"/>
-        </LinearLayout>
+        </LinearLayout> -->
     </LinearLayout>
 </ScrollView>
