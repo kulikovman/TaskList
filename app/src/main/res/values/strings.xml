@@ -119,7 +119,7 @@
 
 
     <!-- Редактирование описания задачи -->
-    <string name="edit_task_title">Description of task</string>
+    <string name="edit_task_title">Description of the task</string>
     <string name="edit_task_save_button">Save</string>
 
 
@@ -141,7 +141,7 @@
 
 
     <!-- Подсказки для полей ввода -->
-    <string name="task_title_hint">Description of task…</string>
+    <string name="task_title_hint">Description of the task…</string>
     <string name="group_name_hint">Group name…</string>
 
 
