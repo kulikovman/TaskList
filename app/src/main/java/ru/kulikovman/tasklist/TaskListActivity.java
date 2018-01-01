@@ -252,6 +252,41 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
                     mTask.setCompletionDate(System.currentTimeMillis());
                     mTask.setDone(true);
                     Log.d(LOG, "Задача завершена");
+
+                    // Если есть повтор, то создаем новую задачу
+                    if (mTask.getRepeat() != null) {
+                        // Копируем старую задачу
+                        Task task = new Task(mTask.getTitle());
+                        task.setPriority(mTask.getPriority());
+                        task.setRepeat(mTask.getRepeat());
+                        task.setReminder(mTask.getReminder());
+
+                        // Делаем задачу управляемой
+                        Task realmTask = mRealm.copyToRealm(task);
+
+                        // Добавляем группу
+                        if (mTask.getGroup() != null) {
+                            realmTask.setGroup(mTask.getGroup());
+                            mTask.getGroup().addTask(realmTask);
+                        }
+
+                        // Вычисляем и назначаем новую дату
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTimeInMillis(mTask.getTargetDate());
+
+                        if (task.getRepeat().equals("day")) {
+                            calendar.add(Calendar.DAY_OF_YEAR, 1);
+                        } else if (task.getRepeat().equals("week")) {
+                            calendar.add(Calendar.WEEK_OF_YEAR, 1);
+                        } else if (task.getRepeat().equals("month")) {
+                            calendar.add(Calendar.MONTH, 1);
+                        } else if (task.getRepeat().equals("year")) {
+                            calendar.add(Calendar.YEAR, 1);
+                        }
+
+                        realmTask.setTargetDate(calendar.getTimeInMillis());
+                        Log.d(LOG, "Добавлена новая задача");
+                    }
                 }
 
                 // Закрываем транзакцию
@@ -385,14 +420,12 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
             // Открываем транзакцию
             mRealm.beginTransaction();
 
-            // Добавляем в базу и получаем обратно (чтобы стала управляемой)
-            mRealm.insert(task);
-            task = mRealmHelper.getTaskById(task.getId());
+            // Делаем задачу управляемой и назначаем группу
+            Task realmTask = mRealm.copyToRealm(task);
 
-            // Назначаем группу, если открыт список групп
             if (mGroup != null) {
-                task.setGroup(mGroup);
-                mGroup.addTask(task); // тут стопудово какая-то ошибка...
+                realmTask.setGroup(mGroup);
+                mGroup.addTask(realmTask);
             }
 
             // Закрываем транзакцию

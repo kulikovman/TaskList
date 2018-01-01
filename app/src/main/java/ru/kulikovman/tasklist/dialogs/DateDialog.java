@@ -74,6 +74,7 @@ public class DateDialog extends CallbackDialogFragment {
                                 break;
                             case 3: // Без даты
                                 mTask.setTargetDate(Long.MAX_VALUE);
+                                mTask.setRepeat(null);
                                 mTask.setReminder(false);
                                 break;
                         }
