@@ -2,6 +2,7 @@ package ru.kulikovman.tasklist.dialogs;
 
 
 import android.app.Dialog;
+import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -9,6 +10,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -54,6 +57,9 @@ public class EditTaskDialog extends CallbackDialogFragment {
         // Вставляем в поле описание задачи
         String oldTaskTitle = mTask.getTitle();
         editText.setText(oldTaskTitle);
+
+        // Запрашиваем фокус
+        editText.requestFocus();
 
         // Слушатель для кнопки очищения поля
         clearButton.setOnClickListener(new View.OnClickListener() {

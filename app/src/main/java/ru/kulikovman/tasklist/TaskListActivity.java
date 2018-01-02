@@ -10,7 +10,6 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 
 import android.support.v4.app.DialogFragment;
@@ -26,8 +25,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -39,6 +37,7 @@ import java.util.Map;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
+
 import ru.kulikovman.tasklist.adapters.MenuAdapter;
 import ru.kulikovman.tasklist.dialogs.DateDialog;
 import ru.kulikovman.tasklist.dialogs.EditTaskDialog;

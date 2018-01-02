@@ -312,7 +312,6 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
         String groupName = mGroupField.getText().toString().trim();
 
         if (groupName.length() > 0) {
-            //RealmResults<Group> existGroups = mRealm.where(Group.class).equalTo(Group.NAME, groupName).findAll();
             Group existGroup = mRealm.where(Group.class).equalTo(Group.NAME, groupName).findFirst();
 
             if (existGroup == null) {

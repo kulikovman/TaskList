@@ -55,6 +55,9 @@ public class EditGroupDialog extends CallbackDialogFragment {
         String oldName = mGroup.getName();
         editText.setText(oldName);
 
+        // Запрашиваем фокус
+        editText.requestFocus();
+
         // Слушатель для кнопки очищения поля
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
