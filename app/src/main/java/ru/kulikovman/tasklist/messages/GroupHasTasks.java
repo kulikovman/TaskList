@@ -7,9 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 
-import io.realm.OrderedRealmCollectionSnapshot;
 import io.realm.Realm;
 import ru.kulikovman.tasklist.R;
 import ru.kulikovman.tasklist.models.Group;

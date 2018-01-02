@@ -1,14 +1,11 @@
 package ru.kulikovman.tasklist;
 
 
-import android.util.Log;
-
 import java.util.HashMap;
 import java.util.Map;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
-import io.realm.RealmResults;
 import io.realm.Sort;
 import ru.kulikovman.tasklist.models.Group;
 import ru.kulikovman.tasklist.models.Task;

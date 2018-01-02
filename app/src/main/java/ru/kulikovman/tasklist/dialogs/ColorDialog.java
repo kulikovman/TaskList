@@ -12,7 +12,6 @@ import io.realm.Realm;
 import ru.kulikovman.tasklist.CallbackDialogFragment;
 import ru.kulikovman.tasklist.R;
 import ru.kulikovman.tasklist.models.Group;
-import ru.kulikovman.tasklist.models.Task;
 
 public class ColorDialog extends CallbackDialogFragment {
     private Realm mRealm;

@@ -4,7 +4,6 @@ package ru.kulikovman.tasklist;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmResults;

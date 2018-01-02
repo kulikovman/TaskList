@@ -9,7 +9,6 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -19,7 +18,6 @@ import android.view.View;
 import io.realm.OrderedRealmCollection;
 import io.realm.Realm;
 import io.realm.Sort;
-import ru.kulikovman.tasklist.models.Group;
 import ru.kulikovman.tasklist.models.Task;
 import ru.kulikovman.tasklist.adapters.TaskAdapter;
 
