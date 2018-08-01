@@ -6,7 +6,7 @@ The application for task management, the main purpose of which is to make task m
 * Quickly change the parameters of the task, without having to open it.
 * Sorting tasks by type and groups.
 * Support for custom groups.
-* Delete and complete tasks using gestures.
+* Delete and complete tasks using gesture swipe.
 * For tasks, you can assign a date, priority, repeat and reminder.
 
 ## Used libraries:
