@@ -13,7 +13,7 @@ The application for task management, the main purpose of which is to make task m
 Realm
 
 ## Screenshots:
-![screenshot of sample](http://kulikovman.ru/android/img/TaskList_github.jpg)
+![screenshot of sample](http://kulikovman.ru/android/img/TaskList.jpg)
 
 ## Link to Google Play:
 <https://play.google.com/store/apps/details?id=ru.kulikovman.tasklist>
